@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:/Unity/Producción UADE\" status)",
+      "Bash(gh auth *)"
+    ]
+  }
+}
