@@ -1,71 +1,160 @@
 # Setup: Sistema de Cámara Metroidvania
 
-Este archivo contiene instrucciones para que un MCP con acceso a Unity Editor las ejecute directamente.
-
-## Contexto del proyecto
-
-- **Engine:** Unity 6000.3.9f1, URP 2D
-- **Escena principal:** `Assets/Scenes/SampleScene.unity`
-- **Scripts de cámara ya creados:**
-  - `Assets/Scripts/CameraFollow.cs`
-  - `Assets/Scripts/CameraRoom.cs`
+Instrucciones para ejecutar via **CoderGamester mcp-unity**.  
+Ejecutá cada paso en orden. Los scripts ya están en el proyecto.
 
 ---
 
-## Tareas a ejecutar en Unity Editor via MCP
+## Paso 1 — Verificar la escena activa
 
-### 1. Asignar tag "Player" al jugador
-
-Buscá el GameObject que tiene el componente `PlayerController` en la escena `SampleScene` y asignale el tag **"Player"** (crealo si no existe).
-
-### 2. Agregar CameraFollow a la Main Camera
-
-En la escena `SampleScene`:
-- Seleccioná el GameObject **"Main Camera"**
-- Agregale el componente `CameraFollow`
-- Dejá todos los valores en default (se detecta el Player automáticamente por tag)
-- Asegurate que `Has Bounds` esté **desactivado** por ahora
-
-Valores default del componente:
 ```
-Smooth Time: 0.2
-Dead Zone: (0.5, 0.3)
-Lookahead Distance: 2
-Lookahead Smooth Time: 0.4
-Has Bounds: false
+load_scene("Assets/Scenes/SampleScene.unity")
 ```
 
-### 3. Crear cuartos (CameraRoom) — opcional
-
-Por cada área del mapa que quieras que la cámara quede confinada:
-
-1. Creá un **GameObject vacío** llamado `Room_01`, `Room_02`, etc.
-2. Agregale un **BoxCollider2D**
-3. Ajustá el `Size` del BoxCollider2D para que cubra toda el área del cuarto
-4. Marcá el BoxCollider2D como **Is Trigger: true** (el script lo hace automático, pero por las dudas)
-5. Agregale el componente `CameraRoom`
-6. Dejá `Auto Compute Bounds: true`
-7. Agrupalos bajo un GameObject vacío llamado `Rooms` para mantener orden
-
-### 4. Verificar Ground Check del jugador
-
-El `PlayerController` busca un hijo llamado `"GroundCheck"`. Verificá que el GameObject del jugador tenga un hijo con ese nombre posicionado en los pies del personaje (Y negativo respecto al padre, por ejemplo `(0, -0.5, 0)`).
+Luego confirmá con:
+```
+get_scene_info()
+```
 
 ---
 
-## Cómo funciona el sistema
+## Paso 2 — Revisar jerarquía y encontrar el jugador
 
-- **Sin salas configuradas:** la cámara sigue al jugador por todo el mapa sin límites.
-- **Con CameraRoom:** cuando el jugador entra al trigger de un cuarto, la cámara se limita a ese cuarto. Al pasar al siguiente cuarto, los bounds cambian automáticamente.
-- **Lookahead:** la cámara se adelanta levemente en la dirección en que corre el jugador.
-- **Dead zone:** la cámara no reacciona a movimientos menores a 0.5 unidades en X y 0.3 en Y, evitando micro-temblores.
+```
+resource: unity://scenes-hierarchy
+```
+
+Buscá el GameObject que tiene el componente `PlayerController`. Anotá su nombre/path exacto (probablemente "Player" o similar).
 
 ---
 
-## Verificación post-setup
+## Paso 3 — Asignar tag "Player" al jugador
 
-Una vez configurado, en Play Mode:
-- [ ] El jugador se mueve y la cámara lo sigue suavemente
-- [ ] Al correr hacia un lado se nota el lookahead
-- [ ] Si hay CameraRooms, la cámara no sale del cuarto actual
-- [ ] En el editor (fuera de Play Mode) los bounds del cuarto se ven en color cyan en la Scene View
+Reemplazá `<path-del-jugador>` con el path encontrado en el paso anterior:
+
+```
+update_gameobject(
+  path: "<path-del-jugador>",
+  tag: "Player"
+)
+```
+
+---
+
+## Paso 4 — Agregar CameraFollow a la Main Camera
+
+```
+update_component(
+  gameObjectPath: "Main Camera",
+  componentName: "CameraFollow",
+  properties: {
+    smoothTime: 0.2,
+    deadZone: { x: 0.5, y: 0.3 },
+    lookaheadDistance: 2.0,
+    lookaheadSmoothTime: 0.4,
+    hasBounds: false
+  }
+)
+```
+
+> `CameraFollow` detecta el Player automáticamente por tag. No hace falta asignarlo a mano.
+
+---
+
+## Paso 5 — Verificar GroundCheck del jugador
+
+```
+get_gameobject(path: "<path-del-jugador>")
+```
+
+Verificá que tenga un hijo llamado `"GroundCheck"`. Si no existe, crealo:
+
+```
+update_gameobject(
+  path: "<path-del-jugador>/GroundCheck",
+  createIfNotExists: true,
+  localPosition: { x: 0, y: -0.5, z: 0 }
+)
+```
+
+---
+
+## Paso 6 — Crear cuartos (opcional, estilo Metroidvania)
+
+Hacé esto por cada cuarto del mapa. Ajustá posición y tamaño según el nivel.
+
+### Crear el contenedor de cuartos
+
+```
+update_gameobject(
+  path: "Rooms",
+  createIfNotExists: true
+)
+```
+
+### Crear un cuarto
+
+```
+update_gameobject(
+  path: "Rooms/Room_01",
+  createIfNotExists: true,
+  localPosition: { x: 0, y: 0, z: 0 }
+)
+```
+
+### Agregar BoxCollider2D como trigger
+
+```
+update_component(
+  gameObjectPath: "Rooms/Room_01",
+  componentName: "BoxCollider2D",
+  properties: {
+    size: { x: 20, y: 12 },
+    isTrigger: true
+  }
+)
+```
+
+> Ajustá `size` para que cubra el área del cuarto. En URP 2D, la cámara default cubre aprox. 19x10 unidades.
+
+### Agregar CameraRoom
+
+```
+update_component(
+  gameObjectPath: "Rooms/Room_01",
+  componentName: "CameraRoom",
+  properties: {
+    autoComputeBounds: true
+  }
+)
+```
+
+Repetí los tres bloques anteriores para `Room_02`, `Room_03`, etc.
+
+---
+
+## Paso 7 — Guardar la escena
+
+```
+save_scene()
+```
+
+---
+
+## Verificación final
+
+Entrá en Play Mode y chequeá:
+- La cámara sigue al jugador suavemente
+- Al correr hacia un lado se nota un leve adelanto (lookahead)
+- Si configuraste cuartos, la cámara no sale de los bordes del cuarto actual
+- En Scene View (fuera de Play) los cuartos se ven como cajas cyan
+
+---
+
+## Referencia de scripts
+
+| Script | Ubicación |
+|---|---|
+| `CameraFollow` | `Assets/Scripts/CameraFollow.cs` |
+| `CameraRoom` | `Assets/Scripts/CameraRoom.cs` |
+| `PlayerController` | `Assets/Scripts/PlayerController.cs` |
