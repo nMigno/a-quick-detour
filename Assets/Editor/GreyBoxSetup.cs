@@ -26,4 +26,33 @@ public class GreyBoxSetup
         EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
         Debug.Log("Grey boxes configurados.");
     }
+
+    [MenuItem("Tools/Fix Player Friction")]
+    static void FixPlayerFriction()
+    {
+        const string matPath = "Assets/Physics/NoFriction.physicsmaterial2d";
+        if (!System.IO.Directory.Exists("Assets/Physics"))
+            System.IO.Directory.CreateDirectory("Assets/Physics");
+
+        var mat = AssetDatabase.LoadAssetAtPath<PhysicsMaterial2D>(matPath);
+        if (mat == null)
+        {
+            mat = new PhysicsMaterial2D("NoFriction");
+            mat.friction = 0f;
+            mat.bounciness = 0f;
+            AssetDatabase.CreateAsset(mat, matPath);
+            AssetDatabase.SaveAssets();
+        }
+
+        var player = GameObject.Find("Player");
+        if (player == null) { Debug.LogError("No se encontró Player"); return; }
+
+        var col = player.GetComponent<BoxCollider2D>();
+        if (col == null) { Debug.LogError("Player no tiene BoxCollider2D"); return; }
+
+        col.sharedMaterial = mat;
+        EditorUtility.SetDirty(col);
+        EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+        Debug.Log("Fricción del player corregida.");
+    }
 }
