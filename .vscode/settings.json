@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Producción UADE.slnx"
+    "dotnet.defaultSolution": "Produccion-UADE.slnx"
 }
