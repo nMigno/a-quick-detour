@@ -18,8 +18,8 @@ TagManager:
   - Interactable
   - Enemy
   - EnemyHitbox
+  - LightBeam
   - Cape
-  - Lantern
   - 
   - 
   - 
@@ -41,6 +41,21 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1476067667
+    locked: 0
+  - name: Platforms
+    uniqueID: 4253362651
+    locked: 0
+  - name: Entities
+    uniqueID: 2601348847
+    locked: 0
+  - name: Tools
+    uniqueID: 3029551707
+    locked: 0
+  - name: UI
+    uniqueID: 1210510799
     locked: 0
   m_RenderingLayers:
   - Default
