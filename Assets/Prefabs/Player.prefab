@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4678954967131768723}
   - component: {fileID: 6243391513919992397}
   - component: {fileID: 6743934918933241255}
+  - component: {fileID: 4343187399219849469}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -234,6 +235,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c078c3ef-fe4f-4931-8789-7350f6af7403
     m_ActionName: 'Player/Flashlight[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4343187399219849469}
+        m_TargetAssemblyTypeName: PlayerInteract, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5c374cd0-2e22-4770-a72b-3b789ca043f8
+    m_ActionName: 'Player/Interactions[/Keyboard/upArrow]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -303,6 +320,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c844a4f6e5c48344296fe8fe98129a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cape
+--- !u!114 &4343187399219849469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677982620056355922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ebb9fc1e49a1664d8be283ef8ffc370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
 --- !u!1 &4758265152089728283
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,9 +472,9 @@ MonoBehaviour:
   activeDuration: 1
   cooldownDuration: 3
   stunDuration: 3
-  lightDistance: 5
+  lightDistance: 10
   baseThickness: 0.5
-  maxThickness: 3
+  maxThickness: 5
   lightBeamObject: {fileID: 8617427846528782157}
   feedbackRenderer: {fileID: 812233667755751243}
   readyColor: {r: 0, g: 1, b: 0, a: 1}

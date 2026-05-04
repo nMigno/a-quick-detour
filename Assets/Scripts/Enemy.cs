@@ -52,6 +52,18 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (LightButton.roomLightOn)
+        {
+            rb.linearVelocity = Vector2.zero;
+
+            spriteRenderer.color = illuminatedColor;
+            if (illuminatedSprite != null)
+            {
+                spriteRenderer.sprite = illuminatedSprite;
+                return;
+            }
+        }
+
         if (isStunned)
         {
             HandleStunTimer();
@@ -109,7 +121,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!isStunned && other.CompareTag("Player"))
+        if (!isStunned && !LightButton.roomLightOn && other.CompareTag("Player"))
         {
             Debug.Log("Enemy is touching: " + other.gameObject.name + " | Tag: " + other.tag);
 

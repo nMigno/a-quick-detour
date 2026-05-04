@@ -185,8 +185,12 @@ MonoBehaviour:
   moveSpeed: 3
   leftWayPoint: {fileID: 2774810243459226265}
   rightWayPoint: {fileID: 8678111091912129967}
-  stunDuration: 3
   damageAmount: 1
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  illuminatedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  stunnedColor: {r: 1, g: 0, b: 0, a: 1}
+  normalSprite: {fileID: 0}
+  illuminatedSprite: {fileID: 0}
 --- !u!1 &2791721884628355353
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +203,7 @@ GameObject:
   m_Layer: 10
   m_Name: PointA
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -230,7 +234,7 @@ GameObject:
   m_Layer: 10
   m_Name: PointB
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

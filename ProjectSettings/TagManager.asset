@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
   - name: Background
     uniqueID: 1476067667
     locked: 0
+  - name: Door
+    uniqueID: 581272593
+    locked: 0
   - name: Platforms
     uniqueID: 4253362651
     locked: 0
@@ -53,6 +57,9 @@ TagManager:
     locked: 0
   - name: Tools
     uniqueID: 3029551707
+    locked: 0
+  - name: Interactables
+    uniqueID: 1648716099
     locked: 0
   - name: UI
     uniqueID: 1210510799
