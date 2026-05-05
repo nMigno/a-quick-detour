@@ -19,6 +19,8 @@ public class Flashlight : MonoBehaviour
     public float baseThickness = 0.5f;
     [Tooltip("Light thickness at max distance")]
     public float maxThickness = 3f;
+    [Tooltip("Light SortingLayer")]
+    [SerializeField] string Layer;
 
     [Header("References")]
     public GameObject lightBeamObject; // Stun trigger
@@ -129,6 +131,7 @@ public class Flashlight : MonoBehaviour
         mesh.uv = uv;
 
         beamMeshFilter.mesh = mesh;
+        beamMeshRenderer.sortingLayerName = Layer;
     }
 
     private void OnFlashlightInput(InputAction.CallbackContext context)

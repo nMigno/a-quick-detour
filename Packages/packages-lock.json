@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "com.disillusion.play-mode-plus": {
-      "version": "file:C:/Users/nickm/Downloads/Play-Mode-Plus-upm/Play-Mode-Plus-upm",
+      "version": "https://github.com/TheDisillusion/Play-Mode-Plus.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "cc98cbadcb241060ce24cf453c383096515ef8bc"
     },
     "com.unity.2d.animation": {
       "version": "13.0.4",

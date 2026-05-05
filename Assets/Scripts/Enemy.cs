@@ -64,17 +64,23 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (isStunned)
+
+        else if (isStunned)
         {
             HandleStunTimer();
             if(stunTimer > 0) return;
         }
+        if (isStunned && LightButton.roomLightOn)
+            stunTimer = 0f;
 
+        if (!isStunned && !LightButton.roomLightOn) 
         Patrol();
     }
 
     private void Patrol()
     {
+        UpdateVisualFeedback();
+
         rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, rb.linearVelocity.y);
 
         if (moveDirection == Vector2.right && transform.position.x >= rightPos.x)
@@ -108,6 +114,7 @@ public class Enemy : MonoBehaviour
         stunTimer = duration;
     }
 
+
     private void HandleStunTimer()
     {
         stunTimer -= Time.deltaTime;
@@ -117,6 +124,7 @@ public class Enemy : MonoBehaviour
             isStunned = false;
             UpdateVisualFeedback();
         }
+
     }
 
     private void OnTriggerStay2D(Collider2D other)

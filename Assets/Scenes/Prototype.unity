@@ -2372,6 +2372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5629141405698127077, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: Layer
+      value: Entities
+      objectReference: {fileID: 0}
     - target: {fileID: 8882366027176695006, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.08
@@ -5715,6 +5719,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7850552132351786458, guid: 0a5ad103bdf20a749beca28ceff39f4e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850552132351786458, guid: 0a5ad103bdf20a749beca28ceff39f4e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1476067667
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5776,6 +5788,10 @@ PrefabInstance:
       propertyPath: destination
       value: 
       objectReference: {fileID: 52108725}
+    - target: {fileID: 9064083096652527864, guid: 88f8d991314d9724289f5490f4a8cc7b, type: 3}
+      propertyPath: requiresKey
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
