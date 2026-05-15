@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -7,16 +8,35 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject flashlightUpgrade;
     [SerializeField] private GameObject blanketShield;
 
+    [Header("Collectables")]
+    [SerializeField] private GameObject key;
+
     private void Start()
     {
-        PlacePlayerAtCheckpoint();
+        PlacePlayer();
         SyncSceneStates();
     }
 
-    private void PlacePlayerAtCheckpoint()
+    private void PlacePlayer()
     {
-        Vector2 checkpointPos = GameManager.Instance.lastCheckpointPosition;
+        if (!string.IsNullOrEmpty(GameManager.Instance.doorID))
+        {
+            Door[] doorsInScene = FindObjectsByType<Door>(FindObjectsSortMode.None);
 
+            foreach(Door door in doorsInScene)
+            {
+                if (door.myDoorID == GameManager.Instance.doorID)
+                {
+                    player.transform.position = door.transform.position;
+                    GameManager.Instance.doorID = "";
+
+                    return;
+                }
+            }
+            Debug.LogWarning("Door ID not found in scene");
+        }
+
+        Vector2 checkpointPos = GameManager.Instance.lastCheckpointPosition;
         if (checkpointPos != Vector2.zero)
         {
             player.transform.position = checkpointPos;
@@ -34,5 +54,10 @@ public class LevelManager : MonoBehaviour
         {
             blanketShield.SetActive(false);
         }   
+
+        if (GameManager.Instance.hasKey && key != null)
+        {
+            key.SetActive(false);
+        }
     }
 }

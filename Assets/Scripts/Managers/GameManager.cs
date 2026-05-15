@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,9 +17,17 @@ public class GameManager : MonoBehaviour
     public bool hasBlanketShield = false;
     public bool hasBlanketGlider = false;
 
+    public bool hasKey = false;
+
     [Header("Checkpoint System")]
     public string lastCheckpointScene;
     public Vector2 lastCheckpointPosition;
+
+    [Header("Door Transitions")]
+    public string doorID = "";
+
+    [Header("World Persistence")]
+    public List<string> revealedIllusionWalls = new List<string>();
 
     private void Awake()
     {
@@ -37,6 +47,28 @@ public class GameManager : MonoBehaviour
         {
             lastCheckpointScene = SceneManager.GetActiveScene().name;
         }
+    }
+
+    public void RegisterRevealedWall(string wallID)
+    {
+        if (!revealedIllusionWalls.Contains(wallID))
+        {
+            revealedIllusionWalls.Add(wallID);
+            Debug.Log($"GameManager: Muro {wallID} registrado como destruido.");
+        }
+    }
+
+    public void UnlockKey()
+    {
+
+        hasKey = true;
+        Debug.Log("Key picked up.");
+    }
+
+    public void UseDoorTransition(string sceneToLoad, string destinationDoorID)
+    {
+        doorID = destinationDoorID;
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     public void UnlockFlashlightUpgrade()

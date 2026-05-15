@@ -1,3 +1,4 @@
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,13 +6,17 @@ public class Door : MonoBehaviour
 {
     [Header("Door Settings")]
     [Tooltip("Set true if door needs a key to be opened")]
-    public bool requiresKey = false; 
+    public string myDoorID;
     
-    [Tooltip("Drag destination door here")]
-    public Transform destination;
-       
+    [Tooltip("Scene destination when door is opened")]
+    public string sceneToLoad;
+
+    [Tooltip("Destination Door ID")]
+    public string destinationDoorID;
+
+    public bool requiresKey = false;
+
     private bool playerInRange = false;
-    private Transform playerTransform;
     private bool isLocked;
 
     private void Start()
@@ -31,43 +36,35 @@ public class Door : MonoBehaviour
     {
         if (isLocked)
         {
-            if (KeyPickUp.hasKey)
+            if (GameManager.Instance.hasKey)
             {
                 isLocked = false;
                 Debug.Log("Door unlocked with key!");
-                Teleport();
+                Transition();
             }
             else
             {
                 Debug.Log("Needs a key to be opened");
-                // Future sound trigger for door closed
             }
         }
         else
         {
-            Teleport();
+            Transition();
         }
     }
 
-    private void Teleport()
+    private void Transition()
     {
-        if (destination != null && playerTransform != null)
-        {
-            playerTransform.position = destination.position;
-            Debug.Log("Teleported");
-        }
-        else
-        {
-            Debug.LogWarning("Destination missing on Door Inspector");
-        }
+        Debug.Log($"Travelling to {sceneToLoad}, destination: {destinationDoorID}");
+        GameManager.Instance.UseDoorTransition(sceneToLoad, destinationDoorID);
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            playerTransform = other.transform;
         }
     }
 
@@ -76,7 +73,6 @@ public class Door : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            playerTransform = null;
         }
     }
 }
