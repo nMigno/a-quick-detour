@@ -17,6 +17,7 @@ public class KeyPickUp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasKey = true;
+            Debug.Log("Player picked up key!");
 
             if (wallToHide != null)
             {

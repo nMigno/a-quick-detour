@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
     public PlayerController Controller { get; private set; }
     public PlayerHP Health { get; private set; }
     public Flashlight PlayerFlashlight { get; private set; }
-    public Cape PlayerCape { get; private set; }
+    public Blanket PlayerBlanket { get; private set; }
 
     private void Awake()
     {
@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
         Controller = GetComponent<PlayerController>();
         Health = GetComponent<PlayerHP>();
         PlayerFlashlight = GetComponentInChildren<Flashlight>();
-        PlayerCape = GetComponentInChildren<Cape>();
+        PlayerBlanket = GetComponentInChildren<Blanket>();
         
     }
 }

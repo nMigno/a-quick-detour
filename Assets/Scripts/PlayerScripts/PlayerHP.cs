@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerHP : MonoBehaviour
 {
     [Header("Health Settings")]
-    [SerializeField] private int maxHealth = 2;
     private int currentHealth;
 
     [Header("Invulnerability (i-frames)")]
@@ -21,8 +20,7 @@ public class PlayerHP : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = maxHealth;
-        currentRespawnPosition = transform.position;
+        currentHealth = GameManager.Instance.currentHP;
     }
 
     public void TakeDamage(int damageAmount, Vector3 damageSourcePosition)
@@ -30,6 +28,8 @@ public class PlayerHP : MonoBehaviour
         if (isInvulnerable) return;
 
         currentHealth -= damageAmount;
+        GameManager.Instance.UpdateHP(currentHealth);
+
         Debug.Log("Player received damage. HP left: " + currentHealth);
 
         if (currentHealth <= 0)
@@ -59,19 +59,6 @@ public class PlayerHP : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player died. Respawning...");
-        Respawn();
-    }
-
-    private void Respawn()
-    {
-        currentHealth = maxHealth;
-        transform.position = currentRespawnPosition;
-        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-        //StartCoroutine(InvulnerabilityRoutine()); only if an enemy is over checkpoint
-    }
-
-    public void SetRespawnPoint(Vector3 newRespawnPosition)
-    {
-        currentRespawnPosition = newRespawnPosition;
+        GameManager.Instance.RespawnPlayer();
     }
 }

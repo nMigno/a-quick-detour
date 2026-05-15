@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 6987354313161956345}
   - component: {fileID: 4678954967131768723}
   - component: {fileID: 6243391513919992397}
-  - component: {fileID: 6743934918933241255}
   - component: {fileID: 4343187399219849469}
+  - component: {fileID: 1975485469039569573}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1693618449
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
@@ -306,20 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4604377081d4241aa28e95a4fa12fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHP
-  maxHealth: 2
   invulnerabilityDuration: 1.5
---- !u!114 &6743934918933241255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4677982620056355922}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c844a4f6e5c48344296fe8fe98129a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cape
 --- !u!114 &4343187399219849469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +319,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ebb9fc1e49a1664d8be283ef8ffc370, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
+--- !u!114 &1975485469039569573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677982620056355922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c844a4f6e5c48344296fe8fe98129a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cape
 --- !u!1 &4758265152089728283
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +442,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1265415589
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -475,6 +474,7 @@ MonoBehaviour:
   lightDistance: 10
   baseThickness: 0.5
   maxThickness: 5
+  Layer: 
   lightBeamObject: {fileID: 8617427846528782157}
   feedbackRenderer: {fileID: 812233667755751243}
   readyColor: {r: 0, g: 1, b: 0, a: 1}

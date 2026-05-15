@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5738670204301631824}
   - component: {fileID: 6382899503195603377}
   m_Layer: 0
-  m_Name: PlayerCamera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
