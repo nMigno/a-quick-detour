@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 groundCheckSize = new Vector2(0.9f, 0.05f);
     [SerializeField] private LayerMask groundLayer;
 
+    [SerializeField] private Transform spawnPoint;
+
     private Rigidbody2D rb;
     private PlayerInput playerInput;
     private InputAction jumpAction;
@@ -49,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        gameObject.transform.position = spawnPoint.position;
+        playerInput.ActivateInput();
         // Set Max Health/Sanity
         // Set UI Manager
         // Initialize Checkpoints
@@ -66,11 +70,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-            if (coyoteTimeCounter > 0)
+            /*if (coyoteTimeCounter > 0)
             {
-                Jump();
-            }
-            else if (jumpsRemaining > 0)
+               Jump();
+            }*/
+            if (jumpsRemaining > 0)
             {
                 Jump();
             }
@@ -106,9 +110,10 @@ public class PlayerController : MonoBehaviour
         CheckCollisions();
     }
 
+    //Seoarar funcion de chequear grounded de funcion coyote
     private void CheckCollisions()
     {
-        bool wasGrounded = isGrounded;
+        //bool wasGrounded = isGrounded;
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
         bool isHoldingJump = jumpAction.IsPressed();
 
@@ -124,7 +129,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             // If in the air, counter starts decreasing
-            coyoteTimeCounter -= Time.fixedDeltaTime;
+            coyoteTimeCounter -= Time.deltaTime;
 
             // Avoid air jump if counter = 0
             if (coyoteTimeCounter <= 0f && jumpsRemaining == maxJumps)
@@ -133,6 +138,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
     private void Jump()
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);

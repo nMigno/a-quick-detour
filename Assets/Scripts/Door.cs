@@ -1,4 +1,4 @@
-using UnityEditorInternal;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,27 +19,41 @@ public class Door : MonoBehaviour
     private bool playerInRange = false;
     private bool isLocked;
 
+    [SerializeField] private Transform playerSpawn;
+
+    private PlayerInput player;
+
     private void Start()
     {
         isLocked = requiresKey;
+        player = GameObject.Find("Player").GetComponent<PlayerInput>();
+        
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (playerInRange && context.started)
         {
-            TryInteract();
+            StartCoroutine(TryInteract());
+            
         }
     }
 
-    private void TryInteract()
+    private IEnumerator TryInteract()
     {
+        
+
         if (isLocked)
         {
+            
             if (GameManager.Instance.hasKey)
             {
+                player.DeactivateInput();
+                yield return new WaitForSeconds(0.5f);
                 isLocked = false;
                 Debug.Log("Door unlocked with key!");
+                playerSpawn.position = gameObject.transform.position;
+                
                 Transition();
             }
             else
@@ -49,6 +63,9 @@ public class Door : MonoBehaviour
         }
         else
         {
+            player.DeactivateInput();
+            yield return new WaitForSeconds(0.5f);
+            playerSpawn.position = gameObject.transform.position;
             Transition();
         }
     }
