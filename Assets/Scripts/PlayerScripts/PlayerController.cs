@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerInput playerInput;
     private InputAction jumpAction;
-    
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
