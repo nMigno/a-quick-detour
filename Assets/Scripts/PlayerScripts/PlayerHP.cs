@@ -61,4 +61,11 @@ public class PlayerHP : MonoBehaviour
         Debug.Log("Player died. Respawning...");
         GameManager.Instance.RespawnPlayer();
     }
+
+    public void HealToMax()
+    {
+        currentHealth = GameManager.Instance.maxHP;
+        GameManager.Instance.UpdateHP(currentHealth);
+        Debug.Log("Played fully healed on checkpoint.");
+    }
 }

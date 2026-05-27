@@ -8,6 +8,10 @@ public class Flashlight : MonoBehaviour
     public enum FlashlightState { Ready, On, Jammed }
     public FlashlightState currentState = FlashlightState.Ready;
 
+    [Header("Battery Settings")]
+    public int maxUses = 2;
+    private int currentUses;
+
     [Header("Time (seconds)")]
     public float activeDuration = 1f;
     public float cooldownDuration = 3f;
@@ -34,15 +38,18 @@ public class Flashlight : MonoBehaviour
     public Color onColor = Color.white;
     public Color jammedColor = Color.red;
     public Color beamColor = new Color (1f, 0.9f, 0.1f, 0.5f);
+    public Color revealBeamColor = Color.orange;
 
     private PlayerInput playerInput;
     private InputAction flashlightAction;
+    private InputAction revealAction;
     private PolygonCollider2D beamCollider;
 
     private void Awake()
     {
         playerInput = GetComponentInParent<PlayerInput>();
         flashlightAction = playerInput.actions.FindAction("Flashlight");
+        revealAction = playerInput.actions.FindAction("RevealLight");
 
         if (lightBeamObject != null)
         {
@@ -61,21 +68,24 @@ public class Flashlight : MonoBehaviour
     private void OnEnable()
     {
         flashlightAction.performed += OnFlashlightInput;
+        revealAction.performed += OnRevealInput;
     }
 
     private void OnDisable()
     {
         flashlightAction.performed -= OnFlashlightInput;
+        revealAction.performed -= OnRevealInput;
     }
 
     private void Start()
     {
+        currentUses = maxUses;
         SetState(FlashlightState.Ready);
         lightBeamObject.SetActive(false);
-        ConfigureLightBeam();
+        ConfigureLightBeam(beamColor);
     }
 
-    private void ConfigureLightBeam()
+    private void ConfigureLightBeam(Color activeColor)
     {
         if (beamCollider != null)
         {
@@ -96,7 +106,7 @@ public class Flashlight : MonoBehaviour
 
             if (beamMeshRenderer != null)
             {
-                beamMeshRenderer.material.color = beamColor;
+                beamMeshRenderer.material.color = activeColor;
             }
         }
     }
@@ -138,14 +148,50 @@ public class Flashlight : MonoBehaviour
     {
         if (currentState == FlashlightState.Ready)
         {
-            StartCoroutine(UseFlashlight());
+            if (currentUses > 0)
+            {
+                StartCoroutine(UseLight(false));
+            }
+            else
+            {
+                Debug.Log("Flashlight out of battery!");
+            }
         }
     }
 
-    private IEnumerator UseFlashlight()
+    private void OnRevealInput(InputAction.CallbackContext context)
     {
+        if (currentState == FlashlightState.Ready)
+        {
+            if (GameManager.Instance.hasFlashlightUpgrade)
+            {
+                StartCoroutine(UseLight(true));
+            }
+            else
+            {
+                Debug.Log("Upgrade not unlocked yet!");
+            }
+        }
+    }
+
+    private IEnumerator UseLight(bool isRevealMode)
+    {
+        if (!isRevealMode) 
+        {
+            currentUses--;
+        }
+
         SetState(FlashlightState.On);
-        ConfigureLightBeam();
+
+        LightBeam beamScript = lightBeamObject.GetComponent<LightBeam>();
+        if (beamScript != null)
+        {
+            beamScript.isRevealMode = isRevealMode;
+        }
+
+        Color currentColor = isRevealMode ? revealBeamColor : beamColor;
+        ConfigureLightBeam(currentColor);
+
         lightBeamObject.SetActive(true);
 
         yield return new WaitForSeconds(activeDuration);
@@ -177,5 +223,11 @@ public class Flashlight : MonoBehaviour
                     break;    
             } 
         }
+    }
+
+    public void RechargeBattery()
+    {
+        currentUses = maxUses;
+        Debug.Log("Flashlight recharged!");
     }
 }

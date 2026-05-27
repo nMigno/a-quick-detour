@@ -14,10 +14,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Power-ups & Skills")]
     public bool hasFlashlightUpgrade = false;
-    public bool hasBlanketShield = false;
+    public bool hasDoubleJump = false;
     public bool hasBlanketGlider = false;
-
-    public bool hasKey = false;
 
     [Header("Checkpoint System")]
     public string lastCheckpointScene;
@@ -28,6 +26,16 @@ public class GameManager : MonoBehaviour
 
     [Header("World Persistence")]
     public List<string> revealedIllusionWalls = new List<string>();
+    public List<string> deadEnemies = new List<string>();
+
+    public void RegisterDeadEnemy(string EnemyID)
+    {
+        if (!deadEnemies.Contains(EnemyID))
+        {
+            deadEnemies.Add(EnemyID);
+            Debug.Log($"GameManager: Enemy {EnemyID} registered as dead.");
+        }
+    }
 
     private void Awake()
     {
@@ -58,13 +66,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UnlockKey()
-    {
-
-        hasKey = true;
-        Debug.Log("Key picked up.");
-    }
-
     public void UseDoorTransition(string sceneToLoad, string destinationDoorID)
     {
         doorID = destinationDoorID;
@@ -76,11 +77,10 @@ public class GameManager : MonoBehaviour
         hasFlashlightUpgrade = true;
         Debug.Log("Flashlight upgrade unlocked.");
     }
-
-    public void UnlockBlanketShield()
+    public void UnlockDoubleJump()
     {
-        hasBlanketShield = true;   
-        Debug.Log("Blanket shield unlocked.");
+        hasDoubleJump = true;
+        Debug.Log("Double Jump unlocked!");
     }
 
     public void UnlockBlanketGlider()

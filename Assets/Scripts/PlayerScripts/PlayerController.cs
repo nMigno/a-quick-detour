@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private float coyoteTimeCounter;
 
+    [Header("Glider Settings")]
+    [Tooltip("Maximum fall speed while gliding.")]
+    [SerializeField] private float glideFallSpeed = -2f;
+    private bool isGliding = false;
+
     [Header("Player Gravity Settings")]
     [SerializeField] private float fallGravityMultiplier = 2.5f;
     private float defaultGravityScale;
@@ -52,12 +57,12 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        gameObject.transform.position = spawnPoint.position;
         playerInput.ActivateInput();
-        // Set Max Health/Sanity
-        // Set UI Manager
-        // Initialize Checkpoints
-        // Initialize Flashlight battery/system
+
+        if (GameManager.Instance.hasDoubleJump)
+        {
+            maxJumps = 2;
+        }
     }
     
     // Input System Callbacks    
@@ -71,10 +76,6 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-            /*if (coyoteTimeCounter > 0)
-            {
-               Jump();
-            }*/
             if (jumpsRemaining > 0)
             {
                 Jump();
@@ -89,6 +90,19 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    public void OnGlide(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            isGliding = true;
+        } 
+        else if (context.canceled)
+        {
+            isGliding = false;
+        }
+    }  
+
     private void Update()
     {
         IncreaseGravity();
@@ -109,9 +123,10 @@ public class PlayerController : MonoBehaviour
 
         rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
         CheckCollisions();
+        HandleGliding();
     }
 
-    //Seoarar funcion de chequear grounded de funcion coyote
+    //Divide grounded check method from coyote's.
     private void CheckCollisions()
     {
         //bool wasGrounded = isGrounded;
@@ -204,6 +219,25 @@ public class PlayerController : MonoBehaviour
 
         // Impulse for hit player 
         rb.AddForce(new Vector2(horizontalDirection * knockbackForceX, knockbackForceY), ForceMode2D.Impulse);
+    }
+
+    public void UnlockDoubleJump()
+    {
+        maxJumps = 2;
+        Debug.Log("Double jump unlocked!");
+    }
+
+    private void HandleGliding()
+    {
+        if (isGrounded)
+        {
+            isGliding = false;
+        }
+
+        if (isGliding && !isGrounded && rb.linearVelocity.y < 0 && GameManager.Instance.hasBlanketGlider)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, glideFallSpeed));
+        }
     }
 
     //Editor box rendering

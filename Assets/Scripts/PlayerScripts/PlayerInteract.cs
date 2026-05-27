@@ -5,18 +5,22 @@ using UnityEngine.InputSystem;
 public class PlayerInteract : MonoBehaviour
 {
     private Door currentDoor;
-    private LightButton currentLightButton;
+    private Checkpoint currentCheckpoint;
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.started && currentDoor != null)
+        if (context.started)
         {
-            currentDoor.OnInteract(context);
-        }
+            if (currentDoor != null)
+            {
+                currentDoor.OnInteract(context);
+            }
 
-        if (currentLightButton != null)
-        {
-            currentLightButton.OnInteract(context);
+            if (currentCheckpoint != null)
+            {
+                Player player = GetComponent<Player>();
+                currentCheckpoint.Interact(player);
+            }
         }
     }
 
@@ -25,7 +29,10 @@ public class PlayerInteract : MonoBehaviour
         if (collision.CompareTag("Door"))
         {
             currentDoor = collision.GetComponent<Door>();
-            currentLightButton = collision.GetComponent<LightButton>();
+        }
+        else if (collision.CompareTag("Checkpoint"))
+        {
+            currentCheckpoint = collision.GetComponent<Checkpoint>();
         }
     }
 
@@ -34,7 +41,10 @@ public class PlayerInteract : MonoBehaviour
         if (collision.CompareTag("Door"))
         {
             currentDoor = null;
-            currentLightButton = null;
+        }
+        else if (collision.CompareTag("Checkpoint"))
+        {
+            currentCheckpoint = null;
         }
     }
 }

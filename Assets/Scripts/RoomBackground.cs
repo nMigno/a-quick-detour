@@ -13,9 +13,4 @@ public class RoomBackground : MonoBehaviour
     {
         bgRenderer = GetComponent<SpriteRenderer>();
     }
-
-    private void Update()
-    {
-        bgRenderer.color = LightButton.roomLightOn ? brightBackground : darkBackground;
-    }
 }

@@ -6,7 +6,7 @@ public class LevelManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject flashlightUpgrade;
-    [SerializeField] private GameObject blanketShield;
+    [SerializeField] private GameObject doubleJumpUpgrade;
 
     [Header("Collectables")]
     [SerializeField] private GameObject key;
@@ -50,14 +50,9 @@ public class LevelManager : MonoBehaviour
             flashlightUpgrade.SetActive(false);
         }
 
-        if (GameManager.Instance.hasBlanketShield && blanketShield != null)
+        if (GameManager.Instance.hasDoubleJump && doubleJumpUpgrade != null)
         {
-            blanketShield.SetActive(false);
-        }   
-
-        if (GameManager.Instance.hasKey && key != null)
-        {
-            key.SetActive(false);
+            doubleJumpUpgrade.SetActive(false);
         }
     }
 }

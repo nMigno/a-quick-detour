@@ -14,8 +14,6 @@ public class Door : MonoBehaviour
     [Tooltip("Destination Door ID")]
     public string destinationDoorID;
 
-    public bool requiresKey = false;
-
     private bool playerInRange = false;
     private bool isLocked;
 
@@ -25,7 +23,6 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        isLocked = requiresKey;
         player = GameObject.Find("Player").GetComponent<PlayerInput>();
         
     }
@@ -41,33 +38,10 @@ public class Door : MonoBehaviour
 
     private IEnumerator TryInteract()
     {
-        
-
-        if (isLocked)
-        {
-            
-            if (GameManager.Instance.hasKey)
-            {
-                player.DeactivateInput();
-                yield return new WaitForSeconds(0.5f);
-                isLocked = false;
-                Debug.Log("Door unlocked with key!");
-                playerSpawn.position = gameObject.transform.position;
-                
-                Transition();
-            }
-            else
-            {
-                Debug.Log("Needs a key to be opened");
-            }
-        }
-        else
-        {
-            player.DeactivateInput();
-            yield return new WaitForSeconds(0.5f);
-            playerSpawn.position = gameObject.transform.position;
-            Transition();
-        }
+        player.DeactivateInput();
+        yield return new WaitForSeconds(0.5f);
+        playerSpawn.position = gameObject.transform.position;
+        Transition();
     }
 
     private void Transition()

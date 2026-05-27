@@ -4,17 +4,18 @@ using System.Collections.Generic;
 public class LightBeam : MonoBehaviour
 {
     public Flashlight flashlightController;
+    public bool isRevealMode = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("La luz tocó a: " + other.gameObject.name);
 
-        if (other.TryGetComponent<Enemy>(out Enemy enemy))
+        if (!isRevealMode && other.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            enemy.SetIlluminated(true, flashlightController.stunDuration);
+            enemy.SetIlluminated(true);
         }
 
-        if (other.TryGetComponent<IllusionWall>(out IllusionWall wall))
+        if (isRevealMode && other.TryGetComponent<IllusionWall>(out IllusionWall wall))
         {
             wall.Reveal();
         }
@@ -22,9 +23,9 @@ public class LightBeam : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.TryGetComponent<Enemy>(out Enemy enemy))
+        if(!isRevealMode && other.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            enemy.SetIlluminated(false, 0f);
+            enemy.SetIlluminated(false);
         }
     }
 }

@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
         Controller = GetComponent<PlayerController>();
         Health = GetComponent<PlayerHP>();
         PlayerFlashlight = GetComponentInChildren<Flashlight>();
-        PlayerBlanket = GetComponentInChildren<Blanket>();
-        
+        PlayerBlanket = GetComponentInChildren<Blanket>();        
     }
 }

@@ -34,9 +34,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "RevealLight",
+                    "type": "Button",
+                    "id": "231346aa-ec90-4c32-8d65-e38bb34cc4b9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interactions",
                     "type": "Button",
                     "id": "5c374cd0-2e22-4770-a72b-3b789ca043f8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Glide",
+                    "type": "Button",
+                    "id": "84ebb192-470f-427f-9c2f-efbfaa3fa3c2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -195,6 +213,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interactions",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a52e29f-3077-4b9a-85f4-ee7c984c251a",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RevealLight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3804c975-a33f-4c32-acca-9ee7366eb521",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RevealLight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "123b42d3-ea32-4ef1-b932-e414c74d5772",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Glide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cce9552f-18b7-4dda-9550-24053c61b7e1",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Glide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

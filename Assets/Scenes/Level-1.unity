@@ -654,12 +654,16 @@ PrefabInstance:
       value: 2.0230188
       objectReference: {fileID: 0}
     - target: {fileID: 1710554049267659585, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5876
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710554049267659585, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.45
+      value: 27.42
       objectReference: {fileID: 0}
     - target: {fileID: 1710554049267659585, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.48
+      value: 24.39
       objectReference: {fileID: 0}
     - target: {fileID: 1710554049267659585, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -861,11 +865,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1710554049267659585, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 41.3609
+      value: 41.4
       objectReference: {fileID: 0}
     - target: {fileID: 1710554049267659585, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.2178
+      value: 23.51
       objectReference: {fileID: 0}
     - target: {fileID: 1710554049267659585, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -913,6 +917,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1710554049267659585, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
   m_PrefabInstance: {fileID: 271471855}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &273675331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4677982620056355922, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+  m_PrefabInstance: {fileID: 1260007269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &273675335 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4678954967131768723, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+  m_PrefabInstance: {fileID: 1260007269}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273675331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e7db2bce7ec1846beeb45c599e0928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1001 &349495788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3676,11 +3696,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539596273441155948, guid: 8a5967e80b819a247816f17047d63651, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 54.05544
+      value: 54.19
       objectReference: {fileID: 0}
     - target: {fileID: 539596273441155948, guid: 8a5967e80b819a247816f17047d63651, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.58889
+      value: 10.81
       objectReference: {fileID: 0}
     - target: {fileID: 539596273441155948, guid: 8a5967e80b819a247816f17047d63651, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3876,9 +3896,61 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 231346aa-ec90-4c32-8d65-e38bb34cc4b9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: 84ebb192-470f-427f-9c2f-efbfaa3fa3c2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: 'Player/RevealLight[/Keyboard/v]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: 'Player/Glide[/Keyboard/z]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 273675335}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnGlide
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127776261070775656, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4677982620056355922, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4678954967131768723, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
+      propertyPath: coyoteTime
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4678954967131768723, guid: ff0a2c2592b43b74c929056829f0834b, type: 3}
       propertyPath: spawnPoint
@@ -5971,7 +6043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3348423146525361336, guid: d4a53184982bea04a9f1f018b7dfa52d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40.716995
+      value: -39.576263
       objectReference: {fileID: 0}
     - target: {fileID: 3348423146525361336, guid: d4a53184982bea04a9f1f018b7dfa52d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7013,6 +7085,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 9126878302362545399, guid: 74165e0f0ce359d4aaee49131da51e22, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7077,7 +7153,7 @@ PrefabInstance:
     - target: {fileID: 8839955771094937233, guid: 76883b0ba4f4e6541b5f9b4f13da95ce, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 273675331}
     - target: {fileID: 8839955771094937233, guid: 76883b0ba4f4e6541b5f9b4f13da95ce, type: 3}
       propertyPath: blanketShield
       value: 

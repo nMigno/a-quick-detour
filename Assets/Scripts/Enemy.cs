@@ -15,9 +15,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int damageAmount = 1;
 
     [Header("Blockout Color (Test Feedback)")]
-    [SerializeField] private Color normalColor = Color.white;
+    [SerializeField] private Color normalColor = Color.brown;
     [SerializeField] private Color illuminatedColor = Color.yellow;
-    [SerializeField] private Color stunnedColor = Color.red;
+    [SerializeField] private Color stunnedColor = Color.blue;
 
     [Header("Sprites (Artist's Assets)")]
     public Sprite normalSprite;
@@ -29,13 +29,16 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveDirection;
     private bool isStunned = false;
-    private float stunTimer = 0f;
 
     private Vector3 leftPos;
     private Vector3 rightPos;
 
+    private string enemyID;
+
     private void Awake()
     {        
+        enemyID = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "_Enemy_" + transform.position.ToString();
+
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -50,30 +53,23 @@ public class Enemy : MonoBehaviour
         rightPos = rightWayPoint.position;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (LightButton.roomLightOn)
+        if (GameManager.Instance.deadEnemies.Contains(enemyID))
         {
-            rb.linearVelocity = Vector2.zero;
+            ApplyStun();
 
-            spriteRenderer.color = illuminatedColor;
+            spriteRenderer.color = stunnedColor;
             if (illuminatedSprite != null)
             {
                 spriteRenderer.sprite = illuminatedSprite;
-                return;
             }
         }
+    }
 
-
-        else if (isStunned)
-        {
-            HandleStunTimer();
-            if(stunTimer > 0) return;
-        }
-        if (isStunned && LightButton.roomLightOn)
-            stunTimer = 0f;
-
-        if (!isStunned && !LightButton.roomLightOn) 
+    private void Update()
+    {
+        if (isStunned) return;
         Patrol();
     }
 
@@ -103,33 +99,23 @@ public class Enemy : MonoBehaviour
     }
 
     // Stun system (public bc is called from Flashlight.cs)
-    public void ApplyStun(float duration)
+    public void ApplyStun()
     {
         if (!isStunned)
         {
             isStunned = true;
-            rb.linearVelocity = Vector2.zero; // Stop enemy
+            rb.simulated = false;
+
+            if (!string.IsNullOrEmpty(enemyID))
+            {
+                GameManager.Instance.RegisterDeadEnemy(enemyID);
+            }
         }
-
-        stunTimer = duration;
-    }
-
-
-    private void HandleStunTimer()
-    {
-        stunTimer -= Time.deltaTime;
-
-        if (stunTimer <= 0)
-        {
-            isStunned = false;
-            UpdateVisualFeedback();
-        }
-
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!isStunned && !LightButton.roomLightOn && other.CompareTag("Player"))
+        if (!isStunned && other.CompareTag("Player"))
         {
             Debug.Log("Enemy is touching: " + other.gameObject.name + " | Tag: " + other.tag);
 
@@ -143,13 +129,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void SetIlluminated(bool state, float duration)
+    public void SetIlluminated(bool state)
     {
         isIlluminated = state;
 
         if(isIlluminated)
         {
-            ApplyStun(duration);
+            ApplyStun();
             UpdateVisualFeedback();
         }
         else
