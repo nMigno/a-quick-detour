@@ -10,7 +10,6 @@ public class Flashlight : MonoBehaviour
 
     [Header("Battery Settings")]
     public int maxUses = 2;
-    private int currentUses;
 
     [Header("Time (seconds)")]
     public float activeDuration = 1f;
@@ -79,7 +78,6 @@ public class Flashlight : MonoBehaviour
 
     private void Start()
     {
-        currentUses = maxUses;
         SetState(FlashlightState.Ready);
         lightBeamObject.SetActive(false);
         ConfigureLightBeam(beamColor);
@@ -148,7 +146,7 @@ public class Flashlight : MonoBehaviour
     {
         if (currentState == FlashlightState.Ready)
         {
-            if (currentUses > 0)
+            if (GameManager.Instance.currentFlashlightUses > 0)
             {
                 StartCoroutine(UseLight(false));
             }
@@ -178,7 +176,7 @@ public class Flashlight : MonoBehaviour
     {
         if (!isRevealMode) 
         {
-            currentUses--;
+            GameManager.Instance.currentFlashlightUses--;
         }
 
         SetState(FlashlightState.On);
@@ -227,7 +225,7 @@ public class Flashlight : MonoBehaviour
 
     public void RechargeBattery()
     {
-        currentUses = maxUses;
+        GameManager.Instance.currentFlashlightUses = maxUses;
         Debug.Log("Flashlight recharged!");
     }
 }

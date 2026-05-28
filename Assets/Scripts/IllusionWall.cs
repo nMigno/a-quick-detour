@@ -40,6 +40,8 @@ public class IllusionWall : MonoBehaviour
         revealColor.a = revealedAlpha;
         spriteRenderer.color = revealColor;
 
+        GameManager.Instance.RegisterRevealedWall(wallID);
+
         Debug.Log("Illusion wall dissapeared!");
     }
 

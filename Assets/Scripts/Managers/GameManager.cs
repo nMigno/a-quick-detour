@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour
     [Header("World Persistence")]
     public List<string> revealedIllusionWalls = new List<string>();
     public List<string> deadEnemies = new List<string>();
+    public List<string> collectedBatteries = new List<string>();
+
+    [Header("Flashlight Battery Manager")]
+    public int currentFlashlightUses = 2;
+    public int checkpointFlashlightUses = 2;
 
     public void RegisterDeadEnemy(string EnemyID)
     {
@@ -98,6 +103,8 @@ public class GameManager : MonoBehaviour
     {
         lastCheckpointPosition = position;
         lastCheckpointScene = sceneName;
+        checkpointFlashlightUses = currentFlashlightUses;
+
         Debug.Log($"GameManager: Checkpoint set at {position} in scene {sceneName}");
     }
 
@@ -106,6 +113,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager: Respawning on last checkpoint.");
 
         UpdateHP(maxHP);
+
+        currentFlashlightUses = checkpointFlashlightUses;
+
         SceneManager.LoadScene(lastCheckpointScene);
     }
 }
