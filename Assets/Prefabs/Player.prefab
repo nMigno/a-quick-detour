@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6987354313161956345}
   - component: {fileID: 4678954967131768723}
   - component: {fileID: 6243391513919992397}
-  - component: {fileID: 6743934918933241255}
   - component: {fileID: 4343187399219849469}
   m_Layer: 6
   m_Name: Player
@@ -162,9 +161,9 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.13386679, y: -0.11049271}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.02, y: 0.01, z: 0.02, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.56, y: 2.4}
     newSize: {x: 1, y: 2}
@@ -172,7 +171,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.3187284, y: 2.2209854}
   m_EdgeRadius: 0
 --- !u!114 &3127776261070775656
 MonoBehaviour:
@@ -251,6 +250,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5c374cd0-2e22-4770-a72b-3b789ca043f8
     m_ActionName: 'Player/Interactions[/Keyboard/upArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 231346aa-ec90-4c32-8d65-e38bb34cc4b9
+    m_ActionName: 'Player/RevealLight[/Keyboard/v]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 84ebb192-470f-427f-9c2f-efbfaa3fa3c2
+    m_ActionName: 'Player/Glide[/Keyboard/z]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -288,12 +295,14 @@ MonoBehaviour:
   jumpCutMultiplier: 0.3
   maxJumps: 1
   coyoteTime: 0.15
+  glideFallSpeed: -2
   fallGravityMultiplier: 2
   groundCheck: {fileID: 3759174887751696575}
-  groundCheckSize: {x: 0.9, y: 0.02}
+  groundCheckSize: {x: 1.4, y: 0.02}
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  spawnPoint: {fileID: 0}
 --- !u!114 &6243391513919992397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,20 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4604377081d4241aa28e95a4fa12fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHP
-  maxHealth: 2
   invulnerabilityDuration: 1.5
---- !u!114 &6743934918933241255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4677982620056355922}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c844a4f6e5c48344296fe8fe98129a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cape
 --- !u!114 &4343187399219849469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +353,7 @@ Transform:
   m_GameObject: {fileID: 4758265152089728283}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -469,6 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Flashlight
   currentState: 0
+  maxUses: 2
   activeDuration: 1
   cooldownDuration: 3
   stunDuration: 3
@@ -482,6 +479,7 @@ MonoBehaviour:
   onColor: {r: 1, g: 1, b: 1, a: 1}
   jammedColor: {r: 1, g: 0, b: 0, a: 1}
   beamColor: {r: 1, g: 0.9, b: 0.1, a: 0.5}
+  revealBeamColor: {r: 1, g: 0.6470588, b: 0, a: 1}
 --- !u!1 &8617427846528782157
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,6 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightBeam
   flashlightController: {fileID: 0}
+  isRevealMode: 0
 --- !u!60 &8156133831422571548
 PolygonCollider2D:
   m_ObjectHideFlags: 0

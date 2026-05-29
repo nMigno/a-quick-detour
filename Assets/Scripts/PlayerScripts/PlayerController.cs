@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     [Header("Collision Checks")]
     [Tooltip("Here goes child object GroundCheck")]
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.9f, 0.05f);
+    [SerializeField] private Vector2 groundCheckSize = new Vector2(1.4f, 0.05f);
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private Transform spawnPoint;
