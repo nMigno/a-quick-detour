@@ -1,0 +1,1096 @@
+fileFormatVersion: 2
+guid: 260c17dd7b045274e8558d67f1536ee6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1017366021978335469
+    second: Fondo03_0
+  - first:
+      213: 5230994452980917178
+    second: Fondo03_1
+  - first:
+      213: -1636512201760279518
+    second: Fondo03_2
+  - first:
+      213: 4538443374954701753
+    second: Fondo03_3
+  - first:
+      213: 7401941101297855090
+    second: Fondo03_4
+  - first:
+      213: 967184759450561789
+    second: Fondo03_5
+  - first:
+      213: -6707333260795158205
+    second: Fondo03_6
+  - first:
+      213: 6632878277149236432
+    second: Fondo03_7
+  - first:
+      213: 1601555351817428677
+    second: Fondo03_8
+  - first:
+      213: 210104531588753139
+    second: Fondo03_9
+  - first:
+      213: -6913934881556686149
+    second: Fondo03_10
+  - first:
+      213: -3805471358386070123
+    second: Fondo03_11
+  - first:
+      213: 3963799241098511073
+    second: Fondo03_12
+  - first:
+      213: -4063583357828876897
+    second: Fondo03_13
+  - first:
+      213: 1624843668291861904
+    second: Fondo03_14
+  - first:
+      213: -3032423048153477755
+    second: Fondo03_15
+  - first:
+      213: 114845719189120942
+    second: Fondo03_16
+  - first:
+      213: 5176756289561570305
+    second: Fondo03_17
+  - first:
+      213: -1305585925312630764
+    second: Fondo03_18
+  - first:
+      213: -6114296075588262684
+    second: Fondo03_19
+  - first:
+      213: -8250675388745790563
+    second: Fondo03_20
+  - first:
+      213: 2776458374142857102
+    second: Fondo03_21
+  - first:
+      213: 4921714845836371517
+    second: Fondo03_22
+  - first:
+      213: -4382544245837963372
+    second: Fondo03_23
+  - first:
+      213: 7135400908345440096
+    second: Fondo03_24
+  - first:
+      213: -8811869516648828777
+    second: Fondo03_25
+  - first:
+      213: -2415582330195035394
+    second: Fondo03_26
+  - first:
+      213: 1217467501272091962
+    second: Fondo03_27
+  - first:
+      213: 7398699956380542155
+    second: Fondo03_28
+  - first:
+      213: -3788779313814283950
+    second: Fondo03_29
+  - first:
+      213: -5670481811739043520
+    second: Fondo03_30
+  - first:
+      213: 7387520468803477410
+    second: Fondo03_31
+  - first:
+      213: -5604123044163012942
+    second: Fondo03_32
+  - first:
+      213: 9101623595047647327
+    second: Fondo03_33
+  - first:
+      213: -9217249529110195714
+    second: Fondo03_34
+  - first:
+      213: 3661239322716486112
+    second: Fondo03_35
+  - first:
+      213: -5727945200444059995
+    second: Fondo03_36
+  - first:
+      213: -6356942143302680292
+    second: Fondo03_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Fondo03_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1388
+        height: 1288
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de8229ab1096e1e00800000000000000
+      internalID: 1017366021978335469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_1
+      rect:
+        serializedVersion: 2
+        x: 589
+        y: 938
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab367ff6db9389840800000000000000
+      internalID: 5230994452980917178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_3
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 908
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b3666d243acbfe30800000000000000
+      internalID: 4538443374954701753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_4
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 882
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ae837e63af8b660800000000000000
+      internalID: 7401941101297855090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_5
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 851
+        width: 37
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfce8331a612c6d00800000000000000
+      internalID: 967184759450561789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_6
+      rect:
+        serializedVersion: 2
+        x: 580
+        y: 857
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3416420bfe3cae2a0800000000000000
+      internalID: -6707333260795158205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_7
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 870
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dc92eb86a7bc0c50800000000000000
+      internalID: 6632878277149236432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_8
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 843
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ce14396b1ed93610800000000000000
+      internalID: 1601555351817428677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_9
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 838
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f62c0355f07ae200800000000000000
+      internalID: 210104531588753139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_10
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 828
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bba91a85bd4cc00a0800000000000000
+      internalID: -6913934881556686149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_11
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 803
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59d997836ff303bc0800000000000000
+      internalID: -3805471358386070123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_12
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 789
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e2c3ae986e320730800000000000000
+      internalID: 3963799241098511073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_13
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 786
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f95bb6147704b97c0800000000000000
+      internalID: -4063583357828876897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_14
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 720
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09d341025ba9c8610800000000000000
+      internalID: 1624843668291861904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_15
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 699
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58dca1edd4baae5d0800000000000000
+      internalID: -3032423048153477755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_16
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 695
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea7ed38b293089100800000000000000
+      internalID: 114845719189120942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_17
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 662
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10c2610fa6887d740800000000000000
+      internalID: 5176756289561570305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_18
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 669
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 410bdf9a480a1ede0800000000000000
+      internalID: -1305585925312630764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_19
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 647
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e42ffa3d18a52ba0800000000000000
+      internalID: -6114296075588262684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_20
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 630
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9bcfb8a276bf7d80800000000000000
+      internalID: -8250675388745790563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_21
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 596
+        width: 38
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8f81745e26f78620800000000000000
+      internalID: 2776458374142857102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_22
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 604
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d36e7df63917d4440800000000000000
+      internalID: 4921714845836371517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_23
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 584
+        width: 9
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49f55666a331e23c0800000000000000
+      internalID: -4382544245837963372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_24
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 310
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 067fde73259060360800000000000000
+      internalID: 7135400908345440096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_25
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 305
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 790bd05ac53f5b580800000000000000
+      internalID: -8811869516648828777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_26
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 292
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efab3034ba02a7ed0800000000000000
+      internalID: -2415582330195035394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_27
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 297
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3dc7e2fd3055e010800000000000000
+      internalID: 1217467501272091962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_28
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 279
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc4a2cb09667da660800000000000000
+      internalID: 7398699956380542155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_29
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 268
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25950c3b94d8b6bc0800000000000000
+      internalID: -3788779313814283950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_30
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 237
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0491bf1f5d66e41b0800000000000000
+      internalID: -5670481811739043520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_31
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 157
+        width: 9
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2af55f1c9beb58660800000000000000
+      internalID: 7387520468803477410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_32
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 136
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b6351388c72a32b0800000000000000
+      internalID: -5604123044163012942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_33
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 133
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f58f02eef667f4e70800000000000000
+      internalID: 9101623595047647327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_34
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 128
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef1104b6360c51080800000000000000
+      internalID: -9217249529110195714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_35
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 123
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e9353414c55fc230800000000000000
+      internalID: 3661239322716486112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_36
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 91
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5aec0aa20304280b0800000000000000
+      internalID: -5727945200444059995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondo03_37
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 97
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c11cbba1dca97c7a0800000000000000
+      internalID: -6356942143302680292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 982d1664e09ff3046bbab4ca915d6473
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Fondo03_0: 1017366021978335469
+      Fondo03_1: 5230994452980917178
+      Fondo03_10: -6913934881556686149
+      Fondo03_11: -3805471358386070123
+      Fondo03_12: 3963799241098511073
+      Fondo03_13: -4063583357828876897
+      Fondo03_14: 1624843668291861904
+      Fondo03_15: -3032423048153477755
+      Fondo03_16: 114845719189120942
+      Fondo03_17: 5176756289561570305
+      Fondo03_18: -1305585925312630764
+      Fondo03_19: -6114296075588262684
+      Fondo03_2: -1636512201760279518
+      Fondo03_20: -8250675388745790563
+      Fondo03_21: 2776458374142857102
+      Fondo03_22: 4921714845836371517
+      Fondo03_23: -4382544245837963372
+      Fondo03_24: 7135400908345440096
+      Fondo03_25: -8811869516648828777
+      Fondo03_26: -2415582330195035394
+      Fondo03_27: 1217467501272091962
+      Fondo03_28: 7398699956380542155
+      Fondo03_29: -3788779313814283950
+      Fondo03_3: 4538443374954701753
+      Fondo03_30: -5670481811739043520
+      Fondo03_31: 7387520468803477410
+      Fondo03_32: -5604123044163012942
+      Fondo03_33: 9101623595047647327
+      Fondo03_34: -9217249529110195714
+      Fondo03_35: 3661239322716486112
+      Fondo03_36: -5727945200444059995
+      Fondo03_37: -6356942143302680292
+      Fondo03_4: 7401941101297855090
+      Fondo03_5: 967184759450561789
+      Fondo03_6: -6707333260795158205
+      Fondo03_7: 6632878277149236432
+      Fondo03_8: 1601555351817428677
+      Fondo03_9: 210104531588753139
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

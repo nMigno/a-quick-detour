@@ -2,7 +2,31 @@
   "permissions": {
     "allow": [
       "Bash(git -C \"c:/Unity/Producción UADE\" status)",
-      "Bash(gh auth *)"
+      "Bash(gh auth *)",
+      "Bash(git -C \"c:/Unity/Producción UADE\" remote set-url origin https://github.com/lucasaparicio01/Produccion-UADE.git)",
+      "Bash(git -C \"c:/Unity/Producción UADE\" remote -v)",
+      "Bash(git -C \"c:/Unity/Producción UADE\" show --stat HEAD)",
+      "Bash(git -C \"c:/Unity/Producción UADE\" ls-files)",
+      "WebSearch",
+      "Bash(npm --version)",
+      "Bash(node \"c:/Unity/Producción UADE/Library/PackageCache/com.gamelovers.mcp-unity@6e5904b0eb78/Server~/build/index.js\")",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(claude mcp *)",
+      "mcp__mcp-unity__get_scene_info",
+      "mcp__claude_ai_Notion__notion-search",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Notion__notion-create-pages",
+      "mcp__mcp-unity__recompile_scripts",
+      "mcp__mcp-unity__batch_execute",
+      "mcp__mcp-unity__execute_menu_item",
+      "mcp__mcp-unity__get_gameobject",
+      "mcp__mcp-unity__save_scene",
+      "mcp__mcp-unity__get_console_logs",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git pull *)"
     ]
   }
 }
