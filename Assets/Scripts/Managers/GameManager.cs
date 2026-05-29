@@ -118,4 +118,13 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(lastCheckpointScene);
     }
+
+    public void RegisterCollectedBattery(string batteryID)
+    {
+        if (!collectedBatteries.Contains(batteryID))
+        {
+            collectedBatteries.Add(batteryID);
+            Debug.Log($"GameManager: Battery {batteryID} collected!");
+        }
+    }
 }

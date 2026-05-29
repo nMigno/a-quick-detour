@@ -58,11 +58,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerInput.ActivateInput();
-
-        if (GameManager.Instance.hasDoubleJump)
-        {
-            maxJumps = 2;
-        }
     }
     
     // Input System Callbacks    
@@ -105,6 +100,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        maxJumps = GameManager.Instance.hasDoubleJump ? 2 : 1;
+
         IncreaseGravity();
         HandleSpriteFlip();
     }
