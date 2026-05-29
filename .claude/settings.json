@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__mcp-unity__set_transform",
+      "mcp__mcp-unity__update_component",
+      "Bash(git commit -m ' *)"
+    ]
+  },
+  "mcpServers": {
+    "mcp-unity": {
+      "command": "node",
+      "args": [
+        "C:/Unity/Producción UADE/Library/PackageCache/com.gamelovers.mcp-unity@6e5904b0eb78/Server~/build/index.js"
+      ]
+    }
+  }
+}
