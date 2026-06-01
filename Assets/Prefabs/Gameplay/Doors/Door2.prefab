@@ -52,18 +52,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door2
       objectReference: {fileID: 0}
-    - target: {fileID: 5004522656420302363, guid: 88f8d991314d9724289f5490f4a8cc7b, type: 3}
-      propertyPath: m_Color.b
-      value: 0.047603074
-      objectReference: {fileID: 0}
-    - target: {fileID: 5004522656420302363, guid: 88f8d991314d9724289f5490f4a8cc7b, type: 3}
-      propertyPath: m_Color.g
-      value: 0.6981132
-      objectReference: {fileID: 0}
-    - target: {fileID: 5004522656420302363, guid: 88f8d991314d9724289f5490f4a8cc7b, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
