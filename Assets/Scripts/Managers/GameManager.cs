@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Power-ups & Skills")]
     public bool hasFlashlightUpgrade = false;
-    public bool hasDoubleJump = false;
+    public bool hasDoubleJump = true;
     public bool hasBlanketGlider = false;
 
     [Header("Checkpoint System")]

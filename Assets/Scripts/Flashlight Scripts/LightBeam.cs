@@ -15,6 +15,11 @@ public class LightBeam : MonoBehaviour
             enemy.SetIlluminated(true);
         }
 
+        if (!isRevealMode && other.TryGetComponent<CupEnemy>(out CupEnemy cupEnemy))
+        {
+            cupEnemy.SetIlluminated(true);
+        }
+
         if (isRevealMode && other.TryGetComponent<IllusionWall>(out IllusionWall wall))
         {
             wall.Reveal();
@@ -26,6 +31,11 @@ public class LightBeam : MonoBehaviour
         if(!isRevealMode && other.TryGetComponent<Enemy>(out Enemy enemy))
         {
             enemy.SetIlluminated(false);
+        }
+
+        if (!isRevealMode && other.TryGetComponent<CupEnemy>(out CupEnemy cupEnemy))
+        {
+            cupEnemy.SetIlluminated(false);
         }
     }
 }

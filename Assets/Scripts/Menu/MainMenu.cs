@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     [Header("Main Configuration")]
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
+    [SerializeField] private GameObject creditsPanel;
     [SerializeField] private string firstElementTag = "InitialSelectableUIElement";
 
     [Header("Options Menu")]
@@ -35,6 +36,7 @@ public class MainMenu : MonoBehaviour
         );
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
+        creditsPanel.SetActive(false);
     }
 
     void OpenSubMenu(SubMenu? subMenu)
@@ -49,21 +51,21 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.PlayUIConfirmSound();
         controllerMenu.SetActive(true);
         soundMenu.SetActive(false);
-        graphicsMenu.SetActive(false);
+        creditsPanel.SetActive(false);
     }
     public void OpenSoundMenu()
     {
         GameManager.Instance.PlayUIConfirmSound();
         controllerMenu.SetActive(false);
         soundMenu.SetActive(true);
-        graphicsMenu.SetActive(false);
+        creditsPanel.SetActive(false);
     }
     public void OpenGraphicsMenu()
     {
         GameManager.Instance.PlayUIConfirmSound();
         controllerMenu.SetActive(false);
         soundMenu.SetActive(false);
-        graphicsMenu.SetActive(true);
+        creditsPanel.SetActive(true);
     }
 
     public void OpenOptionsPanel()
@@ -80,7 +82,15 @@ public class MainMenu : MonoBehaviour
     public void OpenCreditsPanel()
     {
         GameManager.Instance.PlayUIConfirmSound();
-        GameManager.Instance.LoadCredits();
+        mainMenu.SetActive(false);
+        creditsPanel.SetActive(true);
+    }
+    public void CloseCreditsPanel()
+    {
+        GameManager.Instance.PlayUICancelSound();
+        creditsPanel.SetActive(false); 
+        mainMenu.SetActive(true); 
+        GameManager.Instance.SetFirstSelectedElement(GameObject.FindGameObjectWithTag(firstElementTag));
     }
 
     public void QuitGame()

@@ -14,6 +14,9 @@ public class Door : MonoBehaviour
     [Tooltip("Destination Door ID")]
     public string destinationDoorID;
 
+    [Header("Endgame")]
+    public bool isFinalDoor = false;
+
     private bool playerInRange = false;
     private bool isLocked;
 
@@ -40,12 +43,29 @@ public class Door : MonoBehaviour
     {
         player.DeactivateInput();
         yield return new WaitForSeconds(0.5f);
-        playerSpawn.position = gameObject.transform.position;
+        if (playerSpawn != null)
+        {
+            playerSpawn.position = gameObject.transform.position;
+        }
         Transition();
     }
 
     private void Transition()
     {
+        if (isFinalDoor)
+        {
+            EmergencyUI emergencyUI = FindAnyObjectByType<EmergencyUI>();
+            if (emergencyUI != null)
+            {
+                emergencyUI.TriggerLevelEnd();
+            }
+            else
+            {
+                Debug.LogError("EmergencyUI canvas missing!");
+            }
+            return; 
+        }
+
         Debug.Log($"Travelling to {sceneToLoad}, destination: {destinationDoorID}");
         GameManager.Instance.UseDoorTransition(sceneToLoad, destinationDoorID);
     }
