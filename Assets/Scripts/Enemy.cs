@@ -15,25 +15,17 @@ public class Enemy : MonoBehaviour
     [Header("Combat Settings")]
     [SerializeField] private int damageAmount = 1;
 
-    [Header("Blockout Color (Test Feedback)")]
-    [SerializeField] private Color normalColor = Color.brown;
-    [SerializeField] private Color illuminatedColor = Color.yellow;
-    [SerializeField] private Color stunnedColor = Color.blue;
-
     [Header("Sprites (Artist's Assets)")]
     public Sprite normalSprite;
     public Sprite illuminatedSprite;
     
     private SpriteRenderer spriteRenderer;
     private bool isIlluminated = false;
-
     private Rigidbody2D rb;
     private Vector2 moveDirection;
     private bool isStunned = false;
-
     private Vector3 leftPos;
     private Vector3 rightPos;
-
     private string enemyID;
 
     private void Awake()
@@ -43,7 +35,6 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        spriteRenderer.color = normalColor;
         if (normalSprite != null)
         {
             spriteRenderer.sprite = normalSprite;
@@ -60,7 +51,6 @@ public class Enemy : MonoBehaviour
         {
             ApplyStun();
 
-            spriteRenderer.color = stunnedColor;
             if (illuminatedSprite != null)
             {
                 spriteRenderer.sprite = illuminatedSprite;
@@ -147,25 +137,15 @@ public class Enemy : MonoBehaviour
 
     private void UpdateVisualFeedback()
     {
-        if (isIlluminated)
+        if (isIlluminated || isStunned)
         {
-            spriteRenderer.color = illuminatedColor;
             if (illuminatedSprite != null)
             {
                 spriteRenderer.sprite = illuminatedSprite;
-            }
-        }
-        else if (isStunned)
-        {
-            spriteRenderer.color = stunnedColor;
-            if (illuminatedSprite != null)
-            {
-                spriteRenderer.sprite = illuminatedSprite;
-            }
+            }      
         }
         else
         {
-            spriteRenderer.color = normalColor;
             if (normalSprite != null)
             {
                 spriteRenderer.sprite = normalSprite;

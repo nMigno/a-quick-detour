@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: e0fabd789302f81498d44549795455f1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - navigateAction: {instanceID: 0}
+  - audioMixer: {fileID: 24100000, guid: a19249bc055ad574a86c359159028272, type: 2}
+  - uiConfirmClip: {instanceID: 0}
+  - uiCancelClip: {instanceID: 0}
+  - uiAudioSource: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

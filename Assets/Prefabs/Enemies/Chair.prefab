@@ -158,9 +158,9 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.13230705, y: 0.14521337}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0.51, y: 0.14, z: 0.53, w: 0.26}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.56, y: 2.56}
     newSize: {x: 1, y: 1}
@@ -168,7 +168,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2627602, y: 1.8694291}
   m_EdgeRadius: 0
 --- !u!114 &8296661234179850664
 MonoBehaviour:
@@ -186,11 +186,8 @@ MonoBehaviour:
   leftWayPoint: {fileID: 2774810243459226265}
   rightWayPoint: {fileID: 8678111091912129967}
   damageAmount: 1
-  normalColor: {r: 0.990566, g: 0, b: 0.01863329, a: 1}
-  illuminatedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  stunnedColor: {r: 0.29036134, g: 0.30200994, b: 0.8207547, a: 1}
-  normalSprite: {fileID: 0}
-  illuminatedSprite: {fileID: 0}
+  normalSprite: {fileID: -3935032340282478731, guid: f97054a8aab97eb4b9bc3527820335f9, type: 3}
+  illuminatedSprite: {fileID: 8967626656746682124, guid: 80cfbbbf1e7cd7e44a853c53198a3d93, type: 3}
 --- !u!1 &2791721884628355353
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,11 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider2D))]
 public class Checkpoint : MonoBehaviour
 {
-    [Tooltip("Active checkpoint color")]
-    [SerializeField] private Color activeColor = Color.green;
+    [Header("Sprites")]
+    public Sprite activeSprite;
+
     private SpriteRenderer spriteRenderer;
 
     public void Awake()
@@ -16,7 +18,7 @@ public class Checkpoint : MonoBehaviour
 
     public void Interact(Player player)
     {
-        spriteRenderer.color = activeColor;
+        spriteRenderer.sprite = activeSprite;
         string currentScene = SceneManager.GetActiveScene().name;
         GameManager.Instance.SetCheckpoint(transform.position, currentScene);
         player.Health.HealToMax();
