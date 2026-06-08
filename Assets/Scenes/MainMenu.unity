@@ -412,6 +412,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 885895510}
+    - target: {fileID: 4644549185203449446, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: e51c97cb86d56fd47b5f970f01a6a4d9, type: 3}
     - target: {fileID: 5268139125013988514, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -423,6 +427,26 @@ PrefabInstance:
     - target: {fileID: 5407228758064629121, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
       propertyPath: m_Name
       value: MenuCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218664400843376254, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 894.5205
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218664400843376254, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 437.6724
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218664400843376254, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218664400843376254, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 139.1482
+      objectReference: {fileID: 0}
+    - target: {fileID: 6218664400843376254, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 318.83618
       objectReference: {fileID: 0}
     - target: {fileID: 7143248301760197927, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
       propertyPath: m_Pivot.x

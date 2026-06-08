@@ -43,7 +43,7 @@ public class MainMenu : MonoBehaviour
     {
         controllerMenu.SetActive(SubMenu.CONTROLLER == subMenu);
         soundMenu.SetActive(SubMenu.SOUND == subMenu);
-        graphicsMenu.SetActive(SubMenu.GRAPHICS == subMenu);
+        //graphicsMenu.SetActive(SubMenu.GRAPHICS == subMenu);
     }
 
     public void OpenControllerMenu()
