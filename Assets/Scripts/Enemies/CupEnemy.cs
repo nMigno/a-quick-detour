@@ -37,6 +37,7 @@ public class CupEnemy : MonoBehaviour
     private bool isTriggered = false;
     private bool isBroken = false;
     private bool isIlluminated = false;
+    private bool hasDamagedPlayer = false;
 
     private void Awake()
     {
@@ -97,30 +98,60 @@ public class CupEnemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (isBroken) return;
-
-        if (other.CompareTag("Player"))
-        {
-            PlayerHP playerHP = other.GetComponent<PlayerHP>();
-            playerHP.TakeDamage(damageAmount, transform.position);
-        }
-
+        
         if (other.CompareTag("Ground"))
         {
             BreakCup();
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (isBroken || !isTriggered) return;
+
+        Collider2D playerCollider = Physics2D.OverlapBox(col.bounds.center, col.bounds.size, 0f, playerLayer);
+        
+        if (playerCollider != null && playerCollider.CompareTag("Player"))
+        {
+            DealDamage(playerCollider);
+        }
+    }
+
     private void BreakCup()
     {
+        if (isBroken) return; 
+
+        if (!hasDamagedPlayer)
+        {
+            Collider2D playerCollider = Physics2D.OverlapBox(col.bounds.center, col.bounds.size, 0f, playerLayer);
+            if (playerCollider != null && playerCollider.CompareTag("Player"))
+            {
+                DealDamage(playerCollider);
+            }
+        }
+
         isBroken = true;
 
-        rb.bodyType = RigidbodyType2D.Static;
         rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+  
         col.enabled = false;
 
         spriteRenderer.sprite = brokenSprite;
         if (audioSource != null && breakClip != null) audioSource.PlayOneShot(breakClip);
         GameManager.Instance.deadEnemies.Add(cupID);
+    }
+
+    private void DealDamage(Collider2D playerCol)
+    {
+        if (hasDamagedPlayer) return;
+
+        PlayerHP playerHP = playerCol.GetComponent<PlayerHP>();
+        if (playerHP != null)
+        {
+            playerHP.TakeDamage(damageAmount, transform.position);
+            hasDamagedPlayer = true;
+        }
     }
 
     private void SetAlreadyBroken()
