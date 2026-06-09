@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallTrigger Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6504482583042900707, guid: 1e70e488a92636341b019ce09085a45b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

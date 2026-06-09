@@ -73,8 +73,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Loading Main Menu...");
-        SceneManager.LoadScene("MainMenu");
+        if (SceneManager.GetActiveScene().name == "Boot")
+        {
+            Debug.Log("Loading Main Menu...");
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     public void RegisterRevealedWall(string wallID)

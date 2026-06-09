@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5430336984312165271}
   m_Layer: 8
   m_Name: IllusionWall
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,4 +152,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IllusionWall
   wallID: 
-  revealedAlpha: 0.2
