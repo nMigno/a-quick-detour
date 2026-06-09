@@ -22,6 +22,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject soundMenu;
     [SerializeField] private GameObject graphicsMenu;
 
+    [Header("Submenus Buttons")]
+    [SerializeField] private GameObject creditsFirstButton;
+
     void Start()
     {
         OpenMainMenuPanel();
@@ -84,7 +87,13 @@ public class MainMenu : MonoBehaviour
         GameManager.Instance.PlayUIConfirmSound();
         mainMenu.SetActive(false);
         creditsPanel.SetActive(true);
+
+        if (creditsFirstButton != null)
+        {
+            GameManager.Instance.SetFirstSelectedElement(creditsFirstButton);
+        }
     }
+
     public void CloseCreditsPanel()
     {
         GameManager.Instance.PlayUICancelSound();

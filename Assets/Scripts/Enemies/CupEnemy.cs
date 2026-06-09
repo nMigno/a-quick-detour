@@ -78,6 +78,7 @@ public class CupEnemy : MonoBehaviour
 
         if (audioSource != null && warningClip != null)
         {
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
             audioSource.PlayOneShot(warningClip);
         }
 
@@ -133,12 +134,16 @@ public class CupEnemy : MonoBehaviour
         isBroken = true;
 
         rb.linearVelocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Static;
-  
+        rb.bodyType = RigidbodyType2D.Static;  
         col.enabled = false;
-
         spriteRenderer.sprite = brokenSprite;
-        if (audioSource != null && breakClip != null) audioSource.PlayOneShot(breakClip);
+
+        if (audioSource != null && breakClip != null) 
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot(breakClip);
+        }
+        
         GameManager.Instance.deadEnemies.Add(cupID);
     }
 

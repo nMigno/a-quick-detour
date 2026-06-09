@@ -39,25 +39,28 @@ public class GameManager : MonoBehaviour
 
     [Header("Input Action Maps")]
     [SerializeField] private string uiActionMap = "UI";
-    [SerializeField] private string gameplayActionMap = "Gameplay";
+    [SerializeField] private string gameplayActionMap = "Player";
     [SerializeField] private InputActionReference navigateAction;
 
     [Header("Audio")]
     [SerializeField] private AudioMixer audioMixer;
 
-    [Header("SoundSettings")]
-    public float currentMusicVolume = 10f;
-    public float currentSFXVolume = 10f;
+    [Header("Sound Settings")]
+    [Range (0.0001f, 1f)] public float currentMusicVolume = 1f;
+    [Range (0.0001f, 1f)] public float currentSFXVolume = 1f;
+
+    [Header("Music Settings")]
+    [SerializeField] private AudioSource musicAudioSource;
+    [SerializeField] private float pauseVolumeReduction = -12f;
 
     [Header("UI Sound Effects")]
     [SerializeField] private AudioClip uiConfirmClip;
     [SerializeField] private AudioClip uiCancelClip;
     [SerializeField] private AudioSource uiAudioSource;
 
-    // We'll use this later
-    //[Header("Sound Variation")]
-    //[SerializeField, Range(0.1f, 3f)] private float minPitch = 0.95f;
-    //[SerializeField, Range(0.1f, 3f)] private float maxPitch = 1.05f;
+    [Header("Sound Variation")]
+    [SerializeField, Range(0.1f, 3f)] private float minPitch = 0.9f;
+    [SerializeField, Range(0.1f, 3f)] private float maxPitch = 1.1f;
 
     private void Awake()
     {
@@ -90,17 +93,21 @@ public class GameManager : MonoBehaviour
     }
     public void ActivateActionMap(GameInputMap actionMapName)
     {
-        switch (actionMapName)
+        PlayerInput playerInput = FindAnyObjectByType<PlayerInput>();
+
+        if (playerInput != null)
         {
-            case GameInputMap.UI:
-                InputSystem.actions.FindActionMap(gameplayActionMap).Disable();
-                InputSystem.actions.FindActionMap(uiActionMap).Enable();
-                break;
-            case GameInputMap.Gameplay:
-                InputSystem.actions.FindActionMap(uiActionMap).Disable();
-                InputSystem.actions.FindActionMap(gameplayActionMap).Enable();
-                break;
+            switch (actionMapName)
+            {
+                case GameInputMap.UI:
+                    playerInput.SwitchCurrentActionMap(uiActionMap);
+                    break;
+                case GameInputMap.Gameplay:
+                    playerInput.SwitchCurrentActionMap(gameplayActionMap);
+                    break;
+            }
         }
+
     }
     public void RegisterDeadEnemy(string EnemyID)
     {
@@ -170,12 +177,54 @@ public class GameManager : MonoBehaviour
 
     public void PlayUIConfirmSound()
     {
-        Debug.Log("Confirm UI Sound");
+        if (uiAudioSource != null && uiConfirmClip != null)
+        {
+            uiAudioSource.pitch = Random.Range(minPitch, maxPitch);
+            uiAudioSource.PlayOneShot(uiConfirmClip);
+        }
     }
 
     public void PlayUICancelSound()
     {
-        Debug.Log("Cancel UI Sound");
+        if (uiAudioSource != null && uiCancelClip != null)
+        {
+            uiAudioSource.pitch = Random.Range(minPitch, maxPitch);
+            uiAudioSource.PlayOneShot(uiCancelClip);
+        }
+    }
+
+    public void PlayMusic(AudioClip newClip)
+    {
+        if (newClip == null) return;
+
+        if (musicAudioSource.clip == newClip) return;
+
+        musicAudioSource.clip = newClip;
+        musicAudioSource.Play();
+    }
+
+    public void UpdateMusicVolume(float volume)
+    {
+        currentMusicVolume = volume;        
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(currentMusicVolume) * 20);
+    }
+
+    public void UpdateSFXVolume(float volume)
+    {
+        currentSFXVolume = volume;
+        audioMixer.SetFloat("SFXVolume", Mathf.Log10(currentSFXVolume) * 20);
+    }
+
+    public void TogglePauseMusic(bool isPaused)
+    {
+        if (isPaused)
+        {
+            audioMixer.SetFloat("MusicVolume", (Mathf.Log10(currentMusicVolume) * 20) + pauseVolumeReduction);
+        }
+        else
+        {
+            UpdateMusicVolume(currentMusicVolume);
+        }
     }
 
     public void SetFirstSelectedElement(GameObject firstElement)
@@ -209,4 +258,5 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Loading credits...");
     }
+
 }

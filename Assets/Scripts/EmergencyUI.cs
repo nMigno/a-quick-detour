@@ -7,10 +7,12 @@ public class EmergencyUI : MonoBehaviour
 {
     [Header("Pause Menu")]
     public GameObject pausePanel;
+    public GameObject pauseFirstButton;
     private bool isPaused = false;
 
     [Header("Level End")]
     public GameObject toBeContinuedPanel;
+    public GameObject tbcFirstButton;
 
     [Header("Input")]
     public InputActionReference pauseAction;
@@ -50,12 +52,26 @@ public class EmergencyUI : MonoBehaviour
         isPaused = !isPaused;
         pausePanel.SetActive(isPaused);
         Time.timeScale = isPaused ? 0f : 1f;
+
+        if (isPaused)
+        {
+            if (pauseFirstButton != null)
+            {
+                GameManager.Instance.SetFirstSelectedElement(pauseFirstButton);
+            }
+            GameManager.Instance.ActivateActionMap(GameInputMap.UI);
+        }
+        else
+        {
+            GameManager.Instance.ActivateActionMap(GameInputMap.Gameplay);
+        }
     }
     public void ResumeGame()
     {
         isPaused = false;
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
+        GameManager.Instance.ActivateActionMap(GameInputMap.Gameplay);
     }
     public void BackToMainMenu()
     {
@@ -71,6 +87,8 @@ public class EmergencyUI : MonoBehaviour
     {
         Time.timeScale = 0f;
         toBeContinuedPanel.SetActive(true);
+        GameManager.Instance.SetFirstSelectedElement(tbcFirstButton);
+        GameManager.Instance.ActivateActionMap(GameInputMap.UI);
 
         yield return new WaitForSecondsRealtime(5f);
 

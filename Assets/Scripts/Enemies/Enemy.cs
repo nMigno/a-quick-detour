@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour
     [Header("Sprites (Artist's Assets)")]
     public Sprite normalSprite;
     public Sprite illuminatedSprite;
+
+    [Header("Audio Settings")]
+    public AudioSource audioSource;
+    public AudioClip damageClip;
     
     private SpriteRenderer spriteRenderer;
     private bool isIlluminated = false;
@@ -117,6 +121,12 @@ public class Enemy : MonoBehaviour
                 Debug.LogWarning("Warning! Player detected but PlayerHP script is lost");
             }
             playerHP.TakeDamage(damageAmount, transform.position);
+
+            if (audioSource != null) 
+            {
+                audioSource.pitch = Random.Range(0.9f, 1.1f);
+                audioSource.PlayOneShot(damageClip);
+            }
         }
     }
 

@@ -159,6 +159,8 @@ public class PlayerController : MonoBehaviour
 
         coyoteTimeCounter = 0f; // Avoids double jump
         jumpsRemaining--;
+
+        GetComponent<Player>().Audio.PlayJump();
     }
 
     private void IncreaseGravity()

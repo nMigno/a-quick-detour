@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66d683507ab75e04a849d8837b0be278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  levelMusic: {fileID: 0}
   player: {fileID: 0}
   flashlightUpgrade: {fileID: 0}
-  blanketShield: {fileID: 0}
+  doubleJumpUpgrade: {fileID: 0}
+  key: {fileID: 0}

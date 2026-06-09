@@ -47,11 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   mainMenu: {fileID: 0}
   optionsMenu: {fileID: 0}
+  creditsPanel: {fileID: 0}
   firstElementTag: InitialSelectableUIElement
   mainOptionsMenu: {fileID: 0}
   controllerMenu: {fileID: 0}
   soundMenu: {fileID: 0}
   graphicsMenu: {fileID: 0}
+  creditsFirstButton: {fileID: 0}
 --- !u!114 &2505464677624510874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +66,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2087dc2d206f84e43813dcd8bb2bb7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundMenu
-  audioMixer: {fileID: 24100000, guid: a19249bc055ad574a86c359159028272, type: 2}
   musicSlider: {fileID: 0}
   sfxSlider: {fileID: 0}

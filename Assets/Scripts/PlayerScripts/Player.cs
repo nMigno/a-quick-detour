@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public PlayerHP Health { get; private set; }
     public Flashlight PlayerFlashlight { get; private set; }
     public Blanket PlayerBlanket { get; private set; }
+    public PlayerAudio Audio { get; private set; }
 
     private void Awake()
     {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
         Controller = GetComponent<PlayerController>();
         Health = GetComponent<PlayerHP>();
         PlayerFlashlight = GetComponentInChildren<Flashlight>();
-        PlayerBlanket = GetComponentInChildren<Blanket>();        
+        PlayerBlanket = GetComponentInChildren<Blanket>();      
+        Audio = GetComponent<PlayerAudio>();  
     }
 }

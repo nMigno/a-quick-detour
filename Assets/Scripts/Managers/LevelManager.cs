@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip levelMusic;
+
     [Header("References")]
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject flashlightUpgrade;
@@ -13,6 +16,11 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        if (levelMusic != null)
+            {
+                GameManager.Instance.PlayMusic(levelMusic);
+            }
+
         PlacePlayer();
         SyncSceneStates();
     }

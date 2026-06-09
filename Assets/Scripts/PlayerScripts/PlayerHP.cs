@@ -29,6 +29,7 @@ public class PlayerHP : MonoBehaviour
 
         currentHealth -= damageAmount;
         GameManager.Instance.UpdateHP(currentHealth);
+        GetComponent<Player>().Audio.PlayHurt();
 
         Debug.Log("Player received damage. HP left: " + currentHealth);
 
@@ -58,8 +59,10 @@ public class PlayerHP : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player died. Respawning...");
+        GetComponent<Player>().Audio.PlayDeath();
         GameManager.Instance.RespawnPlayer();
+
+        Debug.Log("Player died. Respawning...");
     }
 
     public void HealToMax()
