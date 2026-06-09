@@ -46,6 +46,7 @@ public class CupEnemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
+        audioSource = GetComponent<AudioSource>();
 
         rb.bodyType = RigidbodyType2D.Kinematic;
         spriteRenderer.sprite = normalSprite;
