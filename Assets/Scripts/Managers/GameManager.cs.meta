@@ -9,7 +9,7 @@ MonoImporter:
   - uiConfirmClip: {instanceID: 0}
   - uiCancelClip: {instanceID: 0}
   - uiAudioSource: {instanceID: 0}
-  executionOrder: 0
+  executionOrder: -90
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

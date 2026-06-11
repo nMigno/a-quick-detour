@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Power-ups & Skills")]
     public bool hasFlashlightUpgrade = false;
-    public bool hasDoubleJump = true;
+    public bool hasDoubleJump = false;
     public bool hasBlanketGlider = false;
 
     [Header("Checkpoint System")]
@@ -76,10 +76,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Boot")
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        if (currentScene == "Boot")
         {
             Debug.Log("Loading Main Menu...");
             SceneManager.LoadScene("MainMenu");
+        }
+        else if (currentScene != "MainMenu")
+        {
+            if (string.IsNullOrEmpty(lastCheckpointScene))
+            {
+                Debug.Log("Debug Scene Start");
+                ResetGameState();
+                lastCheckpointScene = currentScene;
+            }
         }
     }
 
@@ -160,8 +171,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager: Respawning on last checkpoint.");
 
         UpdateHP(maxHP);
-
         currentFlashlightUses = checkpointFlashlightUses;
+
+        if (string.IsNullOrEmpty(lastCheckpointScene))
+        {
+            string actualScene = SceneManager.GetActiveScene().name;
+            Debug.LogWarning($"[QA] lastCheckpointScene was empty. Getting actual active scene: {actualScene}");
+            lastCheckpointScene = actualScene;
+        }
 
         SceneManager.LoadScene(lastCheckpointScene);
     }
@@ -238,14 +255,31 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         GameManager.Instance.PlayUIConfirmSound();
-
+        ResetGameState();
         string firstLevel = "Level-1";
         lastCheckpointScene = firstLevel;
-
         currentHP = maxHP;
         currentFlashlightUses = 2;
+        SceneManager.LoadScene(firstLevel);
+    }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(firstLevel);
+    public void ResetGameState()
+    {
+        currentHP = maxHP;
+        currentFlashlightUses = 2;
+        checkpointFlashlightUses = 2;
+
+        lastCheckpointScene = "";
+        lastCheckpointPosition = Vector2.zero;
+        doorID = "";
+
+        revealedIllusionWalls.Clear();
+        deadEnemies.Clear();
+        collectedBatteries.Clear();
+
+        hasFlashlightUpgrade = false;
+        hasDoubleJump = false;
+        hasBlanketGlider = false;
     }
 
     public void QuitGame()

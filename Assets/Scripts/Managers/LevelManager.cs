@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using Unity.Cinemachine;
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,40 +15,75 @@ public class LevelManager : MonoBehaviour
     [Header("Collectables")]
     [SerializeField] private GameObject key;
 
+    private void Awake()
+    {
+        PlacePlayer();
+        SyncSceneStates();
+    }
+
     private void Start()
     {
         if (levelMusic != null)
             {
                 GameManager.Instance.PlayMusic(levelMusic);
             }
-
-        PlacePlayer();
-        SyncSceneStates();
     }
 
     private void PlacePlayer()
     {
+        Vector3 startPos = player.transform.position;
+        bool playerMoved = false;
+
+        // Door transition check
         if (!string.IsNullOrEmpty(GameManager.Instance.doorID))
         {
             Door[] doorsInScene = FindObjectsByType<Door>(FindObjectsSortMode.None);
 
-            foreach(Door door in doorsInScene)
+            for (int i = 0; i < doorsInScene.Length && !playerMoved; i++)
             {
-                if (door.myDoorID == GameManager.Instance.doorID)
+                if (doorsInScene[i].myDoorID == GameManager.Instance.doorID)
                 {
-                    player.transform.position = door.transform.position;
+                    player.transform.position = doorsInScene[i].transform.position;
                     GameManager.Instance.doorID = "";
-
-                    return;
+                    playerMoved = true;
                 }
             }
-            Debug.LogWarning("Door ID not found in scene");
+
+            if (!playerMoved) Debug.LogWarning("Door ID not found in scene");
+        }
+        // If no door, checkpoint check
+        else if (GameManager.Instance.lastCheckpointPosition != Vector2.zero)
+        {
+            player.transform.position = GameManager.Instance.lastCheckpointPosition;
+            playerMoved = true;
+        }
+        else
+        {
+            GameObject spawnPoint = GameObject.Find("SpawnPoint");
+            if (spawnPoint != null)
+            {
+                player.transform.position = spawnPoint.transform.position;
+                playerMoved = true;
+            }
+            else
+            {
+                playerMoved = true;
+            }
         }
 
-        Vector2 checkpointPos = GameManager.Instance.lastCheckpointPosition;
-        if (checkpointPos != Vector2.zero)
+        // Force player and camera TP
+        if (playerMoved)
         {
-            player.transform.position = checkpointPos;
+            Physics2D.SyncTransforms();
+
+            CinemachineCamera cam = FindAnyObjectByType<CinemachineCamera>();
+            if (cam != null)
+            {
+                // Cinemachine update
+                Vector3 warpDelta = player.transform.position - startPos;
+                cam.OnTargetObjectWarped(player.transform, warpDelta);
+                cam.PreviousStateIsValid = false;
+            }
         }
     }
 

@@ -76,6 +76,12 @@ public class EmergencyUI : MonoBehaviour
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ResetGameState();
+        }
+
         SceneManager.LoadScene("MainMenu");
     }
     public void TriggerLevelEnd()
