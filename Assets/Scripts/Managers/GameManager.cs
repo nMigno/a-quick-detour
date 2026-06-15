@@ -56,7 +56,9 @@ public class GameManager : MonoBehaviour
     [Header("UI Sound Effects")]
     [SerializeField] private AudioClip uiConfirmClip;
     [SerializeField] private AudioClip uiCancelClip;
+    [SerializeField] private AudioClip uiHoverClip;
     [SerializeField] private AudioSource uiAudioSource;
+    private bool isAutoSelecting = false;
 
     [Header("Sound Variation")]
     [SerializeField, Range(0.1f, 3f)] private float minPitch = 0.9f;
@@ -210,9 +212,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayUIHoverSound()
+    {
+        if (isAutoSelecting) return;
+
+        if (uiAudioSource != null && uiHoverClip != null)
+        {
+            uiAudioSource.pitch = Random.Range(minPitch, maxPitch);
+            uiAudioSource.PlayOneShot(uiHoverClip);
+        }
+    }
+
     public void PlayMusic(AudioClip newClip)
     {
-        if (newClip == null) return;
+        if (newClip == null)
+        {
+            musicAudioSource.Stop();
+            musicAudioSource.clip = null;
+            return;
+        }
 
         if (musicAudioSource.clip == newClip) return;
 
@@ -248,13 +266,17 @@ public class GameManager : MonoBehaviour
     {
         if (UnityEngine.EventSystems.EventSystem.current != null)
         {
+            isAutoSelecting = true;
+
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(null);
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(firstElement);
+
+            isAutoSelecting = false;
         }
     }
 
     public void StartGame()
     {
-        GameManager.Instance.PlayUIConfirmSound();
         ResetGameState();
         string firstLevel = "Level-1";
         lastCheckpointScene = firstLevel;

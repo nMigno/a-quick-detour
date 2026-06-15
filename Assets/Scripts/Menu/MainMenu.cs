@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject creditsPanel;
-    [SerializeField] private string firstElementTag = "InitialSelectableUIElement";
+    [SerializeField] private AudioClip menuMusic;
 
     [Header("Options Menu")]
     [SerializeField] private GameObject mainOptionsMenu;
@@ -22,24 +22,33 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject soundMenu;
     [SerializeField] private GameObject graphicsMenu;
 
-    [Header("Submenus Buttons")]
+    [Header("First Selected Buttons")]
+    [SerializeField] private GameObject mainFirstButton;
     [SerializeField] private GameObject creditsFirstButton;
+    [SerializeField] private GameObject optionsFirstButton;
 
     void Start()
     {
+        if (menuMusic != null && GameManager.Instance != null)
+        {
+            GameManager.Instance.TogglePauseMusic(false); 
+            GameManager.Instance.PlayMusic(menuMusic);
+        }
+
         OpenMainMenuPanel();
         OpenSubMenu(null);
-
     }
+
     public void OpenMainMenuPanel()
     {
-        GameManager.Instance.PlayUICancelSound();
-        GameManager.Instance.SetFirstSelectedElement(
-            GameObject.FindGameObjectWithTag(firstElementTag)
-        );
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         creditsPanel.SetActive(false);
+
+        if (mainFirstButton != null)
+        {
+            GameManager.Instance.SetFirstSelectedElement(mainFirstButton);
+        }
     }
 
     void OpenSubMenu(SubMenu? subMenu)
@@ -49,42 +58,50 @@ public class MainMenu : MonoBehaviour
         //graphicsMenu.SetActive(SubMenu.GRAPHICS == subMenu);
     }
 
-    public void OpenControllerMenu()
-    {
-        GameManager.Instance.PlayUIConfirmSound();
-        controllerMenu.SetActive(true);
-        soundMenu.SetActive(false);
-        creditsPanel.SetActive(false);
-    }
-    public void OpenSoundMenu()
-    {
-        GameManager.Instance.PlayUIConfirmSound();
-        controllerMenu.SetActive(false);
-        soundMenu.SetActive(true);
-        creditsPanel.SetActive(false);
-    }
-    public void OpenGraphicsMenu()
-    {
-        GameManager.Instance.PlayUIConfirmSound();
-        controllerMenu.SetActive(false);
-        soundMenu.SetActive(false);
-        creditsPanel.SetActive(true);
-    }
 
     public void OpenOptionsPanel()
     {
-        GameManager.Instance.PlayUIConfirmSound();
         mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
 
-        mainOptionsMenu.SetActive(true);
+        if (mainOptionsMenu != null) mainOptionsMenu.SetActive(true);
 
         OpenSubMenu(SubMenu.CONTROLLER);
+
+        if (optionsFirstButton != null)
+        {
+            GameManager.Instance.SetFirstSelectedElement(optionsFirstButton);
+        }
     }
 
+    public void CloseOptionsPanel()
+    {
+        optionsMenu.SetActive(false);
+        mainMenu.SetActive(true);
+
+        if (mainFirstButton != null)
+        {
+            GameManager.Instance.SetFirstSelectedElement(mainFirstButton);
+        }
+
+    }
+
+    
+    public void OpenControllerMenu()
+    {
+        OpenSubMenu(SubMenu.CONTROLLER);
+    }
+    public void OpenSoundMenu()
+    {
+        OpenSubMenu(SubMenu.SOUND);
+    }
+    public void OpenGraphicsMenu()
+    {
+        OpenSubMenu(SubMenu.GRAPHICS);
+    }
+    
     public void OpenCreditsPanel()
     {
-        GameManager.Instance.PlayUIConfirmSound();
         mainMenu.SetActive(false);
         creditsPanel.SetActive(true);
 
@@ -96,21 +113,22 @@ public class MainMenu : MonoBehaviour
 
     public void CloseCreditsPanel()
     {
-        GameManager.Instance.PlayUICancelSound();
         creditsPanel.SetActive(false); 
         mainMenu.SetActive(true); 
-        GameManager.Instance.SetFirstSelectedElement(GameObject.FindGameObjectWithTag(firstElementTag));
+
+        if (mainFirstButton != null)
+        {
+            GameManager.Instance.SetFirstSelectedElement(mainFirstButton);
+        }
     }
 
     public void QuitGame()
     {
-        GameManager.Instance.PlayUIConfirmSound();
         GameManager.Instance.QuitGame();
     }
 
     public void PlayGame()
     {
-        GameManager.Instance.PlayUIConfirmSound();
         GameManager.Instance.StartGame();
     }
 }

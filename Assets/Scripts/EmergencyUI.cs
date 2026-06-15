@@ -53,6 +53,11 @@ public class EmergencyUI : MonoBehaviour
         pausePanel.SetActive(isPaused);
         Time.timeScale = isPaused ? 0f : 1f;
 
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TogglePauseMusic(isPaused);
+        }
+
         if (isPaused)
         {
             if (pauseFirstButton != null)
@@ -71,6 +76,12 @@ public class EmergencyUI : MonoBehaviour
         isPaused = false;
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.TogglePauseMusic(false); 
+        }
+        
         GameManager.Instance.ActivateActionMap(GameInputMap.Gameplay);
     }
     public void BackToMainMenu()

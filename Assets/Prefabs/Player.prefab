@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4343187399219849469}
   - component: {fileID: 7922850246110827140}
   - component: {fileID: 9122387846452113355}
+  - component: {fileID: 2393867282567737756}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -272,6 +273,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 84ebb192-470f-427f-9c2f-efbfaa3fa3c2
     m_ActionName: 'Player/Glide[/Keyboard/z]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 95b176ec-fe4f-42ae-bacd-06725128f71d
+    m_ActionName: 'Player/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c5e19f4c-3f35-4fa6-bf44-8958649bf184
+    m_ActionName: 'UI/Navigation[/Keyboard/upArrow,/Keyboard/downArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2fab5251-7408-499c-ad23-55b9d37a8fe9
+    m_ActionName: 'UI/Confirm[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d70b29ae-9eb4-4dfc-ad6c-96cab52ddccc
+    m_ActionName: 'UI/Cancel[/Keyboard/x]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -460,6 +477,25 @@ MonoBehaviour:
   deathClip: {fileID: 0}
   minPitch: 0.9
   maxPitch: 1.1
+--- !u!114 &2393867282567737756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677982620056355922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8e118ff64cc6a4e96d89dd7cda3d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerFootsteps
+  footstepClips:
+  - {fileID: 8300000, guid: 91482bbd66b80864ea1441822fa1a7fe, type: 3}
+  - {fileID: 8300000, guid: 6ed8d7b9ae4bddd48a8064132267cdde, type: 3}
+  - {fileID: 8300000, guid: 987233a0d07a7424495446e8542ac13d, type: 3}
+  - {fileID: 8300000, guid: f1a796c6cba4ecf468ff4b49c97d0114, type: 3}
+  minPitch: 0.95
+  maxPitch: 1.05
 --- !u!1 &4758265152089728283
 GameObject:
   m_ObjectHideFlags: 0

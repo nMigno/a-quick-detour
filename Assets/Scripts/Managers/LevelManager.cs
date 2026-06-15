@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        if (levelMusic != null)
+        if (GameManager.Instance != null)
             {
                 GameManager.Instance.PlayMusic(levelMusic);
             }
