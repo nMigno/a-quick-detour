@@ -21,11 +21,13 @@ public class Mannequin : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+    private Collider2D col;
     private Player player;
 
     private string enemyID;
     private bool isStunned = false;
     private bool isIlluminated = false;
+    private bool isChasing = false;
     private float notLookedTimer = 0f;
 
     private void Awake()
@@ -33,6 +35,7 @@ public class Mannequin : MonoBehaviour
         enemyID = SceneManager.GetActiveScene().name + "_Mannequin_" + transform.position.ToString();
 
         rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
 
@@ -49,11 +52,17 @@ public class Mannequin : MonoBehaviour
 
             if (illuminatedSprite != null) spriteRenderer.sprite = illuminatedSprite;
         }
+        else
+        {
+            SetChasingState(false);
+        }
     }
 
     private void Update()
     {
        if (isStunned || player == null) return;
+
+       bool shouldChase = false;
 
        if (IsPlayerLooking())
         {
@@ -66,11 +75,33 @@ public class Mannequin : MonoBehaviour
 
             if (notLookedTimer >= timeToMove)
             {
-                ChasePlayer();
+                shouldChase = true;
             }
-            else
+        }
+
+        if (shouldChase != isChasing) SetChasingState(shouldChase);
+
+        if (isChasing)
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+    }
+
+    private void SetChasingState(bool state)
+    {
+        isChasing = state;
+
+        if (player != null)
+        {
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+
+            if (playerCollider != null && col != null)
             {
-                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+                Physics2D.IgnoreCollision(col, playerCollider, !isChasing);
             }
         }
     }
@@ -102,6 +133,7 @@ public class Mannequin : MonoBehaviour
         if (!isStunned)
         {
             isStunned = true;
+            isChasing = false;
             rb.simulated = false;
 
             if (!string.IsNullOrEmpty(enemyID))
@@ -146,23 +178,20 @@ public class Mannequin : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!isStunned && other.CompareTag("Player"))
+        if (!isStunned && isChasing && other.CompareTag("Player"))
         {
-            PlayerHP playerHP = other.GetComponent<PlayerHP>();
+            Player playerNode = other.GetComponent<Player>();
 
-            if (playerHP == null)
+            if (playerNode != null)
             {
-                Debug.LogWarning("Warning! Player detected but PlayerHP script is lost");
-                return;
-            }
-
-            // Aplicar daño. Esto internamente llama a ApplyKnockback() en PlayerController
-            playerHP.TakeDamage(damageAmount, transform.position);
-
-            if (audioSource != null && damageClip != null)
-            {
-                audioSource.pitch = Random.Range(0.9f, 1.1f);
-                audioSource.PlayOneShot(damageClip);
+                if(playerNode.Health.TakeDamage(damageAmount, transform.position))
+                {
+                    if (audioSource != null && damageClip != null)
+                    {
+                        audioSource.pitch = Random.Range(0.9f, 1.1f);
+                        audioSource.PlayOneShot(damageClip);
+                    }
+                }
             }
         }
     }

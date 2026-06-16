@@ -67,9 +67,9 @@ MonoBehaviour:
   currentSFXVolume: 1
   musicAudioSource: {fileID: 6030126955935199517}
   pauseVolumeReduction: -12
-  uiConfirmClip: {fileID: 8300000, guid: 7672f8cde0322c2449019bfa1ec289d8, type: 3}
-  uiCancelClip: {fileID: 8300000, guid: 56a1e502a2fc0e04ba87b44288d2cc9a, type: 3}
-  uiHoverClip: {fileID: 8300000, guid: 50bcbc4ea3abfb24689c8cbdc0599736, type: 3}
+  uiConfirmClip: {fileID: 8300000, guid: d0947abf44cb7a44aba6e3407196ac74, type: 3}
+  uiCancelClip: {fileID: 8300000, guid: bf865b390b9f7494eaffb40176bb6f70, type: 3}
+  uiHoverClip: {fileID: 8300000, guid: 166b1a513cb92634aba59612a10162a0, type: 3}
   uiAudioSource: {fileID: 8056365605173335435}
   minPitch: 0.98
   maxPitch: 1.02

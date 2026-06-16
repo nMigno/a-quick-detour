@@ -250,6 +250,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6665318929130245494, guid: 11f7942c4cda2914693218f1880eed40, type: 3}
+      propertyPath: uiHoverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 166b1a513cb92634aba59612a10162a0, type: 3}
+    - target: {fileID: 6665318929130245494, guid: 11f7942c4cda2914693218f1880eed40, type: 3}
+      propertyPath: uiCancelClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bf865b390b9f7494eaffb40176bb6f70, type: 3}
+    - target: {fileID: 6665318929130245494, guid: 11f7942c4cda2914693218f1880eed40, type: 3}
+      propertyPath: uiConfirmClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d0947abf44cb7a44aba6e3407196ac74, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

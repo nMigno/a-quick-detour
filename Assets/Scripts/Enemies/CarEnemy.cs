@@ -75,12 +75,18 @@ public class CarEnemy : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, playerTransform.position);
 
-        if (distance <= detectionRadius && !warningPlayed)
+        bool isPlayerToTheRight = playerTransform.position.x > transform.position.x;
+        bool isMovingTowardsPlayer = (isPlayerToTheRight && moveDirection.x > 0) || (!isPlayerToTheRight && moveDirection.x < 0);
+
+        if (distance <= detectionRadius && isMovingTowardsPlayer && !warningPlayed)
         {
             audioSource.PlayOneShot(engineWarningClip);
             warningPlayed = true;
         }
-        else if (distance > detectionRadius + 5f) warningPlayed = false;
+        else if (distance > detectionRadius + 5f || !isMovingTowardsPlayer)
+        {
+            warningPlayed = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -90,11 +96,12 @@ public class CarEnemy : MonoBehaviour
             PlayerHP playerHP = other.GetComponent<PlayerHP>();
             if (playerHP != null)
             {
-                playerHP.TakeDamage(instakillDamage, transform.position);
-
-                if(crashClip != null && !audioSource.isPlaying)
+                if (playerHP.TakeDamage(instakillDamage, transform.position))
                 {
-                    audioSource.PlayOneShot(crashClip);
+                    if(crashClip != null && !audioSource.isPlaying)
+                    {
+                        audioSource.PlayOneShot(crashClip);
+                    }
                 }
             }
         }

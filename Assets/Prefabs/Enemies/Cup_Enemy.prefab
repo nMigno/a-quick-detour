@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8044650697290803383}
   - component: {fileID: 1536635283672783525}
   - component: {fileID: 5410814011964337784}
-  - component: {fileID: 850798094886459912}
   - component: {fileID: 8941652604538047175}
-  m_Layer: 10
+  - component: {fileID: 9132844850390454334}
+  m_Layer: 11
   m_Name: Cup_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1693618449
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 6851983745352317437, guid: 284b4acb39da8054da3dbe371f587b6a, type: 3}
@@ -119,9 +119,9 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 0
+  m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &5410814011964337784
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,35 +168,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.21, y: 3.4067993}
   m_EdgeRadius: 0
---- !u!114 &850798094886459912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2505532609563616986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45bca489261d0034a92db8e512b52574, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CupEnemy
-  cupID: 
-  normalSprite: {fileID: 6851983745352317437, guid: 284b4acb39da8054da3dbe371f587b6a, type: 3}
-  brokenSprite: {fileID: -8019285108419693754, guid: f1c70b59ba4418041a816ca07003783d, type: 3}
-  detectionDistance: 10
-  brokenDetectionDistance: 20
-  warningTime: 0.5
-  fallGravity: 4
-  damageAmount: 1
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  audioSource: {fileID: 8941652604538047175}
-  warningClip: {fileID: 0}
-  breakClip: {fileID: 0}
 --- !u!82 &8941652604538047175
 AudioSource:
   m_ObjectHideFlags: 0
@@ -294,3 +265,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9132844850390454334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505532609563616986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bca489261d0034a92db8e512b52574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FallingTrapEnemy
+  trapID: 
+  normalSprite: {fileID: 6851983745352317437, guid: 284b4acb39da8054da3dbe371f587b6a, type: 3}
+  brokenSprite: {fileID: -8019285108419693754, guid: f1c70b59ba4418041a816ca07003783d, type: 3}
+  detectionDistance: 15
+  brokenDetectionDistance: 20
+  warningTime: 0.5
+  fallGravity: 4
+  damageAmount: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  audioSource: {fileID: 8941652604538047175}
+  warningClip: {fileID: 8300000, guid: b7efc9784d19ee14c9ffbf2b40962fc2, type: 3}
+  breakClip: {fileID: 8300000, guid: af443e5802783ac48b14ff2dbae242a8, type: 3}

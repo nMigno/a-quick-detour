@@ -78,6 +78,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (audioMixer != null)
+        {
+            UpdateMusicVolume(currentMusicVolume);
+            UpdateSFXVolume(currentSFXVolume);
+        }
+
         string currentScene = SceneManager.GetActiveScene().name;
 
         if (currentScene == "Boot")
@@ -315,4 +321,14 @@ public class GameManager : MonoBehaviour
         Debug.Log("Loading credits...");
     }
 
+    #if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (Application.isPlaying && audioMixer != null)
+        {
+            UpdateMusicVolume(currentMusicVolume);
+            UpdateSFXVolume(currentSFXVolume);
+        }
+    }
+    #endif
 }

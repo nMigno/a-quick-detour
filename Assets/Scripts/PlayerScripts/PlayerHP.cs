@@ -10,6 +10,8 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] private float invulnerabilityDuration = 1.5f;
     private bool isInvulnerable = false;
 
+    [HideInInspector] public bool isProtectedByBlanket = false;
+
     private Vector3 currentRespawnPosition;
     private SpriteRenderer spriteRenderer;
 
@@ -23,9 +25,9 @@ public class PlayerHP : MonoBehaviour
         currentHealth = GameManager.Instance.currentHP;
     }
 
-    public void TakeDamage(int damageAmount, Vector3 damageSourcePosition)
+    public bool TakeDamage(int damageAmount, Vector3 damageSourcePosition)
     {
-        if (isInvulnerable) return;
+        if (isInvulnerable || isProtectedByBlanket) return false;
 
         currentHealth -= damageAmount;
         GameManager.Instance.UpdateHP(currentHealth);
@@ -42,6 +44,8 @@ public class PlayerHP : MonoBehaviour
             GetComponent<PlayerController>().ApplyKnockback(damageSourcePosition);
             StartCoroutine(InvulnerabilityRoutine());
         }
+
+        return true;
     }
 
     private IEnumerator InvulnerabilityRoutine()

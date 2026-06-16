@@ -39,6 +39,7 @@ public class Flashlight : MonoBehaviour
     public Color beamColor = new Color (1f, 0.9f, 0.1f, 0.5f);
     public Color revealBeamColor = Color.orange;
 
+    private Player playerNode;
     private PlayerInput playerInput;
     private InputAction flashlightAction;
     private InputAction revealAction;
@@ -46,6 +47,7 @@ public class Flashlight : MonoBehaviour
 
     private void Awake()
     {
+        playerNode = GetComponentInParent<Player>();
         playerInput = GetComponentInParent<PlayerInput>();
         flashlightAction = playerInput.actions.FindAction("Flashlight");
         revealAction = playerInput.actions.FindAction("RevealLight");
@@ -66,14 +68,14 @@ public class Flashlight : MonoBehaviour
 
     private void OnEnable()
     {
-        flashlightAction.performed += OnFlashlightInput;
-        revealAction.performed += OnRevealInput;
+        if (flashlightAction != null) flashlightAction.performed += OnFlashlightInput;
+        if (revealAction != null) revealAction.performed += OnRevealInput;
     }
 
     private void OnDisable()
     {
-        flashlightAction.performed -= OnFlashlightInput;
-        revealAction.performed -= OnRevealInput;
+        if (flashlightAction != null) flashlightAction.performed -= OnFlashlightInput;
+        if (revealAction != null) revealAction.performed -= OnRevealInput;
     }
 
     private void Start()
@@ -146,6 +148,8 @@ public class Flashlight : MonoBehaviour
     {
         if (currentState == FlashlightState.Ready)
         {
+            if (playerNode != null) playerNode.Audio.PlayFlashlightOn();
+
             if (GameManager.Instance.currentFlashlightUses > 0)
             {
                 StartCoroutine(UseLight(false));
@@ -163,6 +167,8 @@ public class Flashlight : MonoBehaviour
         {
             if (GameManager.Instance.hasFlashlightUpgrade)
             {
+                if (playerNode != null) playerNode.Audio.PlayFlashlightOn();
+
                 StartCoroutine(UseLight(true));
             }
             else
@@ -204,6 +210,8 @@ public class Flashlight : MonoBehaviour
 
     private void SetState(FlashlightState newState)
     {
+        bool isStateChanging = currentState != newState;
+
         currentState = newState;
 
         if (feedbackRenderer != null)
@@ -212,12 +220,14 @@ public class Flashlight : MonoBehaviour
             {
                 case FlashlightState.Ready:
                     feedbackRenderer.color = readyColor;
+                    if (isStateChanging && playerNode != null) playerNode.Audio.PlayFlashlightReady();
                     break;
                 case FlashlightState.On:
                     feedbackRenderer.color = onColor;
                     break;
                 case FlashlightState.Jammed:
                     feedbackRenderer.color = jammedColor;
+                    if (isStateChanging && playerNode != null) playerNode.Audio.PlayFlashlightJammed();
                     break;    
             } 
         }

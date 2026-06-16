@@ -1,19 +1,18 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
 
-[RequireComponent(typeof(SpriteRenderer), typeof(Collider2D), typeof(Rigidbody2D))]
-public class CupEnemy : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D), typeof(Rigidbody2D))]
+public class FanEnemy : MonoBehaviour
 {
-    [Header("CupID")]
-    public string cupID;
+    [Header("Fan ID")]
+    public string fanID;
 
     [Header("Sprites")]
     public Sprite normalSprite;
     public Sprite brokenSprite;
 
     [Header("Falling Settings")]
-    public float detectionDistance = 5f;
+    public float detectionDistance = 15f;
     public float brokenDetectionDistance = 20f;
     public float warningTime = 0.5f;
     public float fallGravity = 4f;
@@ -41,7 +40,7 @@ public class CupEnemy : MonoBehaviour
 
     private void Awake()
     {
-        cupID = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "_Enemy_" + transform.position.ToString();
+        fanID = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name + "_FanEnemy_" + transform.position.ToString();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -55,7 +54,7 @@ public class CupEnemy : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance.deadEnemies.Contains(cupID))
+        if (GameManager.Instance.deadEnemies.Contains(fanID))
         {
             SetAlreadyBroken();
         }
@@ -65,7 +64,8 @@ public class CupEnemy : MonoBehaviour
     {
         if (isBroken || isTriggered) return;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, detectionDistance, playerLayer);
+        Vector2 boxSize = new Vector2(col.bounds.size.x, 0.1f);
+        RaycastHit2D hit = Physics2D.BoxCast(col.bounds.center, boxSize, 0f, Vector2.down, detectionDistance, playerLayer);
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
@@ -85,12 +85,14 @@ public class CupEnemy : MonoBehaviour
 
         Vector3 originalPos = transform.position;
         float elapsed = 0f;
+
         while (elapsed < warningTime)
         {
             transform.position = originalPos + (Vector3)Random.insideUnitCircle * 0.05f;
             elapsed += Time.deltaTime;
             yield return null;
         }
+
         transform.position = originalPos;
 
         rb.bodyType = RigidbodyType2D.Dynamic;
@@ -100,65 +102,52 @@ public class CupEnemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (isBroken) return;
-        
-        if (other.CompareTag("Ground"))
+
+        if (other.CompareTag("Player"))
         {
-            BreakCup();
+            DealDamage(other);
         }
-    }
-
-    private void FixedUpdate()
-    {
-        if (isBroken || !isTriggered) return;
-
-        Collider2D playerCollider = Physics2D.OverlapBox(col.bounds.center, col.bounds.size, 0f, playerLayer);
-        
-        if (playerCollider != null && playerCollider.CompareTag("Player"))
+        else if (other.CompareTag("Ground") || ((1 << other.gameObject.layer) & groundLayer) != 0)
         {
-            DealDamage(playerCollider);
+            BreakFan();
         }
-    }
-
-    private void BreakCup()
-    {
-        if (isBroken) return; 
-
-        if (!hasDamagedPlayer)
-        {
-            Collider2D playerCollider = Physics2D.OverlapBox(col.bounds.center, col.bounds.size, 0f, playerLayer);
-            if (playerCollider != null && playerCollider.CompareTag("Player"))
-            {
-                DealDamage(playerCollider);
-            }
-        }
-
-        isBroken = true;
-
-        rb.linearVelocity = Vector2.zero;
-        rb.bodyType = RigidbodyType2D.Static;  
-        col.enabled = false;
-        spriteRenderer.sprite = brokenSprite;
-
-        if (audioSource != null && breakClip != null) 
-        {
-            audioSource.pitch = Random.Range(0.9f, 1.1f);
-            audioSource.PlayOneShot(breakClip);
-        }
-        
-        GameManager.Instance.deadEnemies.Add(cupID);
     }
 
     private void DealDamage(Collider2D playerCol)
     {
         if (hasDamagedPlayer) return;
 
-        PlayerHP playerHP = playerCol.GetComponent<PlayerHP>();
-        if (playerHP != null)
+        Player playerNode = playerCol.GetComponent<Player>();
+        if (playerNode != null)
         {
-            playerHP.TakeDamage(damageAmount, transform.position);
+            playerNode.Health.TakeDamage(damageAmount, transform.position);
             hasDamagedPlayer = true;
         }
     }
+
+
+    private void BreakFan()
+    {
+        if (isBroken) return;
+
+        isBroken = true;
+        rb.linearVelocity = Vector2.zero;
+        rb.bodyType = RigidbodyType2D.Static;
+        col.enabled = false;
+        spriteRenderer.sprite = brokenSprite;
+
+        if (audioSource != null && breakClip != null)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot(breakClip);
+        }
+
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.deadEnemies.Add(fanID);
+        }
+    }
+
 
     private void SetAlreadyBroken()
     {

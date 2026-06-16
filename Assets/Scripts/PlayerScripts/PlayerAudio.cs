@@ -14,6 +14,10 @@ public class PlayerAudio : MonoBehaviour
     public AudioClip flashlightJammedClip;
     public AudioClip flashlightReadyClip;
 
+    [Header("Blanket")]
+    public AudioClip blanketOnClip;
+    public AudioClip blanketOffClip;
+
     [Header("Combat")]
     public AudioClip hurtClip;
     public AudioClip deathClip;
@@ -42,4 +46,6 @@ public class PlayerAudio : MonoBehaviour
     public void PlayFlashlightReady() => PlaySound(flashlightReadyClip);
     public void PlayHurt() => PlaySound(hurtClip);
     public void PlayDeath() => PlaySound(deathClip);
+    public void PlayBlanketOn() => PlaySound(blanketOnClip);
+    public void PlayBlanketOff() => PlaySound(blanketOffClip);
 }

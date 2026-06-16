@@ -88,7 +88,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3935032340282478731, guid: f97054a8aab97eb4b9bc3527820335f9, type: 3}
+  m_Sprite: {fileID: -1621105665651577678, guid: 9d5fc0ec843b16a45a0182b0c300585b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -159,17 +159,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.13230705, y: 0.14521337}
+  m_Offset: {x: -0.020951271, y: -0.03869629}
   m_SpriteTilingProperty:
-    border: {x: 0.51, y: 0.14, z: 0.53, w: 0.26}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 1.55, y: 2.23}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.2627602, y: 1.8694291}
+  m_Size: {x: 1.5692768, y: 2.2372484}
   m_EdgeRadius: 0
 --- !u!114 &8296661234179850664
 MonoBehaviour:
@@ -187,10 +187,10 @@ MonoBehaviour:
   leftWayPoint: {fileID: 2774810243459226265}
   rightWayPoint: {fileID: 8678111091912129967}
   damageAmount: 1
-  normalSprite: {fileID: -3935032340282478731, guid: f97054a8aab97eb4b9bc3527820335f9, type: 3}
+  normalSprite: {fileID: -1621105665651577678, guid: 9d5fc0ec843b16a45a0182b0c300585b, type: 3}
   illuminatedSprite: {fileID: 8967626656746682124, guid: 80cfbbbf1e7cd7e44a853c53198a3d93, type: 3}
   audioSource: {fileID: 6801532564325129376}
-  damageClip: {fileID: 0}
+  damageClip: {fileID: 8300000, guid: 6b7a7b8b56afba540b722cc66e8c1810, type: 3}
 --- !u!82 &6801532564325129376
 AudioSource:
   m_ObjectHideFlags: 0
@@ -376,7 +376,7 @@ Transform:
   m_GameObject: {fileID: 5347038401814842806}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.167, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -416,7 +416,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.14906502, y: 0.1321255}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

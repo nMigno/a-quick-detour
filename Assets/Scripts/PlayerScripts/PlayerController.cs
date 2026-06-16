@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction jumpAction;
 
+    public bool canMove = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -69,6 +71,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (!canMove) return;
+
         if (context.started)
         {
             if (jumpsRemaining > 0)
@@ -103,7 +107,7 @@ public class PlayerController : MonoBehaviour
         maxJumps = GameManager.Instance.hasDoubleJump ? 2 : 1;
 
         IncreaseGravity();
-        HandleSpriteFlip();
+        if (canMove) HandleSpriteFlip();
     }
 
     private void FixedUpdate()
@@ -116,6 +120,13 @@ public class PlayerController : MonoBehaviour
                 isKnockedBack = false;
             }
             return; // we ignore inputs returning
+        }
+
+        if (!canMove)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            CheckCollisions();
+            return;
         }
 
         rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);

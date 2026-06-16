@@ -151,9 +151,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1693618449
+  m_SortingLayer: 4
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -247,7 +247,7 @@ AudioSource:
   m_GameObject: {fileID: 5456696192377241048}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1290281358180820341, guid: a19249bc055ad574a86c359159028272, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -352,5 +352,5 @@ MonoBehaviour:
   damageAmount: 1
   normalSprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   illuminatedSprite: {fileID: 0}
-  audioSource: {fileID: 0}
-  damageClip: {fileID: 0}
+  audioSource: {fileID: 7706284695705809466}
+  damageClip: {fileID: 8300000, guid: 2a3099e8280ec1a42a6cb0716d7dbede, type: 3}
