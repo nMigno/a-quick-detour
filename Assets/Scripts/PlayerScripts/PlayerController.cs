@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerInput playerInput;
     private InputAction jumpAction;
+    private Animator anim;
 
     public bool canMove = true;
 
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
         defaultGravityScale = rb.gravityScale;
         playerInput = GetComponent<PlayerInput>();
         jumpAction = playerInput.actions.FindAction("Jump");
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -108,6 +110,8 @@ public class PlayerController : MonoBehaviour
 
         IncreaseGravity();
         if (canMove) HandleSpriteFlip();
+
+        UpdateAnimations();
     }
 
     private void FixedUpdate()
@@ -187,14 +191,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            //Future enemy interactions
-        }
-
-    }
     
     private void HandleSpriteFlip()
     {
@@ -248,6 +244,16 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, glideFallSpeed));
         }
+    }
+
+    private void UpdateAnimations()
+    {
+        if (anim == null) return;
+
+        anim.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        anim.SetFloat("yVelocity", rb.linearVelocity.y);
+        anim.SetBool("IsGrounded", isGrounded);
+        anim.SetBool("IsGliding", isGliding);
     }
 
     //Editor box rendering

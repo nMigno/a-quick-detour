@@ -46,8 +46,9 @@ public class Mannequin : MonoBehaviour
     {
         player = FindAnyObjectByType<Player>();
 
-        if (GameManager.Instance.deadEnemies.Contains(enemyID))
+        if (GameManager.Instance.IsEnemyDead(enemyID, out Vector3 savedPos))
         {
+            transform.position = savedPos;
             ApplyStun();
 
             if (illuminatedSprite != null) spriteRenderer.sprite = illuminatedSprite;
@@ -128,7 +129,7 @@ public class Mannequin : MonoBehaviour
         transform.localScale = scale;
     }
 
-    public void ApplyStun()
+    public void ApplyStun(bool registerInGameManager = true)
     {
         if (!isStunned)
         {
@@ -136,9 +137,9 @@ public class Mannequin : MonoBehaviour
             isChasing = false;
             rb.simulated = false;
 
-            if (!string.IsNullOrEmpty(enemyID))
+            if (registerInGameManager && !string.IsNullOrEmpty(enemyID))
             {
-                GameManager.Instance.RegisterDeadEnemy(enemyID);
+                GameManager.Instance.RegisterDeadEnemy(enemyID, transform.position);
             }
         }
     }

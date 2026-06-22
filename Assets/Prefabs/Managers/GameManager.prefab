@@ -56,6 +56,7 @@ MonoBehaviour:
   doorID: 
   revealedIllusionWalls: []
   deadEnemies: []
+  savedDeadEnemies: []
   collectedBatteries: []
   currentFlashlightUses: 2
   checkpointFlashlightUses: 2
@@ -63,7 +64,7 @@ MonoBehaviour:
   gameplayActionMap: Player
   navigateAction: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: a19249bc055ad574a86c359159028272, type: 2}
-  currentMusicVolume: 0.093
+  currentMusicVolume: 0.5
   currentSFXVolume: 1
   musicAudioSource: {fileID: 6030126955935199517}
   pauseVolumeReduction: -12
@@ -73,6 +74,7 @@ MonoBehaviour:
   uiAudioSource: {fileID: 8056365605173335435}
   minPitch: 0.98
   maxPitch: 1.02
+  startingScene: '[1] Mingorance_TestScene'
 --- !u!82 &8056365605173335435
 AudioSource:
   m_ObjectHideFlags: 0

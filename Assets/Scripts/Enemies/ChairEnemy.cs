@@ -65,8 +65,9 @@ public class ChairEnemy : MonoBehaviour
     {
         playerNode = FindAnyObjectByType<Player>();
 
-        if (GameManager.Instance.deadEnemies.Contains(enemyID))
+        if (GameManager.Instance.IsEnemyDead(enemyID, out Vector3 savedPos))
         {
+            transform.position = savedPos;
             ApplyStun();            
         }
 
@@ -162,7 +163,7 @@ public class ChairEnemy : MonoBehaviour
         UpdateVisualFeedback();
     }
 
-    public void ApplyStun()
+    public void ApplyStun(bool registerInGameManager = true)
     {
         if (!isStunned)
         {
@@ -170,9 +171,10 @@ public class ChairEnemy : MonoBehaviour
             isChasing = false;
             rb.simulated = false;
 
-            if (!string.IsNullOrEmpty(enemyID))
+            if (registerInGameManager && !string.IsNullOrEmpty(enemyID))
             {
-                GameManager.Instance.RegisterDeadEnemy(enemyID);
+                // Registramos el ID y la posición ACTUAL donde quedó aturdido
+                GameManager.Instance.RegisterDeadEnemy(enemyID, transform.position);
             }
 
             UpdateVisualFeedback();

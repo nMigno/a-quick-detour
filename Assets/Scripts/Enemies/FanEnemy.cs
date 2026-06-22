@@ -54,8 +54,9 @@ public class FanEnemy : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance.deadEnemies.Contains(fanID))
+        if (GameManager.Instance.IsEnemyDead(fanID, out Vector3 savedPos)) 
         {
+            transform.position = savedPos; 
             SetAlreadyBroken();
         }
     }
@@ -144,7 +145,7 @@ public class FanEnemy : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.deadEnemies.Add(fanID);
+            GameManager.Instance.RegisterDeadEnemy(fanID, transform.position);
         }
     }
 
@@ -156,12 +157,6 @@ public class FanEnemy : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         col.enabled = false;
         spriteRenderer.sprite = brokenSprite;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, brokenDetectionDistance, groundLayer);
-        if (hit.collider != null)
-        {
-            transform.position = hit.point + Vector2.up * 0.2f;
-        }
     }
 
     public void SetIlluminated(bool state)

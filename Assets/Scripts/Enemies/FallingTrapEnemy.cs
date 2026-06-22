@@ -55,8 +55,9 @@ public class FallingTrapEnemy : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance.deadEnemies.Contains(trapID))
+        if (GameManager.Instance.IsEnemyDead(trapID, out Vector3 savedPos))
         {
+            transform.position = savedPos;
             SetAlreadyBroken();
         }
     }
@@ -133,7 +134,7 @@ public class FallingTrapEnemy : MonoBehaviour
         
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.deadEnemies.Add(trapID);
+            GameManager.Instance.RegisterDeadEnemy(trapID, transform.position);
         }
     }
 
@@ -156,12 +157,6 @@ public class FallingTrapEnemy : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         col.enabled = false;
         spriteRenderer.sprite = brokenSprite;
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, brokenDetectionDistance, groundLayer);
-        if (hit.collider != null)
-        {
-            transform.position = hit.point + Vector2.up * 0.2f;
-        }
     }
 
     public void SetIlluminated(bool state)
