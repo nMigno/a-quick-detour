@@ -22,6 +22,7 @@ public class PlayerHP : MonoBehaviour
 
     private void Start()
     {
+        spriteRenderer.enabled = true;
         currentHealth = GameManager.Instance.currentHP;
     }
 
@@ -41,6 +42,9 @@ public class PlayerHP : MonoBehaviour
         }
         else
         {
+            Animator anim = GetComponent<Animator>();
+            if (anim != null) anim.SetTrigger("Damaged");
+
             GetComponent<PlayerController>().ApplyKnockback(damageSourcePosition);
             StartCoroutine(InvulnerabilityRoutine());
         }
@@ -62,11 +66,59 @@ public class PlayerHP : MonoBehaviour
     }
 
     private void Die()
-    {
+    {        
         GetComponent<Player>().Audio.PlayDeath();
-        GameManager.Instance.RespawnPlayer();
+        Animator anim = GetComponent<Animator>();
+        if (anim != null) anim.SetTrigger("Death");
+
+        GetComponent<PlayerController>().enabled = false;
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
 
         Debug.Log("Player died. Respawning...");
+        StartCoroutine(DeathRoutine());
+    }
+
+    private IEnumerator DeathRoutine()
+    {
+        yield return null;
+
+        float animDuration = 1f;
+        Animator anim = GetComponent<Animator>();
+
+        if (anim != null)
+        {
+            AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("Death"))
+            {
+                animDuration = stateInfo.length;
+            }
+        }
+
+        float totalWaitTime = animDuration + 0.5f;
+
+        // Delete this visual patch block when anim is implemented
+        // Start of visual patch
+        float elapsedTime = 0f;
+        Color originalColor = spriteRenderer.color;
+        Quaternion originalRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(0, 0, 90f);
+
+        while (elapsedTime < totalWaitTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / totalWaitTime;
+
+            transform.rotation = Quaternion.Lerp(originalRotation, targetRotation, t);
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, Mathf.Lerp(1f, 0f, t));
+
+            yield return null;
+        }
+
+        spriteRenderer.enabled = false;
+        // End of visual patch
+
+        // yield return new WaitForSeconds(animDuration + 0.5f);
+        GameManager.Instance.RespawnPlayer();
     }
 
     public void HealToMax()

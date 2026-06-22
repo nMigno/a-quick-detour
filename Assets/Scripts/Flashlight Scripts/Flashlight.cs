@@ -8,9 +8,6 @@ public class Flashlight : MonoBehaviour
     public enum FlashlightState { Ready, On, Jammed }
     public FlashlightState currentState = FlashlightState.Ready;
 
-    [Header("Battery Settings")]
-    public int maxUses = 2;
-
     [Header("Time (seconds)")]
     public float activeDuration = 1f;
     public float cooldownDuration = 3f;
@@ -149,15 +146,7 @@ public class Flashlight : MonoBehaviour
         if (currentState == FlashlightState.Ready)
         {
             if (playerNode != null) playerNode.Audio.PlayFlashlightOn();
-
-            if (GameManager.Instance.currentFlashlightUses > 0)
-            {
-                StartCoroutine(UseLight(false));
-            }
-            else
-            {
-                Debug.Log("Flashlight out of battery!");
-            }
+            StartCoroutine(UseLight(false));
         }
     }
 
@@ -180,11 +169,6 @@ public class Flashlight : MonoBehaviour
 
     private IEnumerator UseLight(bool isRevealMode)
     {
-        if (!isRevealMode) 
-        {
-            GameManager.Instance.currentFlashlightUses--;
-        }
-
         SetState(FlashlightState.On);
 
         LightBeam beamScript = lightBeamObject.GetComponent<LightBeam>();
@@ -231,11 +215,5 @@ public class Flashlight : MonoBehaviour
                     break;    
             } 
         }
-    }
-
-    public void RechargeBattery()
-    {
-        GameManager.Instance.currentFlashlightUses = maxUses;
-        Debug.Log("Flashlight recharged!");
     }
 }

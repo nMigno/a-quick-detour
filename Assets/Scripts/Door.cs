@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(AudioSource))]
 public class Door : MonoBehaviour
 {
     [Header("Door Settings")]
@@ -17,12 +18,21 @@ public class Door : MonoBehaviour
     [Header("Endgame")]
     public bool isFinalDoor = false;
 
+    [Header("Audio")]
+    public AudioClip openSound;
+    private AudioSource audioSource;
+
     private bool playerInRange = false;
     private bool isLocked;
 
     [SerializeField] private Transform playerSpawn;
 
     private PlayerInput player;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {
@@ -42,6 +52,12 @@ public class Door : MonoBehaviour
     private IEnumerator TryInteract()
     {
         player.DeactivateInput();
+
+        if (openSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(openSound);
+        }
+        
         yield return new WaitForSeconds(0.5f);
         if (playerSpawn != null)
         {

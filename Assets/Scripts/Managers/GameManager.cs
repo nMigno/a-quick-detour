@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem;
@@ -30,7 +29,8 @@ public class GameManager : MonoBehaviour
 
     [Header("World Persistence")]
     public List<string> revealedIllusionWalls = new List<string>();
-    public List<string> deadEnemies = new List<string>();
+    public List<DeadEnemyData> deadEnemies = new List<DeadEnemyData>();
+    public List<DeadEnemyData> savedDeadEnemies = new List<DeadEnemyData>();
     public List<string> collectedBatteries = new List<string>();
 
     [Header("Flashlight Battery Manager")]
@@ -63,6 +63,10 @@ public class GameManager : MonoBehaviour
     [Header("Sound Variation")]
     [SerializeField, Range(0.1f, 3f)] private float minPitch = 0.9f;
     [SerializeField, Range(0.1f, 3f)] private float maxPitch = 1.1f;
+
+    [Header("Scene Debug Settings")]
+    [Tooltip("Exact scene name")]
+    [SerializeField] private string startingScene = "Level-1";
 
     private void Awake()
     {
@@ -128,13 +132,26 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    public void RegisterDeadEnemy(string EnemyID)
+    public void RegisterDeadEnemy(string EnemyID, Vector3 deathPosition)
     {
-        if (!deadEnemies.Contains(EnemyID))
+        if (!deadEnemies.Exists(e => e.enemyID == EnemyID))
         {
-            deadEnemies.Add(EnemyID);
-            Debug.Log($"GameManager: Enemy {EnemyID} registered as dead.");
+            deadEnemies.Add(new DeadEnemyData(EnemyID, deathPosition));
+            Debug.Log($"GameManager: Enemy {EnemyID} registered as dead at {deathPosition}.");
         }
+    }
+
+    public bool IsEnemyDead(string enemyID, out Vector3 savedPosition)
+    {
+        DeadEnemyData data = deadEnemies.Find(e => e.enemyID == enemyID);
+        if (data != null)
+        {
+            savedPosition = data.position;
+            return true;
+        }
+        
+        savedPosition = Vector3.zero;
+        return false;
     }
 
     public void UseDoorTransition(string sceneToLoad, string destinationDoorID)
@@ -169,7 +186,12 @@ public class GameManager : MonoBehaviour
     {
         lastCheckpointPosition = position;
         lastCheckpointScene = sceneName;
-        checkpointFlashlightUses = currentFlashlightUses;
+        
+        savedDeadEnemies.Clear();
+        foreach(var enemy in deadEnemies) 
+        {
+            savedDeadEnemies.Add(new DeadEnemyData(enemy.enemyID, enemy.position));
+        }
 
         Debug.Log($"GameManager: Checkpoint set at {position} in scene {sceneName}");
     }
@@ -178,17 +200,23 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager: Respawning on last checkpoint.");
 
-        UpdateHP(maxHP);
-        currentFlashlightUses = checkpointFlashlightUses;
-
-        if (string.IsNullOrEmpty(lastCheckpointScene))
+        deadEnemies.Clear();
+        foreach(var enemy in savedDeadEnemies) 
         {
-            string actualScene = SceneManager.GetActiveScene().name;
-            Debug.LogWarning($"[QA] lastCheckpointScene was empty. Getting actual active scene: {actualScene}");
-            lastCheckpointScene = actualScene;
+            deadEnemies.Add(new DeadEnemyData(enemy.enemyID, enemy.position));
         }
 
-        SceneManager.LoadScene(lastCheckpointScene);
+        UpdateHP(maxHP);
+
+        if (!string.IsNullOrEmpty(lastCheckpointScene))
+        {
+            SceneManager.LoadScene(lastCheckpointScene);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
     }
 
     public void RegisterCollectedBattery(string batteryID)
@@ -284,11 +312,17 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         ResetGameState();
-        string firstLevel = "Level-1";
-        lastCheckpointScene = firstLevel;
+
+        if (string.IsNullOrEmpty(startingScene))
+        {
+        Debug.LogError("Build error: No assigned scene in 'Starting Scene' on Game Manager Inspector.");
+        return;
+        }
+
+        lastCheckpointScene = startingScene;
         currentHP = maxHP;
         currentFlashlightUses = 2;
-        SceneManager.LoadScene(firstLevel);
+        SceneManager.LoadScene(startingScene);
     }
 
     public void ResetGameState()
@@ -303,6 +337,7 @@ public class GameManager : MonoBehaviour
 
         revealedIllusionWalls.Clear();
         deadEnemies.Clear();
+        savedDeadEnemies.Clear();
         collectedBatteries.Clear();
 
         hasFlashlightUpgrade = false;
@@ -331,4 +366,17 @@ public class GameManager : MonoBehaviour
         }
     }
     #endif
+}
+
+[System.Serializable]
+public class DeadEnemyData
+{
+    public string enemyID;
+    public Vector3 position;
+
+    public DeadEnemyData(string id, Vector3 pos)
+    {
+        enemyID = id;
+        position = pos;
+    }
 }
