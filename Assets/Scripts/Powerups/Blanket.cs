@@ -11,6 +11,7 @@ public class Blanket : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction blanketAction;
     private SpriteRenderer playerSpriteRenderer;
+    private Animator anim;
 
     private void Awake()
     {
@@ -20,7 +21,7 @@ public class Blanket : MonoBehaviour
 
         if (playerNode != null)
         {
-            playerSpriteRenderer = playerNode.GetComponent<SpriteRenderer>();
+            anim = playerNode.GetComponent<Animator>();
         }
     }
 
@@ -78,17 +79,6 @@ public class Blanket : MonoBehaviour
             else playerNode.Audio.PlayBlanketOff();
         }
 
-        if (playerSpriteRenderer != null)
-        {
-            if (isActive)
-            {
-                originalSprite = playerSpriteRenderer.sprite;
-                if (blanketSprite != null) playerSpriteRenderer.sprite = blanketSprite;
-            }
-            else
-            {
-                playerSpriteRenderer.sprite = originalSprite;
-            }
-        }
+        if (anim != null) anim.SetBool("MantaOn", isActive);
     }
 }
