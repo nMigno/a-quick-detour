@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 49.07126, y: -4.42867, z: 0}
-  m_LocalScale: {x: 0.42880762, y: 1.0951699, z: 1}
+  m_LocalScale: {x: 1.0237782, y: 1.0951699, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,12 +85,12 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: f45e9125732c3ae4b97171011f77ca60, type: 3}
+  m_Sprite: {fileID: -7237307886242296082, guid: f60ef850305080342b6b592de9035cc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.34, y: 1.49}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -133,8 +133,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 2}
+    oldSize: {x: 1.34, y: 1.49}
+    newSize: {x: 1.34, y: 1.49}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -181,8 +181,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FallingTrapEnemy
   trapID: 
-  normalSprite: {fileID: 7482667652216324306, guid: f45e9125732c3ae4b97171011f77ca60, type: 3}
-  brokenSprite: {fileID: -6250887530782015655, guid: f1c70b59ba4418041a816ca07003783d, type: 3}
+  normalSprite: {fileID: -7237307886242296082, guid: f60ef850305080342b6b592de9035cc8, type: 3}
+  brokenSprite: {fileID: 4080464657369389634, guid: a482db82aaedf4f41882a7eef8f54d73, type: 3}
   detectionDistance: 15
   brokenDetectionDistance: 20
   warningTime: 0.5
