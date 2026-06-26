@@ -5,7 +5,10 @@ public class UISelectButtonFix : MonoBehaviour, IPointerEnterHandler, ISelectHan
 {
     public void OnPointerEnter(PointerEventData eventData)
     { 
-        EventSystem.current.SetSelectedGameObject(gameObject);
+        if (gameObject.activeInHierarchy && EventSystem.current.currentSelectedGameObject != gameObject)
+        {
+            EventSystem.current.SetSelectedGameObject(gameObject);
+        }
     }
 
     public void OnSelect(BaseEventData eventData)

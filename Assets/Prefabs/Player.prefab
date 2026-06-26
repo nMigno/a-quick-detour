@@ -100,7 +100,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.56, y: 2.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -171,7 +171,7 @@ BoxCollider2D:
     border: {x: 0.02, y: 0.01, z: 0.02, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.56, y: 2.4}
-    newSize: {x: 1, y: 2}
+    newSize: {x: 1.56, y: 2.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -510,7 +510,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4677982620056355922}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: df9d1df636ea98646a0f1657577feec3, type: 2}
   m_CullingMode: 0

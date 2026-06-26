@@ -85,7 +85,7 @@ public class FinalBoss : MonoBehaviour
         {
             player.Health.isProtectedByBlanket = false;
 
-            if (player.Health.TakeDamage(instakillDamage, transform.position))
+            if (player.Health.TakeDamage(instakillDamage, transform.position, true))
             {
                 if (hitPlayerSound != null) audioSource.PlayOneShot(hitPlayerSound);
             }

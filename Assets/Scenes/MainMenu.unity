@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &630211738
+--- !u!1 &42396236
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,9 +127,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 630211741}
-  - component: {fileID: 630211740}
-  - component: {fileID: 630211739}
+  - component: {fileID: 42396239}
+  - component: {fileID: 42396238}
+  - component: {fileID: 42396237}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -137,13 +137,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &630211739
+--- !u!114 &42396237
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630211738}
+  m_GameObject: {fileID: 42396236}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
@@ -168,13 +168,13 @@ MonoBehaviour:
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
   m_ScrollDeltaPerTick: 6
---- !u!114 &630211740
+--- !u!114 &42396238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630211738}
+  m_GameObject: {fileID: 42396236}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
@@ -183,13 +183,13 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!4 &630211741
+--- !u!4 &42396239
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630211738}
+  m_GameObject: {fileID: 42396236}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -400,29 +400,76 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 356329948897959423, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 742240031053162785, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2024846248629337444, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 584481666756001457, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_text
+      value: 'Move
+
+        Flashlight
+
+        Blanket
+
+        Jump
+
+        Interact
+
+        Confirm
+
+        Pause
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 3822432318861914841, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4341680669443999343, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_text
+      value: 'Left / Right
+
+        X
+
+        B
+
+        A
+
+        Up
+
+        A
+
+        Start
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4536132557053832105, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5278505818269423858, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5407228758064629121, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
       propertyPath: m_Name
       value: MenuCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 6322193172074679445, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
+    - target: {fileID: 6736253332571099981, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_text
+      value: 'Left / Right Arrow
+
+        C
+
+        Z
+
+        X / Space
+
+        Up
+        Arrow
+
+        Enter
+
+        Esc
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 7143248301760197927, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
       propertyPath: m_Pivot.x
@@ -508,9 +555,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9183840265298616763, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
+    - target: {fileID: 8719374256278962577, guid: f6a579191e75ca44a8eca3ebd719cc07, type: 3}
+      propertyPath: m_text
+      value: 'Move
+
+        Flashlight
+
+        Blanket
+
+        Jump
+
+        Interact
+
+        Confirm
+
+        Pause'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -524,4 +583,4 @@ SceneRoots:
   - {fileID: 2054253293}
   - {fileID: 3542548970349681933}
   - {fileID: 1840604673}
-  - {fileID: 630211741}
+  - {fileID: 42396239}

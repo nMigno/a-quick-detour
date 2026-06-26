@@ -239,7 +239,7 @@
                 {
                     "name": "",
                     "id": "2a52e29f-3077-4b9a-85f4-ee7c984c251a",
-                    "path": "<Keyboard>/v",
+                    "path": "<Keyboard>/z",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KeyboardMouse",
@@ -250,7 +250,7 @@
                 {
                     "name": "",
                     "id": "3804c975-a33f-4c32-acca-9ee7366eb521",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -261,7 +261,7 @@
                 {
                     "name": "",
                     "id": "123b42d3-ea32-4ef1-b932-e414c74d5772",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": ";KeyboardMouse",
@@ -272,7 +272,7 @@
                 {
                     "name": "",
                     "id": "cce9552f-18b7-4dda-9550-24053c61b7e1",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",

@@ -64,7 +64,7 @@ MonoBehaviour:
   gameplayActionMap: Player
   navigateAction: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: a19249bc055ad574a86c359159028272, type: 2}
-  currentMusicVolume: 0.5
+  currentMusicVolume: 0.2
   currentSFXVolume: 1
   musicAudioSource: {fileID: 6030126955935199517}
   pauseVolumeReduction: -12

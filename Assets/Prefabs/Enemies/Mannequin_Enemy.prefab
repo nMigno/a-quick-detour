@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 3131486076404093767}
   - component: {fileID: 7706284695705809466}
   - component: {fileID: 6938078090582776294}
+  - component: {fileID: 7292623645809182391}
   m_Layer: 10
   m_Name: Mannequin_Enemy
   m_TagString: Enemy
@@ -446,3 +447,25 @@ MonoBehaviour:
   illuminatedSprite: {fileID: 0}
   audioSource: {fileID: 7706284695705809466}
   damageClip: {fileID: 8300000, guid: 2a3099e8280ec1a42a6cb0716d7dbede, type: 3}
+--- !u!95 &7292623645809182391
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5456696192377241048}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4bd24e23f3f4d294f885539b07cf25e6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

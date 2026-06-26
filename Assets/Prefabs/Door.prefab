@@ -153,9 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf26e230b067ca408c7d70adbefee2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
-  myDoorID: 
-  sceneToLoad: 
-  destinationDoorID: 
+  myDoorID: 1
+  sceneToLoad: '[2] Mingorance_TestScene'
+  destinationDoorID: 2
   isFinalDoor: 0
   openSound: {fileID: 8300000, guid: 758f0e06ce925824c9abbbfc7b601bbb, type: 3}
   playerSpawn: {fileID: 3178127089256595441}

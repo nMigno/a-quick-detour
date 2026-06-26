@@ -26,9 +26,9 @@ public class PlayerHP : MonoBehaviour
         currentHealth = GameManager.Instance.currentHP;
     }
 
-    public bool TakeDamage(int damageAmount, Vector3 damageSourcePosition)
+    public bool TakeDamage(int damageAmount, Vector3 damageSourcePosition, bool bypassInvulnerability = false)
     {
-        if (isInvulnerable || isProtectedByBlanket) return false;
+        if ((isInvulnerable && !bypassInvulnerability) || isProtectedByBlanket) return false;
 
         currentHealth -= damageAmount;
         GameManager.Instance.UpdateHP(currentHealth);
