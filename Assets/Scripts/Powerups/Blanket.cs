@@ -65,6 +65,10 @@ public class Blanket : MonoBehaviour
     {
         if (playerNode == null) return;
 
+        // Secure protector blanket activation only while grounded
+        Rigidbody2D rb = playerNode.GetComponent<Rigidbody2D>();
+        if (isActive && rb != null && Mathf.Abs(rb.linearVelocity.y) > 0.1f) return;
+
         playerNode.Health.isProtectedByBlanket = isActive;
         playerNode.Controller.canMove = !isActive;
 

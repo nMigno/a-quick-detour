@@ -260,28 +260,6 @@
                 },
                 {
                     "name": "",
-                    "id": "123b42d3-ea32-4ef1-b932-e414c74d5772",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";KeyboardMouse",
-                    "action": "Glide",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cce9552f-18b7-4dda-9550-24053c61b7e1",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Glide",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "31a626db-c75f-491b-8ce2-b9e39aacefe6",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -299,6 +277,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7112bd8c-8e38-4c3a-aba8-d68ccfc59bf9",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Glide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89bd6368-b316-4b32-b9f6-bda282debea6",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Glide",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

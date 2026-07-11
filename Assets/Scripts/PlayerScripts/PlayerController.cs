@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Gravity Settings")]
     [SerializeField] private float fallGravityMultiplier = 2.5f;
+    [SerializeField] private float maxFallSpeed = 15f;
     private float defaultGravityScale;
 
     [Header("Collision Checks")]
@@ -94,9 +95,14 @@ public class PlayerController : MonoBehaviour
 
     public void OnGlide(InputAction.CallbackContext context)
     {
+        if (GameManager.Instance != null && !GameManager.Instance.hasBlanketGlider) return;
+
         if (context.started)
         {
-            isGliding = true;
+            if (!isGrounded)
+            {
+                isGliding = true;
+            }
         } 
         else if (context.canceled)
         {
@@ -130,12 +136,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             CheckCollisions();
+            LimitFallSpeed();
             return;
         }
 
         rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
         CheckCollisions();
         HandleGliding();
+        LimitFallSpeed();
     }
 
     //Divide grounded check method from coyote's.
@@ -263,6 +271,14 @@ public class PlayerController : MonoBehaviour
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(groundCheck.position, groundCheckSize);
+        }
+    }
+
+    private void LimitFallSpeed()
+    {
+        if (rb.linearVelocity.y < -maxFallSpeed)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -maxFallSpeed);
         }
     }
 }

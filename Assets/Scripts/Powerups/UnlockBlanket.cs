@@ -33,5 +33,6 @@ public class UnlockBlanket : MonoBehaviour
 
         Player player = playerObj.GetComponent<Player>();
         player.PlayerBlanket.enabled = true;
+        GameManager.Instance.UnlockBlanketGlider();
     }
 }

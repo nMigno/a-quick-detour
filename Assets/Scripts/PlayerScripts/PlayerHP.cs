@@ -66,13 +66,14 @@ public class PlayerHP : MonoBehaviour
     }
 
     private void Die()
-    {        
+    {      
         GetComponent<Player>().Audio.PlayDeath();
         Animator anim = GetComponent<Animator>();
         if (anim != null) anim.SetTrigger("Death");
 
         GetComponent<PlayerController>().enabled = false;
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        GetComponent<Collider2D>().enabled = false;
 
         Debug.Log("Player died. Respawning...");
         StartCoroutine(DeathRoutine());

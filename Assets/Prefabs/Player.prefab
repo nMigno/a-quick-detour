@@ -166,7 +166,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.13795948, y: -0.03006816}
+  m_Offset: {x: -0.13795948, y: -0.08836907}
   m_SpriteTilingProperty:
     border: {x: 0.02, y: 0.01, z: 0.02, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -176,7 +176,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.2904301, y: 2.2811217}
+  m_Size: {x: 1.2904301, y: 2.1645198}
   m_EdgeRadius: 0
 --- !u!114 &3127776261070775656
 MonoBehaviour:
@@ -330,6 +330,7 @@ MonoBehaviour:
   coyoteTime: 0.05
   glideFallSpeed: -2
   fallGravityMultiplier: 2
+  maxFallSpeed: 15
   groundCheck: {fileID: 3759174887751696575}
   groundCheckSize: {x: 0.9, y: 0.05}
   groundLayer:
@@ -685,6 +686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4751998212306962369}
   - component: {fileID: 5039177754382643991}
+  - component: {fileID: 8759626058142942530}
   m_Layer: 6
   m_Name: Blanket
   m_TagString: Untagged
@@ -714,12 +716,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8557946630277922676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9074dfa76dd90f44082ddd90f5cc9b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Blanket
   blanketSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &8759626058142942530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8557946630277922676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 889007373dd7b1e448699440a43cbd73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Glider
 --- !u!1 &8617427846528782157
 GameObject:
   m_ObjectHideFlags: 0
