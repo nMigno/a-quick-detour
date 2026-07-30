@@ -9,17 +9,17 @@ public class LightBeam : MonoBehaviour
     {
         Debug.Log("La luz tocó a: " + other.gameObject.name);
 
-        if (!isRevealMode && other.TryGetComponent<ChairEnemy>(out ChairEnemy enemy))
+        if (other.TryGetComponent<ChairEnemy>(out ChairEnemy enemy))
         {
             enemy.SetIlluminated(true);
         }
 
-        if (!isRevealMode && other.TryGetComponent<FallingTrapEnemy>(out FallingTrapEnemy trapEnemy))
+        if (other.TryGetComponent<FallingTrapEnemy>(out FallingTrapEnemy trapEnemy))
         {
             trapEnemy.SetIlluminated(true);
         }
 
-        if (isRevealMode && other.TryGetComponent<IllusionWall>(out IllusionWall wall))
+        if (other.TryGetComponent<IllusionWall>(out IllusionWall wall))
         {
             wall.Reveal();
         }
@@ -27,12 +27,12 @@ public class LightBeam : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(!isRevealMode && other.TryGetComponent<ChairEnemy>(out ChairEnemy enemy))
+        if(other.TryGetComponent<ChairEnemy>(out ChairEnemy enemy))
         {
             enemy.SetIlluminated(false);
         }
 
-        if (!isRevealMode && other.TryGetComponent<FallingTrapEnemy>(out FallingTrapEnemy trapEnemy))
+        if (other.TryGetComponent<FallingTrapEnemy>(out FallingTrapEnemy trapEnemy))
         {
             trapEnemy.SetIlluminated(false);
         }

@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class PlayerInteract : MonoBehaviour
 {
     private Door currentDoor;
-    private Checkpoint currentCheckpoint;
 
     public void OnInteract(InputAction.CallbackContext context)
     {
@@ -14,12 +13,6 @@ public class PlayerInteract : MonoBehaviour
             if (currentDoor != null)
             {
                 currentDoor.OnInteract(context);
-            }
-
-            if (currentCheckpoint != null)
-            {
-                Player player = GetComponent<Player>();
-                currentCheckpoint.Interact(player);
             }
         }
     }
@@ -30,10 +23,6 @@ public class PlayerInteract : MonoBehaviour
         {
             currentDoor = collision.GetComponent<Door>();
         }
-        else if (collision.CompareTag("Checkpoint"))
-        {
-            currentCheckpoint = collision.GetComponent<Checkpoint>();
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -41,10 +30,6 @@ public class PlayerInteract : MonoBehaviour
         if (collision.CompareTag("Door"))
         {
             currentDoor = null;
-        }
-        else if (collision.CompareTag("Checkpoint"))
-        {
-            currentCheckpoint = null;
         }
     }
 }

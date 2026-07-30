@@ -15,6 +15,9 @@ public class Door : MonoBehaviour
     [Tooltip("Destination Door ID")]
     public string destinationDoorID;
 
+    [Header("Lock Settings")]
+    public bool isLocked = false;
+
     [Header("Endgame")]
     public bool isFinalDoor = false;
 
@@ -23,7 +26,6 @@ public class Door : MonoBehaviour
     private AudioSource audioSource;
 
     private bool playerInRange = false;
-    private bool isLocked;
 
     [SerializeField] private Transform playerSpawn;
 
@@ -44,8 +46,13 @@ public class Door : MonoBehaviour
     {
         if (playerInRange && context.started)
         {
-            StartCoroutine(TryInteract());
-            
+            if (isLocked || string.IsNullOrEmpty(sceneToLoad))
+            {
+                Debug.Log("Door locked.");
+                return;
+            }
+
+            StartCoroutine(TryInteract());            
         }
     }
 
@@ -80,6 +87,12 @@ public class Door : MonoBehaviour
                 Debug.LogError("EmergencyUI canvas missing!");
             }
             return; 
+        }
+
+        if (string.IsNullOrEmpty(sceneToLoad))
+        {
+            Debug.LogWarning("Transition aborted: sceneToLoad is empty in Inspector");
+            return;
         }
 
         Debug.Log($"Travelling to {sceneToLoad}, destination: {destinationDoorID}");

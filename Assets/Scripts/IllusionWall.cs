@@ -1,10 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
 public class IllusionWall : MonoBehaviour
 {
     public string wallID;
     private bool isRevealed = false;
+
+    private void Awake()
+    {
+        wallID = SceneManager.GetActiveScene().name + "_Wall_" + transform.position.ToString();
+    }
 
     private void Start()
     {
@@ -17,7 +23,7 @@ public class IllusionWall : MonoBehaviour
 
     public void Reveal()
     {
-        if (isRevealed || !GameManager.Instance.hasFlashlightUpgrade) return;
+        if (isRevealed) return;
 
         isRevealed = true;
 

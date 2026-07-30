@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
         // Get every component before start
         Controller = GetComponent<PlayerController>();
         Health = GetComponent<PlayerHP>();
-        PlayerFlashlight = GetComponentInChildren<Flashlight>();
-        PlayerBlanket = GetComponentInChildren<Blanket>();      
+        PlayerFlashlight = GetComponentInChildren<Flashlight>(true);
+        PlayerBlanket = GetComponentInChildren<Blanket>(true);      
         Audio = GetComponent<PlayerAudio>();  
     }
 }

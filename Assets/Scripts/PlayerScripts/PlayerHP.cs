@@ -71,9 +71,13 @@ public class PlayerHP : MonoBehaviour
         Animator anim = GetComponent<Animator>();
         if (anim != null) anim.SetTrigger("Death");
 
+        gameObject.tag = "Untagged";
+
+        UnityEngine.InputSystem.PlayerInput playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
+        if (playerInput != null) playerInput.DeactivateInput();
+
         GetComponent<PlayerController>().enabled = false;
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-        GetComponent<Collider2D>().enabled = false;
 
         Debug.Log("Player died. Respawning...");
         StartCoroutine(DeathRoutine());

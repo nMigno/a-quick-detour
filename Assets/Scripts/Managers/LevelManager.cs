@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using Unity.Cinemachine;
 
@@ -15,6 +14,9 @@ public class LevelManager : MonoBehaviour
     [Header("Collectables")]
     [SerializeField] private GameObject key;
 
+    [SerializeField] private bool disableFlashlightOnStart = false;
+    [SerializeField] private bool disableBlanketOnStart = false;
+
     private void Awake()
     {
         PlacePlayer();
@@ -26,7 +28,22 @@ public class LevelManager : MonoBehaviour
         if (GameManager.Instance != null)
             {
                 GameManager.Instance.PlayMusic(levelMusic);
+                ApplyLevelRestrictions();
             }
+    }
+
+    private void ApplyLevelRestrictions()
+    {
+        if (disableFlashlightOnStart)
+        {
+            GameManager.Instance.hasFlashlight = false;
+        }
+
+        if (disableBlanketOnStart)
+        {
+            GameManager.Instance.hasBlanketGlider = false;
+            GameManager.Instance.hasBlanketBase = false;
+        }
     }
 
     private void PlacePlayer()

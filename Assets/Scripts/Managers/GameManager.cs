@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public bool hasFlashlightUpgrade = false;
     public bool hasDoubleJump = false;
     public bool hasBlanketGlider = false;
+    public bool hasBlanketBase = false;
+    public bool hasFlashlight = true;
 
     [Header("Checkpoint System")]
     public string lastCheckpointScene;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     [Header("World Persistence")]
     public List<string> revealedIllusionWalls = new List<string>();
+    public List<string> savedRevealedIllusionWalls = new List<string>();
     public List<DeadEnemyData> deadEnemies = new List<DeadEnemyData>();
     public List<DeadEnemyData> savedDeadEnemies = new List<DeadEnemyData>();
     public List<string> collectedBatteries = new List<string>();
@@ -193,6 +196,9 @@ public class GameManager : MonoBehaviour
             savedDeadEnemies.Add(new DeadEnemyData(enemy.enemyID, enemy.position));
         }
 
+        savedRevealedIllusionWalls.Clear();
+        savedRevealedIllusionWalls.AddRange(revealedIllusionWalls);
+
         Debug.Log($"GameManager: Checkpoint set at {position} in scene {sceneName}");
     }
 
@@ -205,6 +211,9 @@ public class GameManager : MonoBehaviour
         {
             deadEnemies.Add(new DeadEnemyData(enemy.enemyID, enemy.position));
         }
+
+        revealedIllusionWalls.Clear();
+        revealedIllusionWalls.AddRange(savedRevealedIllusionWalls);
 
         UpdateHP(maxHP);
 
@@ -336,6 +345,7 @@ public class GameManager : MonoBehaviour
         doorID = "";
 
         revealedIllusionWalls.Clear();
+        savedRevealedIllusionWalls.Clear();
         deadEnemies.Clear();
         savedDeadEnemies.Clear();
         collectedBatteries.Clear();
@@ -343,6 +353,7 @@ public class GameManager : MonoBehaviour
         hasFlashlightUpgrade = false;
         hasDoubleJump = false;
         hasBlanketGlider = false;
+        hasBlanketBase = false;
     }
 
     public void QuitGame()
@@ -366,6 +377,17 @@ public class GameManager : MonoBehaviour
         }
     }
     #endif
+
+    public void RepairFlashlight()
+    {
+        hasFlashlight = true;
+        Debug.Log("Flashlight repaired!");
+    }
+
+    public void UnlockBlanketBase()
+    {
+        hasBlanketBase = true;
+    }
 }
 
 [System.Serializable]

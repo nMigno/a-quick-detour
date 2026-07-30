@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(Collider2D))]
 public class ArmEnemy : MonoBehaviour
 {
     [Header("Damage Settings")]
@@ -22,14 +22,15 @@ public class ArmEnemy : MonoBehaviour
         {
             PlayerHP playerHP = other.GetComponent<PlayerHP>();
 
-            if(playerHP.TakeDamage(damageAmount, transform.position))
+            if (playerHP != null && playerHP.TakeDamage(damageAmount, transform.position))
             {
                 if (audioSource != null && damageClip != null)
                 {
                     audioSource.pitch = Random.Range(0.9f, 1.1f);
                     audioSource.PlayOneShot(damageClip);
                 }
-            }        
+            }
         }
     }
+
 }

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 64304743869150653}
   - component: {fileID: 2210592459196860283}
   - component: {fileID: 177792679177303057}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tool_Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,8 +183,8 @@ MonoBehaviour:
   trapID: 
   normalSprite: {fileID: -7237307886242296082, guid: f60ef850305080342b6b592de9035cc8, type: 3}
   brokenSprite: {fileID: 4080464657369389634, guid: a482db82aaedf4f41882a7eef8f54d73, type: 3}
-  detectionDistance: 15
-  brokenDetectionDistance: 20
+  detectionDistance: 5
+  brokenDetectionDistance: 10
   warningTime: 0.5
   fallGravity: 4
   damageAmount: 1

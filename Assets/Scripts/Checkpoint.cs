@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,29 +15,39 @@ public class Checkpoint : MonoBehaviour
     private AudioSource audioSource;
     private bool isActivated = false;
 
-    public void Awake()
+    private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         GetComponent<Collider2D>().isTrigger = true;
     }
 
-    public void Interact(Player player)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isActivated) return;
+        if (isActivated || !other.CompareTag("Player")) return;
 
+        Player player = other.GetComponent<Player>();
+        if (player != null) ActivateCheckpoint(player);
+    }
+
+    private void ActivateCheckpoint(Player player)
+    {
         isActivated = true;
-        
+
         if (checkpointSound != null && audioSource != null)
         {
             audioSource.PlayOneShot(checkpointSound);
         }
 
-        spriteRenderer.sprite = activeSprite;
+        if (activeSprite != null && spriteRenderer != null)
+        {
+            spriteRenderer.sprite = activeSprite;
+        }
+
         string currentScene = SceneManager.GetActiveScene().name;
         GameManager.Instance.SetCheckpoint(transform.position, currentScene);
         player.Health.HealToMax();
 
-        Debug.Log($"Checkpoint saved at {currentScene}. Health restored!");
+        Debug.Log($"Checkpoint saved at {currentScene}. Health restored.");
     }
 }
