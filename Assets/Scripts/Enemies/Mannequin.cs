@@ -7,12 +7,26 @@ public class Mannequin : MonoBehaviour
     [Header("Mannequin Settings")]
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float timeToMove = 2f;
+    [Tooltip("Max detección range X")]
+    [SerializeField] private float detectionRangeX = 15f;
+    [Tooltip("Max detection range Y")]
+    [SerializeField] private float detectionRangeY = 3f;
+
+    [Header("Edge & Ground Detection")]
+    [Tooltip("These avoid not falling into void")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float groundCheckDistance = 0.6f;
+
+    [Header("Variant Settings")]
+    [SerializeField] private bool isInstakill = false;
+    [SerializeField] private Color normalColor = Color.white;
 
     [Header("Combat Settings")]
     [SerializeField] private int damageAmount = 1;
 
     [Header("Sprites")]
     public Sprite normalSprite;
+    public Sprite chasingSprite;
     public Sprite illuminatedSprite;
 
     [Header("Audio Settings")]
@@ -28,6 +42,7 @@ public class Mannequin : MonoBehaviour
     private bool isStunned = false;
     private bool isIlluminated = false;
     private bool isChasing = false;
+    private bool isForcedChase = false;
     private float notLookedTimer = 0f;
 
     private void Awake()
@@ -38,14 +53,13 @@ public class Mannequin : MonoBehaviour
         col = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        player = FindAnyObjectByType<Player>();
 
-        if (normalSprite != null) spriteRenderer.sprite = normalSprite;
+        UpdateVisualFeedback();
     }
 
     private void Start()
-    {
-        player = FindAnyObjectByType<Player>();
-
+    { 
         if (GameManager.Instance.IsEnemyDead(enemyID, out Vector3 savedPos))
         {
             transform.position = savedPos;
@@ -53,7 +67,7 @@ public class Mannequin : MonoBehaviour
 
             if (illuminatedSprite != null) spriteRenderer.sprite = illuminatedSprite;
         }
-        else
+        else if (!isForcedChase)
         {
             SetChasingState(false);
         }
@@ -61,40 +75,56 @@ public class Mannequin : MonoBehaviour
 
     private void Update()
     {
-       if (isStunned || player == null) return;
+       if (isStunned) return;
+
+        if (player == null || IsPlayerDead())
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            return;
+        }
 
        bool shouldChase = false;
 
-       if (IsPlayerLooking())
-        {
-            notLookedTimer = 0f;
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        }
+       if (isForcedChase)
+       {
+           shouldChase = true;
+       }
         else
         {
-            notLookedTimer += Time.deltaTime;
+            float distanceX = Mathf.Abs(transform.position.x - player.transform.position.x);
+            float distanceY = Mathf.Abs(transform.position.y - player.transform.position.y);
+            bool isInRange = (distanceX <= detectionRangeX) && (distanceY <= detectionRangeY);
 
-            if (notLookedTimer >= timeToMove)
+            if (isInRange)
             {
-                shouldChase = true;
+                if (IsPlayerLooking())
+                {
+                    notLookedTimer = 0f;
+                    rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+                }
+                else
+                {
+                    notLookedTimer += Time.deltaTime;
+                    if (notLookedTimer >= timeToMove) shouldChase = true;
+                }
             }
-        }
-
-        if (shouldChase != isChasing) SetChasingState(shouldChase);
-
-        if (isChasing)
-        {
-            ChasePlayer();
-        }
-        else
-        {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        }
+            else
+            {
+                notLookedTimer = 0f;
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+        }    
+       
+        if (shouldChase != isChasing) SetChasingState(shouldChase);        
+        if (isChasing) ChasePlayer();
     }
 
     private void SetChasingState(bool state)
     {
+        if (isChasing == state) return;
+
         isChasing = state;
+        UpdateVisualFeedback();
 
         if (player != null)
         {
@@ -111,16 +141,34 @@ public class Mannequin : MonoBehaviour
     {
         // Check if enemy is to left or right of player
         float directionToEnemy = transform.position.x - player.transform.position.x;
-
         // Check where is player looking basing on scale
         bool playerFacingRight = player.transform.localScale.x > 0;
-
         return (directionToEnemy > 0 && playerFacingRight) || (directionToEnemy < 0 && !playerFacingRight);
+    }
+
+    private bool IsPlayerDead()
+    {
+        return player.Health != null && player.Health.CurrentHealth <= 0;
+    }
+
+    private bool HasGroundAhead(float direction)
+    {
+        Bounds bounds = col.bounds;
+        Vector2 checkOrigin = new Vector2(bounds.center.x + direction * (bounds.extents.x + 0.1f), bounds.min.y + 0.1f);
+        RaycastHit2D hit = Physics2D.Raycast(checkOrigin, Vector2.down, groundCheckDistance, groundLayer);
+
+        return hit.collider != null;
     }
 
     private void ChasePlayer()
     {        
         float direction = Mathf.Sign(player.transform.position.x - transform.position.x);
+
+        if (!HasGroundAhead(direction))
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            return;
+        }
 
         rb.linearVelocity = new Vector2(direction * moveSpeed, rb.linearVelocity.y);
 
@@ -131,6 +179,8 @@ public class Mannequin : MonoBehaviour
 
     public void ApplyStun(bool registerInGameManager = true)
     {
+        if (isForcedChase) return;
+
         if (!isStunned)
         {
             isStunned = true;
@@ -147,16 +197,15 @@ public class Mannequin : MonoBehaviour
     public void SetIlluminated(bool state)
     {
         isIlluminated = state;
+        UpdateVisualFeedback();
+    }
 
-        if (isIlluminated)
-        {
-            ApplyStun();
-            UpdateVisualFeedback();
-        }
-        else
-        {
-            UpdateVisualFeedback();
-        }
+    public void ForceChase()
+    {
+        isForcedChase = true;
+        isStunned = false;
+        rb.simulated = true;
+        SetChasingState(true);
     }
 
     private void UpdateVisualFeedback()
@@ -166,6 +215,15 @@ public class Mannequin : MonoBehaviour
             if (illuminatedSprite != null)
             {
                 spriteRenderer.sprite = illuminatedSprite;
+                spriteRenderer.color = Color.white;
+            }
+        }
+        else if (isChasing)
+        {
+            if (chasingSprite != null)
+            {
+                spriteRenderer.sprite = chasingSprite;
+                spriteRenderer.color = normalColor;
             }
         }
         else
@@ -173,6 +231,7 @@ public class Mannequin : MonoBehaviour
             if (normalSprite != null)
             {
                 spriteRenderer.sprite = normalSprite;
+                spriteRenderer.color = normalColor;
             }
         }
     }
@@ -185,7 +244,9 @@ public class Mannequin : MonoBehaviour
 
             if (playerNode != null)
             {
-                if(playerNode.Health.TakeDamage(damageAmount, transform.position))
+                int damageApplied = isInstakill ? 99 : damageAmount;
+
+                if(playerNode.Health.TakeDamage(damageApplied, transform.position))
                 {
                     if (audioSource != null && damageClip != null)
                     {
@@ -194,6 +255,23 @@ public class Mannequin : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, new Vector3(detectionRangeX * 2f, detectionRangeY * 2f, 0f));
+
+        if (col != null)
+        {
+            Gizmos.color = Color.red;
+            Bounds bounds = col.bounds;
+            Vector2 checkLeft = new Vector2(bounds.center.x - (bounds.extents.x + 0.1f), bounds.min.y + 0.1f);
+            Vector2 checkRight = new Vector2(bounds.center.x + (bounds.extents.x + 0.1f), bounds.min.y + 0.1f);
+
+            Gizmos.DrawLine(checkLeft, checkLeft + Vector2.down * groundCheckDistance);
+            Gizmos.DrawLine(checkRight, checkRight + Vector2.down * groundCheckDistance);
         }
     }
 }

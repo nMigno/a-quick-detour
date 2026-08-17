@@ -1,13 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
-[RequireComponent(typeof(BoxCollider2D))]
 public class LevelTransition : MonoBehaviour
 {
     [Header("Transition Settings")]
-    [SerializeField] private string nextSceneName;
     [SerializeField] private float fadeDuration = 0.5f;
 
     [Header("UI References")]
@@ -28,16 +25,17 @@ public class LevelTransition : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void TriggerDoorFade(System.Action onFadeComplete)
     {
-        if (!isTransitioning && other.CompareTag("Player"))
+        if (!isTransitioning && fadeImage != null)
         {
             isTransitioning = true;
-
-            PlayerController player = other.GetComponent<PlayerController>();
-            if (player != null) player.canMove = false;
-
-            StartCoroutine(Fade(0f, 1f, LoadNextLevel));
+            fadeImage.gameObject.SetActive(true);
+            StartCoroutine(Fade(0f, 1f, onFadeComplete));
+        }
+        else
+        {
+            onFadeComplete?.Invoke(); // If no image reference, executes transition immediately
         }
     }
 
@@ -57,12 +55,5 @@ public class LevelTransition : MonoBehaviour
         color.a = targetAlpha;
         fadeImage.color = color;
         onComplete?.Invoke();
-    }
-
-    private void LoadNextLevel()
-    {
-        GameManager.Instance.lastCheckpointPosition = Vector2.zero;
-        GameManager.Instance.lastCheckpointScene = nextSceneName;
-        SceneManager.LoadScene(nextSceneName);
     }
 }

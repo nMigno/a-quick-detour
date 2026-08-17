@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8714829978531228169}
   - component: {fileID: 7401410506674070752}
   - component: {fileID: 5041935321909473506}
-  - component: {fileID: 760954612618899486}
   - component: {fileID: 4984753901463088149}
-  m_Layer: 0
+  - component: {fileID: 6196398050108566005}
+  m_Layer: 11
   m_Name: Arm_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,21 +272,6 @@ PolygonCollider2D:
       - {x: -1.56, y: -1.6899999}
       - {x: -1.4399999, y: -1.73}
   m_UseDelaunayMesh: 1
---- !u!114 &760954612618899486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579066326225864509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6d4247150676584db4f024cef9df7f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArmEnemy
-  damageAmount: 1
-  audioSource: {fileID: 4984753901463088149}
-  damageClip: {fileID: 8300000, guid: 94b899eb38be8ba45b8038f5f3b7e68f, type: 3}
 --- !u!82 &4984753901463088149
 AudioSource:
   m_ObjectHideFlags: 0
@@ -384,3 +369,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6196398050108566005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579066326225864509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d4247150676584db4f024cef9df7f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ArmEnemy
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  isInstakill: 0
+  damageAmount: 1
+  audioSource: {fileID: 4984753901463088149}
+  damageClip: {fileID: 8300000, guid: 0251b8be3ad606342ac36404dce382ce, type: 3}

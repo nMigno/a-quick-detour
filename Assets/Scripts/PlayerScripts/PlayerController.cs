@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Maximum fall speed while gliding.")]
     [SerializeField] private float glideFallSpeed = -2f;
     private bool isGliding = false;
+    private bool isHoldingBlanketButton = false;
 
     [Header("Player Gravity Settings")]
     [SerializeField] private float fallGravityMultiplier = 2.5f;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
     [Header("Collision Checks")]
     [Tooltip("Here goes child object GroundCheck")]
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private Vector2 groundCheckSize = new Vector2(1.4f, 0.05f);
+    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.8f, 0.05f);
     [SerializeField] private LayerMask groundLayer;
 
     [SerializeField] private Transform spawnPoint;
@@ -93,22 +94,42 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnGlide(InputAction.CallbackContext context)
+    public void OnBlanket(InputAction.CallbackContext context)
     {
-        if (GameManager.Instance != null && !GameManager.Instance.hasBlanketGlider) return;
+        if (GameManager.Instance == null) return;
+
+        Player playerNode = GetComponent<Player>();
 
         if (context.started)
         {
-            if (!isGrounded)
+            if (isHoldingBlanketButton) return;
+            isHoldingBlanketButton = true;
+
+            if (isGrounded && GameManager.Instance.hasBlanketBase)
+            {
+                if (playerNode != null && playerNode.PlayerBlanket != null)
+                {
+                    playerNode.PlayerBlanket.ActivateBlanket(true);
+                }
+            }
+
+            else if (!isGrounded && GameManager.Instance.hasBlanketGlider)
             {
                 isGliding = true;
             }
-        } 
+        }
+
         else if (context.canceled)
         {
+            isHoldingBlanketButton = false;
             isGliding = false;
+
+            if (playerNode != null && playerNode.PlayerBlanket != null && GameManager.Instance.hasBlanketBase)
+            {
+                playerNode.PlayerBlanket.ActivateBlanket(false);
+            }
         }
-    }  
+    }
 
     private void Update()
     {
@@ -132,25 +153,28 @@ public class PlayerController : MonoBehaviour
             return; // we ignore inputs returning
         }
 
+        CheckCollisions();
+        HandleGliding();
+
         if (!canMove)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-            CheckCollisions();
             LimitFallSpeed();
             return;
         }
 
         rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
-        CheckCollisions();
-        HandleGliding();
         LimitFallSpeed();
     }
 
     //Divide grounded check method from coyote's.
     private void CheckCollisions()
     {
+        RaycastHit2D hit = Physics2D.BoxCast(groundCheck.position, groundCheckSize, 0f, Vector2.down, 0.05f, groundLayer);
+
         //bool wasGrounded = isGrounded;
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
+        isGrounded = hit.collider != null && hit.normal.y > 0.1f;
+
         bool isHoldingJump = jumpAction.IsPressed();
 
         if (isGrounded)
@@ -188,8 +212,12 @@ public class PlayerController : MonoBehaviour
 
     private void IncreaseGravity()
     {
+        if (isGliding && !isGrounded && rb.linearVelocity.y <= 0)
+        {
+            rb.gravityScale = 0f;
+        }
         // Apply extra gravity when falling
-        if (rb.linearVelocity.y < 0)
+        else if (!isGrounded && rb.linearVelocity.y < -0.2f)
         {
             rb.gravityScale = defaultGravityScale * fallGravityMultiplier;
         }
@@ -243,14 +271,14 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGliding()
     {
-        if (isGrounded)
-        {
-            isGliding = false;
-        }
+        if (isGrounded && isGliding) isGliding = false;
 
-        if (isGliding && !isGrounded && rb.linearVelocity.y < 0 && GameManager.Instance.hasBlanketGlider)
+        if (isGliding && !isGrounded && GameManager.Instance.hasBlanketGlider)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, glideFallSpeed));
+            if (rb.linearVelocity.y <= 0)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, glideFallSpeed);
+            }
         }
     }
 

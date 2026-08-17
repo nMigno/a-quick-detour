@@ -6,6 +6,8 @@ public class PlayerHP : MonoBehaviour
     [Header("Health Settings")]
     private int currentHealth;
 
+    public int CurrentHealth => currentHealth;
+
     [Header("Invulnerability (i-frames)")]
     [SerializeField] private float invulnerabilityDuration = 1.5f;
     private bool isInvulnerable = false;

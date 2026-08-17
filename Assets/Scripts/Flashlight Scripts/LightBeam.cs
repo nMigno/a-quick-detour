@@ -23,6 +23,11 @@ public class LightBeam : MonoBehaviour
         {
             wall.Reveal();
         }
+
+        if (other.TryGetComponent<Mannequin>(out Mannequin mannequinEnemy))
+        {
+            mannequinEnemy.SetIlluminated(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -35,6 +40,11 @@ public class LightBeam : MonoBehaviour
         if (other.TryGetComponent<FallingTrapEnemy>(out FallingTrapEnemy trapEnemy))
         {
             trapEnemy.SetIlluminated(false);
+        }
+
+        if(other.TryGetComponent<Mannequin>(out Mannequin mannequinEnemy))
+        {
+            mannequinEnemy.SetIlluminated(false);
         }
     }
 }

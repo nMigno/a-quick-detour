@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Blanket : MonoBehaviour
 {
@@ -8,38 +7,17 @@ public class Blanket : MonoBehaviour
 
     private Sprite originalSprite;
     private Player playerNode;
-    private PlayerInput playerInput;
-    private InputAction blanketAction;
     private SpriteRenderer playerSpriteRenderer;
     private Animator anim;
 
     private void Awake()
     {
         playerNode = GetComponentInParent<Player>();
-        playerInput = GetComponentInParent<PlayerInput>();
-        blanketAction = playerInput.actions.FindAction("Blanket");
 
         if (playerNode != null)
         {
             anim = playerNode.GetComponent<Animator>();
-        }
-    }
-
-    private void OnEnable()
-    {
-        if (blanketAction != null)
-        {
-            blanketAction.started += OnBlanketPressed;
-            blanketAction.canceled += OnBlanketReleased;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (blanketAction != null)
-        {
-            blanketAction.started -= OnBlanketPressed;
-            blanketAction.canceled -= OnBlanketReleased;
+            playerSpriteRenderer = playerNode.GetComponent<SpriteRenderer>();
         }
     }
 
@@ -51,23 +29,9 @@ public class Blanket : MonoBehaviour
         }
     }
 
-    private void OnBlanketPressed(InputAction.CallbackContext context)
-    {
-        ActivateBlanket(true);
-    }
-
-    private void OnBlanketReleased(InputAction.CallbackContext context)
-    {
-        ActivateBlanket(false);
-    }
-
-    private void ActivateBlanket(bool isActive)
+    public void ActivateBlanket(bool isActive)
     {
         if (playerNode == null) return;
-
-        // Secure protector blanket activation only while grounded
-        Rigidbody2D rb = playerNode.GetComponent<Rigidbody2D>();
-        if (isActive && rb != null && Mathf.Abs(rb.linearVelocity.y) > 0.1f) return;
 
         playerNode.Health.isProtectedByBlanket = isActive;
         playerNode.Controller.canMove = !isActive;

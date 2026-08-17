@@ -214,7 +214,7 @@ Rigidbody2D:
   m_LinearDamping: 0.5
   m_AngularDamping: 0.05
   m_GravityScale: 1.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 22d5fcc8c6f3fa34da09f1aa4bcdc745, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -349,14 +349,10 @@ MonoBehaviour:
     m_ActionId: 5c374cd0-2e22-4770-a72b-3b789ca043f8
     m_ActionName: 'Player/Interactions[/Keyboard/upArrow]'
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 231346aa-ec90-4c32-8d65-e38bb34cc4b9
-    m_ActionName: 'Player/RevealLight[/Keyboard/v]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4678954967131768723}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: OnGlide
+        m_MethodName: OnBlanket
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -366,8 +362,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 84ebb192-470f-427f-9c2f-efbfaa3fa3c2
-    m_ActionName: 'Player/Glide[/Keyboard/z]'
+    m_ActionId: 231346aa-ec90-4c32-8d65-e38bb34cc4b9
+    m_ActionName: 'Player/RevealLight[/Keyboard/v]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 95b176ec-fe4f-42ae-bacd-06725128f71d
@@ -425,7 +421,7 @@ MonoBehaviour:
   fallGravityMultiplier: 2
   maxFallSpeed: 15
   groundCheck: {fileID: 3759174887751696575}
-  groundCheckSize: {x: 0.9, y: 0.05}
+  groundCheckSize: {x: 0.8, y: 0.05}
   groundLayer:
     serializedVersion: 2
     m_Bits: 65664
@@ -664,7 +660,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.153, y: -1.169, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8882366027176695006}
@@ -791,8 +787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4751998212306962369}
-  - component: {fileID: 5039177754382643991}
-  - component: {fileID: 8759626058142942530}
+  - component: {fileID: 4490476487559232560}
   m_Layer: 6
   m_Name: Blanket
   m_TagString: Untagged
@@ -815,20 +810,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8882366027176695006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5039177754382643991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8557946630277922676}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9074dfa76dd90f44082ddd90f5cc9b85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Blanket
-  blanketSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
---- !u!114 &8759626058142942530
+--- !u!114 &4490476487559232560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -837,9 +819,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8557946630277922676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 889007373dd7b1e448699440a43cbd73, type: 3}
+  m_Script: {fileID: 11500000, guid: 9074dfa76dd90f44082ddd90f5cc9b85, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Glider
+  m_EditorClassIdentifier: Assembly-CSharp::Blanket
+  blanketSprite: {fileID: 0}
 --- !u!1 &8617427846528782157
 GameObject:
   m_ObjectHideFlags: 0

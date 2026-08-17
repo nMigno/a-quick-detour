@@ -20,11 +20,12 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         PlacePlayer();
-        SyncSceneStates();
     }
 
     private void Start()
     {
+        SyncSceneStates();
+
         if (GameManager.Instance != null)
             {
                 GameManager.Instance.PlayMusic(levelMusic);
@@ -34,15 +35,21 @@ public class LevelManager : MonoBehaviour
 
     private void ApplyLevelRestrictions()
     {
-        if (disableFlashlightOnStart)
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+        if (currentScene == "Level-2" || disableFlashlightOnStart)
         {
             GameManager.Instance.hasFlashlight = false;
+            Debug.Log("LevelManager: Flashlight  disabled on Level-2.");
         }
 
-        if (disableBlanketOnStart)
+        if (currentScene == "Level-2" || disableBlanketOnStart)
         {
-            GameManager.Instance.hasBlanketGlider = false;
-            GameManager.Instance.hasBlanketBase = false;
+            if (!GameManager.Instance.hasBlanketGlider)
+            {
+                GameManager.Instance.hasBlanketGlider = false;
+                GameManager.Instance.hasBlanketBase = false;
+            }
         }
     }
 
@@ -61,6 +68,11 @@ public class LevelManager : MonoBehaviour
                 if (doorsInScene[i].myDoorID == GameManager.Instance.doorID)
                 {
                     player.transform.position = doorsInScene[i].transform.position;
+
+                    string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                    GameManager.Instance.SetCheckpoint(player.transform.position, currentScene);
+                    Debug.Log($"LevelManager: Checkpoint generated at {GameManager.Instance.doorID} of {currentScene}");
+
                     GameManager.Instance.doorID = "";
                     playerMoved = true;
                 }
@@ -114,6 +126,18 @@ public class LevelManager : MonoBehaviour
         if (GameManager.Instance.hasDoubleJump && doubleJumpUpgrade != null)
         {
             doubleJumpUpgrade.SetActive(false);
+        }
+
+        if (player != null)
+        {
+            Player playerNode = player.GetComponent<Player>();
+            if (playerNode != null && playerNode.PlayerBlanket != null)
+            {
+                if (GameManager.Instance.hasBlanketBase || GameManager.Instance.hasBlanketGlider)
+                {
+                    playerNode.PlayerBlanket.enabled = true;
+                }
+            }
         }
     }
 }

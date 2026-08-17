@@ -46,7 +46,7 @@ public class Door : MonoBehaviour
     {
         if (playerInRange && context.started)
         {
-            if (isLocked || string.IsNullOrEmpty(sceneToLoad))
+            if (isLocked || (!isFinalDoor && string.IsNullOrEmpty(sceneToLoad)))
             {
                 Debug.Log("Door locked.");
                 return;
@@ -65,11 +65,25 @@ public class Door : MonoBehaviour
             audioSource.PlayOneShot(openSound);
         }
         
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
+
         if (playerSpawn != null)
         {
             playerSpawn.position = gameObject.transform.position;
         }
+
+        // Fade screen transition
+        LevelTransition transition = FindAnyObjectByType<LevelTransition>();
+
+        if (transition != null) 
+        {
+            transition.TriggerDoorFade(Transition); // Callback once screen is full black
+        }
+        else
+        {
+            Transition(); // Fallback if no transition prefab loaded
+        }
+
         Transition();
     }
 
