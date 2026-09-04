@@ -22,6 +22,15 @@ public class GameManager : MonoBehaviour
     public bool hasBlanketBase = false;
     public bool hasFlashlight = true;
 
+    [Header("Saved Checkpoint Skills")]
+    public bool savedHasFlashlight = true;
+    public bool savedHasBlanketBase = false;
+    public bool savedHasBlanketGlider = false;
+
+    [Header("Scene Debug Settings")]
+    [Tooltip("Exact scene name")]
+    [SerializeField] private string startingScene = "Level-1";
+
     [Header("Checkpoint System")]
     public string lastCheckpointScene;
     public Vector2 lastCheckpointPosition;
@@ -66,10 +75,10 @@ public class GameManager : MonoBehaviour
     [Header("Sound Variation")]
     [SerializeField, Range(0.1f, 3f)] private float minPitch = 0.9f;
     [SerializeField, Range(0.1f, 3f)] private float maxPitch = 1.1f;
+    
+    [Header("UI Fallback System")]
+    private GameObject lastSelectedGameObject;
 
-    [Header("Scene Debug Settings")]
-    [Tooltip("Exact scene name")]
-    [SerializeField] private string startingScene = "Level-1";
 
     private void Awake()
     {
@@ -105,6 +114,23 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Debug Scene Start");
                 ResetGameState();
                 lastCheckpointScene = currentScene;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (UnityEngine.EventSystems.EventSystem.current != null)
+        {
+            GameObject currentObj = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+
+            if (currentObj != null && currentObj.activeInHierarchy)
+            {
+                lastSelectedGameObject = currentObj;
+            }
+            else if (lastSelectedGameObject != null && lastSelectedGameObject.activeInHierarchy)
+            {
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(lastSelectedGameObject);
             }
         }
     }
@@ -199,6 +225,10 @@ public class GameManager : MonoBehaviour
         savedRevealedIllusionWalls.Clear();
         savedRevealedIllusionWalls.AddRange(revealedIllusionWalls);
 
+        savedHasFlashlight = hasFlashlight;
+        savedHasBlanketBase = hasBlanketBase;
+        savedHasBlanketGlider = hasBlanketGlider;
+
         Debug.Log($"GameManager: Checkpoint set at {position} in scene {sceneName}");
     }
 
@@ -214,6 +244,10 @@ public class GameManager : MonoBehaviour
 
         revealedIllusionWalls.Clear();
         revealedIllusionWalls.AddRange(savedRevealedIllusionWalls);
+
+        hasFlashlight = savedHasFlashlight;
+        hasBlanketBase = savedHasBlanketBase;
+        hasBlanketGlider = savedHasBlanketGlider;
 
         UpdateHP(maxHP);
 
@@ -275,6 +309,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        musicAudioSource.volume = 1f;
+
         if (musicAudioSource.clip == newClip) return;
 
         musicAudioSource.clip = newClip;
@@ -285,6 +321,29 @@ public class GameManager : MonoBehaviour
     {
         currentMusicVolume = volume;        
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(currentMusicVolume) * 20);
+    }
+
+    public void FadeOutMusic(float duration)
+    {
+        if (musicAudioSource != null && musicAudioSource.isPlaying)
+        {
+            StartCoroutine(FadeOutMusicRoutine(duration));
+        }
+    }
+
+    private System.Collections.IEnumerator FadeOutMusicRoutine(float duration)
+    {
+        float startVolume = musicAudioSource.volume;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            musicAudioSource.volume = Mathf.Lerp(startVolume, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        musicAudioSource.volume = 0f;
     }
 
     public void UpdateSFXVolume(float volume)
@@ -354,6 +413,11 @@ public class GameManager : MonoBehaviour
         hasDoubleJump = false;
         hasBlanketGlider = false;
         hasBlanketBase = false;
+
+        hasFlashlight = true;
+        savedHasFlashlight = true;
+        savedHasBlanketBase = false;
+        savedHasBlanketGlider = false;
     }
 
     public void QuitGame()

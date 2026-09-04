@@ -9,6 +9,9 @@ public class CameraOffset : MonoBehaviour
     [SerializeField] private CinemachineCamera targetCamera;
 
     [Header("Offset Settings")]
+    [SerializeField] private bool modifyX = false;
+    [SerializeField] private bool modifyY = true;
+    [SerializeField] private float targetOffsetX = 0f;
     [SerializeField] private float targetOffsetY = -4f;
     [SerializeField] private float transitionDuration = 1.5f;
 
@@ -41,7 +44,12 @@ public class CameraOffset : MonoBehaviour
         if (collision.CompareTag("Player") && composer != null)
         {
             if (transitionCoroutine != null) StopCoroutine(transitionCoroutine);
-            transitionCoroutine = StartCoroutine(TransitionOffset(targetOffsetY));
+
+            Vector3 target = composer.TargetOffset;
+           if (modifyX) target.x = targetOffsetX;
+           if (modifyY) target.y = targetOffsetY;
+
+            transitionCoroutine = StartCoroutine(TransitionOffset(target));
         }
     }
 
@@ -50,15 +58,19 @@ public class CameraOffset : MonoBehaviour
         if (revertOnExit && collision.CompareTag("Player") && composer != null)
         {
             if (transitionCoroutine != null) StopCoroutine(transitionCoroutine);
-            transitionCoroutine = StartCoroutine(TransitionOffset(defaultOffset.y));
+
+            Vector3 target = composer.TargetOffset;
+            if (modifyX) target.x = defaultOffset.x;
+            if (modifyY) target.y = defaultOffset.y;
+
+            transitionCoroutine = StartCoroutine(TransitionOffset(target));
         }
     }
 
-    private IEnumerator TransitionOffset(float targetY)
+    private IEnumerator TransitionOffset(Vector3 endOffset)
     {
         float elapsedTime = 0f;
         Vector3 startOffset = composer.TargetOffset;
-        Vector3 endOffset = new Vector3(startOffset.x, targetY, startOffset.z);
 
         while (elapsedTime < transitionDuration)
         {

@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class CarEnemy : MonoBehaviour
 {
+    [Header("Behavior Settings")]
+    [SerializeField] private bool oneWayMovement = false;
+    [SerializeField] private bool startFacingLeft = false;
+    private bool hasStartedMoving = false;
+
     [Header("Patrol Settings")]
     [SerializeField] private float moveSpeed = 12f;
     [SerializeField] private Transform leftWayPoint;
@@ -32,6 +37,8 @@ public class CarEnemy : MonoBehaviour
 
         leftPos = leftWayPoint.position.x;
         rightPos = rightWayPoint.position.x;
+
+        if (startFacingLeft) FlipDirection(Vector2.left);
     }
 
 
@@ -43,8 +50,20 @@ public class CarEnemy : MonoBehaviour
 
     private void Update()
     {
-        Patrol();
-        ProximityAudio();
+        if (oneWayMovement)
+        {
+            if (!hasStartedMoving)
+            {
+                CheckActivationDistance();
+                return;
+            }
+            MoveAndDestroy();
+        }
+        else
+        {
+            Patrol();
+            ProximityAudio();
+        }
     }
 
     private void Patrol()
@@ -104,6 +123,32 @@ public class CarEnemy : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void CheckActivationDistance()
+    {
+        if (playerTransform == null) return;
+
+        float distance = Vector2.Distance(transform.position, playerTransform.position);
+
+        if (distance <= detectionRadius)
+        {
+            hasStartedMoving = true;
+            if (engineWarningClip != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(engineWarningClip);
+            }
+        }
+    }
+
+    private void MoveAndDestroy()
+    {
+        rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, rb.linearVelocity.y);
+        if ((moveDirection == Vector2.right && transform.position.x >= rightPos) ||
+            (moveDirection == Vector2.left && transform.position.x <= leftPos))
+        {
+            Destroy(gameObject);
         }
     }
 

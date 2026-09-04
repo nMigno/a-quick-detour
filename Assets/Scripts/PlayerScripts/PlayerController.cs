@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     [Header("Glider Settings")]
     [Tooltip("Maximum fall speed while gliding.")]
     [SerializeField] private float glideFallSpeed = -2f;
-    private bool isGliding = false;
+    public bool isGliding = false;
     private bool isHoldingBlanketButton = false;
 
     [Header("Player Gravity Settings")]
@@ -116,6 +116,11 @@ public class PlayerController : MonoBehaviour
             else if (!isGrounded && GameManager.Instance.hasBlanketGlider)
             {
                 isGliding = true;
+
+                if (playerNode != null && playerNode.PlayerFlashlight != null)
+                {
+                    playerNode.PlayerFlashlight.InterruptFlashlight();
+                }
             }
         }
 

@@ -38,8 +38,9 @@ public class SkillsOffTrigger : MonoBehaviour
 
         if (GameManager.Instance != null)
         {
+            GameManager.Instance.hasBlanketBase = false;
             GameManager.Instance.hasBlanketGlider = false;
-            GameManager.Instance.hasFlashlightUpgrade = false;
+            GameManager.Instance.hasFlashlight = false;
         }
 
         if (playerNode.PlayerBlanket != null) playerNode.PlayerBlanket.enabled = false;
@@ -59,8 +60,5 @@ public class SkillsOffTrigger : MonoBehaviour
             if (blanketAction != null) blanketAction.Disable();
             if (glideAction != null) glideAction.Disable();
         }
-
-        Animator anim = playerObj.GetComponent<Animator>();
-        if (anim != null) anim.SetBool("IsBlanketBroken", true);
     }
 }

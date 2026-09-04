@@ -1,12 +1,12 @@
-using UnityEditor.ShaderGraph;
+//using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class MannequinAmbushTrigger : MonoBehaviour
+public class AmbushTrigger : MonoBehaviour
 {
     [Header("Ambush Settings")]
-    [Tooltip("Mannequins who will activate and start chasing")]
-    [SerializeField] private Mannequin[] mannequinsToAmbush;
+    [Tooltip("Objects who will activate and start chasing")]
+    [SerializeField] private GameObject[] enemiesToActivate;
 
     [Tooltip("If active, trigger will deactivate once used")]
     [SerializeField] private bool triggerOnce = true;
@@ -26,34 +26,22 @@ public class MannequinAmbushTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             hasTriggered = true;
-            TriggerAmbush();
+            
+            foreach (GameObject enemy in enemiesToActivate)
+            {
+                enemy.SetActive(true);
+            }
 
             if (triggerOnce) gameObject.SetActive(false);
         }
     }
 
-    private void TriggerAmbush()
-    {
-        if (mannequinsToAmbush == null || mannequinsToAmbush.Length == 0) return;
-
-        foreach (Mannequin mannequin in mannequinsToAmbush)
-        {
-            if (mannequin != null)
-            {
-                if (!mannequin.gameObject.activeSelf)
-                {
-                    mannequin.gameObject.SetActive(true);
-                }
-
-                mannequin.ForceChase();
-            }
-        }
-    }
-
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color (1f, 0.2f, 0.2f, 0.35f);
         BoxCollider2D box = GetComponent<BoxCollider2D>();
         if (box != null) Gizmos.DrawCube(transform.position + (Vector3)box.offset, box.size);
     }
+    #endif
 }

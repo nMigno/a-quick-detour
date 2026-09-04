@@ -19,27 +19,35 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        if (GameManager.Instance != null)
+        {
+            ApplyLevelRestrictions();
+        }
+
         PlacePlayer();
     }
 
     private void Start()
     {
-        SyncSceneStates();
-
         if (GameManager.Instance != null)
-            {
-                GameManager.Instance.PlayMusic(levelMusic);
-                ApplyLevelRestrictions();
-            }
+        {
+            GameManager.Instance.PlayMusic(levelMusic);
+        }
+
+        SyncSceneStates();
     }
 
     private void ApplyLevelRestrictions()
     {
+        bool isFreshStart = !string.IsNullOrEmpty(GameManager.Instance.doorID) || GameManager.Instance.lastCheckpointPosition == Vector2.zero;
+        if (!isFreshStart) return;
+
         string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
         if (currentScene == "Level-2" || disableFlashlightOnStart)
         {
             GameManager.Instance.hasFlashlight = false;
+            GameManager.Instance.savedHasFlashlight = false;
             Debug.Log("LevelManager: Flashlight  disabled on Level-2.");
         }
 
@@ -49,6 +57,10 @@ public class LevelManager : MonoBehaviour
             {
                 GameManager.Instance.hasBlanketGlider = false;
                 GameManager.Instance.hasBlanketBase = false;
+
+                GameManager.Instance.savedHasBlanketGlider = false;
+                GameManager.Instance.savedHasBlanketBase = false;
+                Debug.Log("LevelManager: Blanket disabled on Level-2.");
             }
         }
     }
@@ -67,7 +79,8 @@ public class LevelManager : MonoBehaviour
             {
                 if (doorsInScene[i].myDoorID == GameManager.Instance.doorID)
                 {
-                    player.transform.position = doorsInScene[i].transform.position;
+                    Transform doorSpawnPoint = doorsInScene[i].playerSpawn;
+                    player.transform.position = doorSpawnPoint != null ? doorSpawnPoint.position : doorsInScene[i].transform.position;
 
                     string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
                     GameManager.Instance.SetCheckpoint(player.transform.position, currentScene);
@@ -133,9 +146,17 @@ public class LevelManager : MonoBehaviour
             Player playerNode = player.GetComponent<Player>();
             if (playerNode != null && playerNode.PlayerBlanket != null)
             {
-                if (GameManager.Instance.hasBlanketBase || GameManager.Instance.hasBlanketGlider)
+               playerNode.PlayerBlanket.enabled = GameManager.Instance.hasBlanketBase || GameManager.Instance.hasBlanketGlider;               
+            }
+
+            if (playerNode != null && playerNode.PlayerFlashlight != null)
+            {
+                bool flashOn = GameManager.Instance.hasFlashlight;
+                playerNode.PlayerFlashlight.enabled = flashOn;
+
+                if (!flashOn && playerNode.PlayerFlashlight.lightBeamObject != null)
                 {
-                    playerNode.PlayerBlanket.enabled = true;
+                    playerNode.PlayerFlashlight.lightBeamObject.SetActive(false);
                 }
             }
         }

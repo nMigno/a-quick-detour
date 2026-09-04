@@ -348,8 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c682c6ed89425944aaec2e7621b6b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mannequin
-  moveSpeed: 4
-  timeToMove: 2
+  moveSpeed: 5
+  timeToMove: 0.7
   detectionRangeX: 15
   detectionRangeY: 3
   groundLayer:

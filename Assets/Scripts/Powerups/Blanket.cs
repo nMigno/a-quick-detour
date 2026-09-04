@@ -36,9 +36,17 @@ public class Blanket : MonoBehaviour
         playerNode.Health.isProtectedByBlanket = isActive;
         playerNode.Controller.canMove = !isActive;
 
-        if (playerNode.PlayerFlashlight != null && playerNode.PlayerFlashlight.feedbackRenderer != null)
+        if (playerNode.PlayerFlashlight != null)
         {
-            playerNode.PlayerFlashlight.feedbackRenderer.enabled = !isActive;
+            if(playerNode.PlayerFlashlight.feedbackRenderer != null)
+            {
+                playerNode.PlayerFlashlight.feedbackRenderer.enabled = !isActive;
+            }
+
+            if (isActive)
+            {
+                playerNode.PlayerFlashlight.InterruptFlashlight();
+            }
         }
 
         if (playerNode.Audio != null)

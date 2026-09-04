@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using UnityEngine.UI;
 
 public enum SubMenu
 {
@@ -27,8 +29,21 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject creditsFirstButton;
     [SerializeField] private GameObject optionsFirstButton;
 
+    [Header("Start Game Transition")]
+    [Tooltip("Black Image that covers screen")]
+    [SerializeField] private Image fadeOverlay;
+    [Tooltip("Fade duration towards black (seconds)")]
+    [SerializeField] private float startFadeDuration = 1.5f;
+    [Tooltip("Exclusive SFX for 'Play' button")]
+    [SerializeField] private AudioClip playButtonSFX;
+    [Tooltip("Local AudioSource that reproduces 'Play' SFX")]
+    [SerializeField] private AudioSource menuAudioSource;
+
+    private bool isStartingGame = false;
+
     void Start()
     {
+        if (fadeOverlay != null) fadeOverlay.gameObject.SetActive(false);
         if (menuMusic != null && GameManager.Instance != null)
         {
             GameManager.Instance.TogglePauseMusic(false); 
@@ -41,6 +56,8 @@ public class MainMenu : MonoBehaviour
 
     public void OpenMainMenuPanel()
     {
+        if (isStartingGame) return;
+
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         creditsPanel.SetActive(false);
@@ -55,7 +72,6 @@ public class MainMenu : MonoBehaviour
     {
         controllerMenu.SetActive(SubMenu.CONTROLLER == subMenu);
         soundMenu.SetActive(SubMenu.SOUND == subMenu);
-        //graphicsMenu.SetActive(SubMenu.GRAPHICS == subMenu);
     }
 
 
@@ -129,6 +145,55 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        // Avoids button spamming
+        if (isStartingGame) return;
+        isStartingGame = true;
+
+        // Playing unique SFX
+        menuAudioSource.PlayOneShot(playButtonSFX);
+
+        // Transition
+        if (fadeOverlay != null)
+        {
+            StartCoroutine(FadeAndStart());
+        }
+        else
+        {
+            GameManager.Instance.StartGame();
+        }
+    }
+
+    private IEnumerator FadeAndStart()
+    {
+        UnityEngine.EventSystems.EventSystem.current.enabled = false;
+
+        PlayerInput playerInput = FindAnyObjectByType<PlayerInput>();
+        if (playerInput != null)
+        {
+            playerInput.DeactivateInput();
+        }
+
+        fadeOverlay.gameObject.SetActive(true);
+        Color fadeColor = fadeOverlay.color;
+        fadeColor.a = 0f;
+        fadeOverlay.color = fadeColor;
+        
+        GameManager.Instance.FadeOutMusic(startFadeDuration);
+
+        float elapsed = 0f;
+        while (elapsed < startFadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            fadeColor.a = Mathf.Clamp01(elapsed / startFadeDuration);
+            fadeOverlay.color = fadeColor;
+            yield return null;
+        }
+
+        fadeColor.a = 1f;
+        fadeOverlay.color = fadeColor;
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
         GameManager.Instance.StartGame();
     }
 }

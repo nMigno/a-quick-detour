@@ -52,6 +52,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (8)
@@ -114,6 +118,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (2)
@@ -176,6 +184,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (12)
@@ -238,6 +250,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (10)
@@ -300,6 +316,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (4)
@@ -362,6 +382,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4535965862745573794, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_TagString
       value: Enemy
@@ -428,6 +452,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (5)
@@ -490,6 +518,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (9)
@@ -552,6 +584,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (7)
@@ -614,6 +650,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (11)
@@ -676,6 +716,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (6)
@@ -738,9 +782,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5948902171266751371, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6172692197879820792, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_LocalPosition.x
@@ -800,6 +852,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291527377683524334}
     m_Modifications:
+    - target: {fileID: 3762485368848977838, guid: 744daafbc7f373242a10519f0424a391, type: 3}
+      propertyPath: canFall
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4738316372155385356, guid: 744daafbc7f373242a10519f0424a391, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (3)

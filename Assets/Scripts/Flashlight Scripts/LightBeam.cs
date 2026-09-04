@@ -29,7 +29,7 @@ public class LightBeam : MonoBehaviour
             mannequinEnemy.SetIlluminated(true);
         }
     }
-
+    
     private void OnTriggerExit2D(Collider2D other)
     {
         if(other.TryGetComponent<ChairEnemy>(out ChairEnemy enemy))
@@ -47,4 +47,5 @@ public class LightBeam : MonoBehaviour
             mannequinEnemy.SetIlluminated(false);
         }
     }
+
 }

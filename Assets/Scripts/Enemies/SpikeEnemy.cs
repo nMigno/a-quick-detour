@@ -52,6 +52,7 @@ public class SpikeEnemy : MonoBehaviour
         if (!canFall || isFalling || rb == null) return;
 
         isFalling = true;
+        rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = fallGravity;
     }
 

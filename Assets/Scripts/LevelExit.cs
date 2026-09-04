@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,13 +15,16 @@ public class LevelExit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isTransitioning)
+        if (isTransitioning) return;
+        if(!other.CompareTag("Player")) return;
+
+        PlayerHP playerHP = other.GetComponent<PlayerHP>();
+        if (playerHP.CurrentHealth <= 0) return;
+
+        if (string.IsNullOrEmpty(sceneToLoad))
         {
-            if (string.IsNullOrEmpty(sceneToLoad))
-            {
-                Debug.LogWarning("LevelExit: sceneToLoad not assigned!");
-                return;
-            }
+            Debug.LogWarning("LevelExit: sceneToLoad not assigned!");
+            return;
         }
 
         isTransitioning = true;

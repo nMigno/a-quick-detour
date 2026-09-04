@@ -25,6 +25,8 @@ public class Flashlight : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction flashlightAction;
 
+    private Coroutine flashRoutine;
+
     private void Awake()
     {
         playerNode = GetComponentInParent<Player>();
@@ -50,15 +52,24 @@ public class Flashlight : MonoBehaviour
         lightBeamObject.SetActive(false);
     }
 
-
     private void OnFlashlightInput(InputAction.CallbackContext context)
     {
-        if (currentState != FlashlightState.Ready) return;
+        if (currentState == FlashlightState.Jammed)
+        {
+            playerNode.Audio.PlayFlashlightJammed();
+            return;
+        } 
+
+        if (currentState == FlashlightState.On) return;
+
+        if (playerNode.Health.isProtectedByBlanket || playerNode.Controller.isGliding) return;
 
         if (GameManager.Instance.hasFlashlight) 
         {
             if (playerNode != null) playerNode.Audio.PlayFlashlightOn();
-            StartCoroutine(UseLight());
+
+            if (flashRoutine != null) StopCoroutine(flashRoutine);
+            flashRoutine = StartCoroutine(UseLight());
         }
         else
         {
@@ -69,10 +80,26 @@ public class Flashlight : MonoBehaviour
     private IEnumerator UseLight()
     {
         SetState(FlashlightState.On);
-        lightBeamObject.SetActive(true);
+        if (lightBeamObject != null) lightBeamObject.SetActive(true);
 
         yield return new WaitForSeconds(activeDuration);
 
+        StartCooldown();
+    }
+
+    public void InterruptFlashlight()
+    {
+        if (currentState == FlashlightState.On) StartCooldown();
+    }
+
+    private void StartCooldown()
+    {
+        StopCoroutine(flashRoutine);
+        flashRoutine = StartCoroutine(CooldownRoutine());
+    }
+
+    private IEnumerator CooldownRoutine()
+    {
         SetState(FlashlightState.Jammed);
         lightBeamObject.SetActive(false);
 

@@ -13,8 +13,12 @@ public class VoidKill : MonoBehaviour
        if (other.CompareTag("Player"))
         {
             Debug.Log("Void fall. Instakill");
-            GameManager.Instance.RespawnPlayer();
+
+            PlayerHP playerHP = other.GetComponent<PlayerHP>();
+            if (playerHP != null && playerHP.CurrentHealth > 0)
+            {
+                playerHP.TriggerVoidDeath();
+            }
         }
     }
-
 }

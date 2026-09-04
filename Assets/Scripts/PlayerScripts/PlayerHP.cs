@@ -67,26 +67,51 @@ public class PlayerHP : MonoBehaviour
         isInvulnerable = false;
     }
 
-    private void Die()
+    public void TriggerVoidDeath()
+    {
+        currentHealth = 0;
+        GameManager.Instance.UpdateHP(currentHealth);
+        Die(true);
+    }
+
+    private void Die(bool isVoidDeath = false)
     {      
         GetComponent<Player>().Audio.PlayDeath();
-        Animator anim = GetComponent<Animator>();
-        if (anim != null) anim.SetTrigger("Death");
 
         gameObject.tag = "Untagged";
 
         UnityEngine.InputSystem.PlayerInput playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
-        if (playerInput != null) playerInput.DeactivateInput();
+        if (playerInput != null) 
+        {
+            playerInput.DeactivateInput();
+            playerInput.enabled = false;
+        }
 
-        GetComponent<PlayerController>().enabled = false;
-        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        PlayerController controller = GetComponent<PlayerController>();
+        if (controller != null)
+        {
+            controller.canMove = false;
+            controller.enabled = false;
+        }
+
+        if (!isVoidDeath)
+        {
+            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        }
 
         Debug.Log("Player died. Respawning...");
-        StartCoroutine(DeathRoutine());
+
+        Animator anim = GetComponent<Animator>();
+        if (anim != null) anim.SetTrigger("Death");
+
+        
+        StartCoroutine(DeathRoutine(isVoidDeath));
     }
 
-    private IEnumerator DeathRoutine()
+    private IEnumerator DeathRoutine(bool isVoidDeath)
     {
+        if (isVoidDeath) TriggerFadeAndRespawn();
+
         yield return null;
 
         float animDuration = 1f;
@@ -101,9 +126,8 @@ public class PlayerHP : MonoBehaviour
             }
         }
 
-        float totalWaitTime = animDuration + 0.5f;
+        float totalWaitTime = isVoidDeath ? 0.5f : (animDuration + 0.5f);
 
-        // Delete this visual patch block when anim is implemented
         // Start of visual patch
         float elapsedTime = 0f;
         Color originalColor = spriteRenderer.color;
@@ -124,8 +148,22 @@ public class PlayerHP : MonoBehaviour
         spriteRenderer.enabled = false;
         // End of visual patch
 
-        // yield return new WaitForSeconds(animDuration + 0.5f);
-        GameManager.Instance.RespawnPlayer();
+        // After animation, fade
+        if (!isVoidDeath) TriggerFadeAndRespawn();
+    }
+
+    private void TriggerFadeAndRespawn()
+    {
+        LevelTransition transition = FindFirstObjectByType<LevelTransition>();
+
+        if (transition != null)
+        {
+            transition.TriggerDoorFade(() => GameManager.Instance.RespawnPlayer());
+        }
+        else
+        {
+            GameManager.Instance.RespawnPlayer();
+        }
     }
 
     public void HealToMax()

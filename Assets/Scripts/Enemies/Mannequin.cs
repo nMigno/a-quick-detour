@@ -43,6 +43,7 @@ public class Mannequin : MonoBehaviour
     private bool isIlluminated = false;
     private bool isChasing = false;
     private bool isForcedChase = false;
+    private bool hasBeenRevealed = false;
     private float notLookedTimer = 0f;
 
     private void Awake()
@@ -197,6 +198,7 @@ public class Mannequin : MonoBehaviour
     public void SetIlluminated(bool state)
     {
         isIlluminated = state;
+        if (state) hasBeenRevealed = true;
         UpdateVisualFeedback();
     }
 
@@ -228,7 +230,12 @@ public class Mannequin : MonoBehaviour
         }
         else
         {
-            if (normalSprite != null)
+            if (hasBeenRevealed && illuminatedSprite != null)
+            {
+                spriteRenderer.sprite = illuminatedSprite;
+                spriteRenderer.color = Color.white;
+            }
+            else if (normalSprite != null)
             {
                 spriteRenderer.sprite = normalSprite;
                 spriteRenderer.color = normalColor;
@@ -238,20 +245,39 @@ public class Mannequin : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!isStunned && isChasing && other.CompareTag("Player"))
+        if (isStunned) return;
+
+        if (other.CompareTag("Player"))
         {
-            Player playerNode = other.GetComponent<Player>();
+            bool canDealDamage = false;
 
-            if (playerNode != null)
+            if (!isIlluminated)
             {
-                int damageApplied = isInstakill ? 99 : damageAmount;
-
-                if(playerNode.Health.TakeDamage(damageApplied, transform.position))
+                if (isChasing)
                 {
-                    if (audioSource != null && damageClip != null)
+                    canDealDamage = true;
+                }
+                else if (!hasBeenRevealed)
+                {
+                    canDealDamage = true;
+                }
+            }
+
+            if (canDealDamage)
+            {
+                Player playerNode = other.GetComponent<Player>();
+
+                if (playerNode != null)
+                {
+                    int damageApplied = isInstakill ? 99 : damageAmount;
+
+                    if (playerNode.Health.TakeDamage(damageApplied, transform.position))
                     {
-                        audioSource.pitch = Random.Range(0.9f, 1.1f);
-                        audioSource.PlayOneShot(damageClip);
+                        if (audioSource != null && damageClip != null)
+                        {
+                            audioSource.pitch = Random.Range(0.9f, 1.1f);
+                            audioSource.PlayOneShot(damageClip);
+                        }
                     }
                 }
             }

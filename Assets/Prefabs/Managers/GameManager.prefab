@@ -51,10 +51,17 @@ MonoBehaviour:
   hasFlashlightUpgrade: 0
   hasDoubleJump: 0
   hasBlanketGlider: 0
-  lastCheckpointScene: 
+  hasBlanketBase: 0
+  hasFlashlight: 1
+  savedHasFlashlight: 1
+  savedHasBlanketBase: 0
+  savedHasBlanketGlider: 0
+  startingScene: Level-1
+  lastCheckpointScene: Level-1
   lastCheckpointPosition: {x: 0, y: 0}
   doorID: 
   revealedIllusionWalls: []
+  savedRevealedIllusionWalls: []
   deadEnemies: []
   savedDeadEnemies: []
   collectedBatteries: []
@@ -64,17 +71,16 @@ MonoBehaviour:
   gameplayActionMap: Player
   navigateAction: {fileID: -622397748587133497, guid: 381b0ae758981444b888025b88fb2322, type: 3}
   audioMixer: {fileID: 24100000, guid: a19249bc055ad574a86c359159028272, type: 2}
-  currentMusicVolume: 0.2
+  currentMusicVolume: 0.5
   currentSFXVolume: 1
   musicAudioSource: {fileID: 6030126955935199517}
   pauseVolumeReduction: -12
-  uiConfirmClip: {fileID: 8300000, guid: d0947abf44cb7a44aba6e3407196ac74, type: 3}
+  uiConfirmClip: {fileID: 8300000, guid: d0d96970eab7779479475624d4aa2009, type: 3}
   uiCancelClip: {fileID: 8300000, guid: bf865b390b9f7494eaffb40176bb6f70, type: 3}
-  uiHoverClip: {fileID: 8300000, guid: 166b1a513cb92634aba59612a10162a0, type: 3}
+  uiHoverClip: {fileID: 8300000, guid: 7d5a0ce5103d8f740a54c842b38c738a, type: 3}
   uiAudioSource: {fileID: 8056365605173335435}
   minPitch: 0.98
   maxPitch: 1.02
-  startingScene: Level-1
 --- !u!82 &8056365605173335435
 AudioSource:
   m_ObjectHideFlags: 0

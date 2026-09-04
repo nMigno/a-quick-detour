@@ -173,7 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c29a07c1b6cdc4bae4e2143c3fe28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarEnemy
-  moveSpeed: 9
+  oneWayMovement: 0
+  startFacingLeft: 0
+  moveSpeed: 9.5
   leftWayPoint: {fileID: 2034022839529157221}
   rightWayPoint: {fileID: 941765567341322390}
   instakillDamage: 99
@@ -427,8 +429,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1693618449
+  m_SortingLayer: 4
   m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: e3cf477db74f62b4e990981619f63205, type: 3}

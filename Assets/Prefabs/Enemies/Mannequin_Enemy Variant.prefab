@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6938078090582776294, guid: 91a4bbe0db885084b9d2aa9c292c4197, type: 3}
       propertyPath: moveSpeed
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6938078090582776294, guid: 91a4bbe0db885084b9d2aa9c292c4197, type: 3}
       propertyPath: isInstakill

@@ -11,6 +11,17 @@ public class SoundMenu : MonoBehaviour
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
+    [Header("Sound feedback")]
+    [Tooltip("AudioSource which is going to reproduce sound (GameManager's AudioSource)")]
+    [SerializeField] private AudioSource uiAudioSource;
+    [Tooltip("SFX when slider moves")]
+    [SerializeField] private AudioClip sliderTickClip;
+    [Tooltip("Minimum time between sounds to avoid MachineGun effect")]
+    [SerializeField] private float soundCooldown = 0.05f;
+
+    private float lastSoundTime = 0f;
+
+
     void Start()
     {
         float musicVol = GameManager.Instance.currentMusicVolume;
@@ -34,6 +45,7 @@ public class SoundMenu : MonoBehaviour
         }
 
         GameManager.Instance.currentMusicVolume = sliderValue;
+        PlayTickSound();
     }
 
     public void SetSFXVolume(float sliderValue)
@@ -44,6 +56,20 @@ public class SoundMenu : MonoBehaviour
         }
 
         GameManager.Instance.currentSFXVolume = sliderValue;
+        PlayTickSound();
+    }
+
+    private void PlayTickSound()
+    {
+        if (uiAudioSource != null && sliderTickClip != null)
+        {
+            // UnscaledTime for paused game (Time.timeScale = 0)
+            if (Time.unscaledTime - lastSoundTime > soundCooldown)
+            {
+                uiAudioSource.PlayOneShot(sliderTickClip);
+                lastSoundTime = Time.unscaledTime;
+            }
+        }
     }
 
     private float ConvertToDecibels(float sliderValue)

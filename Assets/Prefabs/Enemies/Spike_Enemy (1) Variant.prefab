@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 76435320967329365, guid: 035ec2ece988b86418dc6609d1f12441, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1683387647501340630, guid: 035ec2ece988b86418dc6609d1f12441, type: 3}
+      propertyPath: fallGravity
+      value: 0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 1683387647501340630, guid: 035ec2ece988b86418dc6609d1f12441, type: 3}
       propertyPath: isInstakill
       value: 1
@@ -35,6 +43,10 @@ PrefabInstance:
     - target: {fileID: 7109619230562928244, guid: 035ec2ece988b86418dc6609d1f12441, type: 3}
       propertyPath: m_Name
       value: Spike_Enemy (1) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207018289313324019, guid: 035ec2ece988b86418dc6609d1f12441, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8557506140776411520, guid: 035ec2ece988b86418dc6609d1f12441, type: 3}
       propertyPath: m_LocalPosition.x
